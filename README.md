@@ -10,9 +10,26 @@ Objectif: Installer de A à Z un serveur dédié Kimsufi avec Docker via des scr
 
 ## Sommaire
 
+[Installation](#Installation)
+
 [Informations](#Informations)
 
-[Commits](#Commits)
+[...](#...)
+
+## Installation
+
+```
+apt-get update
+apt-get install -y wget
+wget -c https://codeload.github.com/Otaku-Prod/Kimsufi/tar.gz/master -O - | tar -xz
+```
+ou 
+
+```
+sudo apt-get update
+sudo apt-get install -y wget
+sudo wget -c https://codeload.github.com/Otaku-Prod/Kimsufi/tar.gz/master -O - | tar -x
+```
 
 ## Informations <a id="Informations"></a>
 
@@ -24,6 +41,6 @@ Si ce projet vous intéresse (ou pas...) et que vous souhaitez contribuer / sign
 
 Pour avoir plus d'information sur les différents projets  
 
-## Commits <a id="Commits"></a>
+## ... <a id="..."></a>
 
-26-07-2022: Ajouts des premiers dossiers : Docker (compose et dockerfile) et Scripts
+...
