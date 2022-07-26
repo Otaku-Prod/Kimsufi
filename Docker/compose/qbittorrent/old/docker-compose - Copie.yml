@@ -1,0 +1,24 @@
+version: "3.9"
+
+services:
+
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent
+    container_name: ${HOSTNAME}
+    restart: unless-stopped
+    environment:
+      - TZ=${TIMEZONE}
+      - PUID=${UID}
+      - PGID=${GID}
+      - WEBUI_PORT=${PORT_WEB}
+    volumes:
+      - ${VOLUME}/config:/config
+      - ${VOLUME}/downloads:/downloads
+    ports:
+      - ${PORT_WEB}:${PORT_WEB}
+      - ${PORT_TCP}:6881
+      - ${PORT_UDP}:6881/udp
+
+networks:
+  default:
+   name: ${NETWORK_NAME}

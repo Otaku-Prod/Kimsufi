@@ -1,0 +1,7 @@
+HOSTNAME=portainer
+
+PORT_HTTP=8000
+
+PORT_HTTPS=9443
+
+VOLUME=/opt/portainer

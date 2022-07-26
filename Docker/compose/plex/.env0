@@ -1,0 +1,11 @@
+HOSTNAME=plex
+
+CLAIM=claim-7UqoEgPhNPnW1WohQGsQ
+
+TIMEZONE=Europe/Paris
+
+PORT_WEB=62945
+
+VOLUME=/opt/plex
+
+VOLUME_DOWNLOADS=/opt/qbittorrent/downloads

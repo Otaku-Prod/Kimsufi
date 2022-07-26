@@ -1,0 +1,33 @@
+version: "3.9"
+
+services:
+
+  plex:
+    image: plexinc/pms-docker
+    container_name: ${HOSTNAME}
+    restart: unless-stopped
+    environment:
+      - PLEX_CLAIM=${CLAIM}
+      - TZ=${TIMEZONE}
+    ports:
+      - ${PORT_WEB}:32400
+    volumes:
+      - ${VOLUME}/config:/config
+      - ${VOLUME}//temp:/transcode
+      - ${VOLUME_DOWNLOADS}:/data
+    networks:	
+      frontend:
+       ipv4_address: 192.168.0.6
+
+networks:
+  frontend:
+    name: frontend
+    external: true
+
+
+
+
+
+
+
+

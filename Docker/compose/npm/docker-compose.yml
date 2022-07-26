@@ -1,0 +1,50 @@
+version: "3.9"
+
+services:
+
+  site:
+    image: docker.io/jc21/nginx-proxy-manager
+    container_name: ${HOSTNAME_SITE}
+    restart: unless-stopped
+    ports:			
+      - ${PORT_HTTP}:80			
+      - ${PORT_WEB}:81			
+      - ${PORT_HTTPS}:443
+    environment:			
+      - DB_MYSQL_HOST=db			
+      - DB_MYSQL_PORT=${DB_PORT}			
+      - DB_MYSQL_USER=${DB_USER}			
+      - DB_MYSQL_PASSWORD=${DB_PASSWORD}			
+      - DB_MYSQL_NAME=${DB_NAME}
+    volumes:			
+      - ${VOLUME}/data:/data:rw			
+      - ${VOLUME}/ssl:/etc/letsencrypt
+    networks:	
+      frontend:
+       ipv4_address: 192.168.0.3
+      backend:
+       ipv4_address: 192.168.100.3
+
+
+  db:			
+    image: docker.io/jc21/mariadb-aria
+    container_name: ${HOSTNAME_DB}
+    restart: unless-stopped			
+    environment:			
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}			
+      - MYSQL_DATABASE=${DB_NAME}			
+      - MYSQL_USER=${DB_USER}			
+      - MYSQL_PASSWORD=${DB_PASSWORD}			
+    volumes:			
+      - ${VOLUME}/db:/var/lib/mysql
+    networks:	
+      backend:
+       ipv4_address: 192.168.100.2			
+
+networks:
+  frontend:
+    name: frontend
+    external: true
+  backend:
+    name: backend
+    external: true

@@ -1,0 +1,15 @@
+HOSTNAME=qbittorrent
+
+TIMEZONE=Europe/Paris
+
+UID=1001
+
+GID=1001
+
+VOLUME=/opt/qbittorrent
+
+PORT_WEB=2908
+
+PORT_TCP=6881
+
+PORT_UDP=6881

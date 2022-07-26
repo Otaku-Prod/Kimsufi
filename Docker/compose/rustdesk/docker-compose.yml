@@ -1,0 +1,41 @@
+version: "3.9"
+
+services:
+
+  hbbs:
+    image: rustdesk/rustdesk-server
+    container_name: ${HOSTNAME_HBBS}
+    restart: unless-stopped
+    command: hbbs -r 192.168.0.11:21117
+    volumes:
+      - ${VOLUME_HBBS}:/root
+    ports:
+      - 21115:21115
+      - 21116:21116
+      - 21116:21116/udp
+      - 21118:21118
+    depends_on:
+      - hbbr
+    networks:	
+      frontend:
+       ipv4_address: 192.168.0.12
+
+
+  hbbr:
+    image: rustdesk/rustdesk-server
+    container_name: ${HOSTNAME_HBBR}
+    restart: unless-stopped
+    command: hbbr
+    volumes:
+      - ${VOLUME_HBBS}:/root
+    ports:
+      - 21117:21117
+      - 21119:21119
+    networks:	
+      frontend:
+       ipv4_address: 192.168.0.11
+
+networks:
+  frontend:
+    name: frontend
+    external: true

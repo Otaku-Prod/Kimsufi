@@ -1,0 +1,21 @@
+filenames:
+  - /var/log/npm/*.log
+labels:
+  type: nginx-proxy-manager
+---
+filenames:
+  - /var/log/*.log
+  - /var/log/host/*.log
+  - /var/log/auth.log
+  - /var/log/syslog
+labels:
+  type: syslog
+---
+filename: /var/log/apache2/*.log
+labels:
+  type: apache2
+---
+filenames:
+  - /var/log/host/*.log
+labels:
+  type: vsftpd

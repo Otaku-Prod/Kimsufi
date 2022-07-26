@@ -1,0 +1,5 @@
+HOSTNAME_HBBS=RustDesk-hbbs
+
+VOLUME_HBBS=/opt/rustdesk/hbbs
+
+HOSTNAME_HBBR=RustDesk-hbbr

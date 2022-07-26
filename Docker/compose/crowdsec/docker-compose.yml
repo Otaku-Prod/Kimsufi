@@ -1,0 +1,46 @@
+version: "3.9"
+
+services:
+
+  crowdsec:
+    image: docker.io/crowdsecurity/crowdsec
+    container_name: crowdsec
+    ports:
+      - 8080:8080
+      - 6060:6060
+    environment:
+      - GID=1001
+      - COLLECTIONS=crowdsecurity/wordpress crowdsecurity/whitelist-good-actors crowdsecurity/nginx-proxy-manager crowdsecurity/sshd crowdsecurity/vsftpd crowdsecurity/linux 
+    volumes:
+      - /opt/crowdsec/config:/etc/crowdsec:rw
+      - /opt/compose/crowdsec/acquis/acquis.yaml:/etc/crowdsec/acquis.yaml
+      - /opt/crowdsec/data:/var/lib/crowdsec/data:rw
+      - /var/log/journal:/run/log/journal:ro
+      - /var/log:/var/log/host:ro
+      - /opt/npm/data/logs:/var/log/npm:ro     
+    restart: unless-stopped
+    networks:	
+      frontend:
+       ipv4_address: 192.168.0.13
+
+  dashboard:
+    build: /opt/dockerfile/crowdsec/dashboard
+    container_name: crowdsec_dashboard
+    restart: unless-stopped
+    ports:
+      - 3000:3000
+    environment:
+      - MB_DB_FILE=/data/metabase.db
+      - MGID=1001
+    depends_on:
+      - crowdsec
+    volumes:
+      - /opt/crowdsec/data:/metabase-data/
+    networks:	
+      frontend:
+       ipv4_address: 192.168.0.14
+
+networks:
+  frontend:
+    name: frontend
+    external: true

@@ -1,0 +1,77 @@
+version: "3.9"
+
+services:
+
+  db:
+    image: mysql
+    container_name: ${DB_HOSTNAME}
+    restart: always
+    environment:
+     MYSQL_DATABASE: ${DB_NAME}
+     MYSQL_USER: ${DB_USER}
+     MYSQL_PASSWORD: ${DB_PASSWORD}
+     MYSQL_RANDOM_ROOT_PASSWORD: '1'
+    volumes:
+      - ${VOLUME}/db:/var/lib/mysql
+    networks:	
+      frontend:
+       ipv4_address: 192.168.0.7
+
+  site:
+    image: otaku-prod-wordpress-ssl
+    container_name: ${SITE_HOSTNAME}
+    restart: always
+    logging:
+     driver: "syslog"
+    ports:
+      - ${PORT_HTTP_WORDPRESS}:80
+      - ${PORT_HTTPS_WORDPRESS}:443
+    environment:
+      WORDPRESS_DB_HOST: ${DB_HOSTNAME}
+      WORDPRESS_DB_USER: ${DB_USER}
+      WORDPRESS_DB_PASSWORD: ${DB_PASSWORD}
+      WORDPRESS_DB_NAME: ${DB_NAME}
+    volumes:
+      - ${VOLUME}/html:/var/www/html
+    depends_on:
+     - db
+    networks:	
+      frontend:
+       ipv4_address: 192.168.0.8
+
+  pma:
+    image: phpmyadmin/phpmyadmin
+    container_name: ${PHPMYADMIN_HOSTNAME}    
+    restart: always
+    ports:
+      - ${PORT_PHPMYADMIN}:80
+    environment:
+      PMA_HOST: ${DB_HOSTNAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    depends_on:
+     - db
+    networks:	
+      frontend:
+       ipv4_address: 192.168.0.9
+
+  cli:
+    image: wordpress:cli
+    container_name: ${CLI_HOSTNAME}
+    restart: always
+    environment:
+     WORDPRESS_DB_USER: ${DB_USER}
+     WORDPRESS_DB_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - ${VOLUME}/data:/var/www/html
+    depends_on:
+      - db
+      - site
+    networks:	
+      frontend:
+       ipv4_address: 192.168.0.10
+
+networks:
+  frontend:
+    name: frontend
+    external: true
