@@ -12,7 +12,7 @@ apt-get remove docker docker-engine docker.io docker-ce docker-ce-cli containerd
 
 apt-get update
 
-apt-get install \
+apt-get install -y \
     ca-certificates \
     curl \
     gnupg \
@@ -30,4 +30,4 @@ chmod a+r /etc/apt/keyrings/docker.gpg
 
 apt-get update
 
-apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
