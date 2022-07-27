@@ -10,6 +10,8 @@ read -p "Saisir le nom d'identification à supprimer (ex: 'ubuntu'): " otaku_scr
 
 # Création du compte
 
+apt-get update
+apt-get install perl
 deluser --remove-home $otaku_script_login
 
 # Suppression des variables
