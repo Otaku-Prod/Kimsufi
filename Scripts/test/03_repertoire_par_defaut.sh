@@ -2,7 +2,7 @@
 
 # Root ou Sudo ?
 
-[ "$(id -u)" != 0 ] && exec sudo "$0"
+[ "$(id -u)" != 0 ] && exec sudo bash "$0"
 
 # Saisie des informations
 

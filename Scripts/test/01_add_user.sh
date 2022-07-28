@@ -2,7 +2,11 @@
 
 # Root ou Sudo ?
 
-[ "$(id -u)" != 0 ] && exec sudo "$0"
+if [ "$(id -u)" != 0 ] && exec sudo bash "$0" ;then
+    echo ok
+else
+    echo Uniquement pour les utilisateurs root ou sudo
+fi 
 
 # Saisie des informations
 

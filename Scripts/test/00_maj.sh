@@ -1,8 +1,9 @@
 #!/bin/sh
 
-# Root ou Sudo ?
+# Force le lancement du script en root ou sudo
 
-[ "$(id -u)" != 0 ] && exec sudo "$0"
+[ "$(id -u)" != 0 ] && exec sudo bash "$0"
+
 
 apt-get -y update
 apt-get -y dist-upgrade
