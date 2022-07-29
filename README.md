@@ -41,9 +41,11 @@ Pour avoir plus d'information sur les différents projets
 
 ## Support <a id="Support"></a>
 
-En cas de message :
+En cas de message d'erreur lors de l'exécution du script :
 
+```
 VOTRE_UTILISATEUR is not in the sudoers file.  This incident will be reported.
+```
 
 Retourner à l'étape [Installation](#Installation), copier/coller et relancer.
 
