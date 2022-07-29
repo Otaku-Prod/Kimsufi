@@ -1,8 +1,20 @@
 #!/bin/sh
 
-# Root ou Sudo ?
+#########################################################################################
+# TITRE: 01_add_user.sh
+#
+# AUTEUR: Otaku-Prod
+# VERSION: 1.0
+# CREATION: 29/07/2022
+# MODIFIE: 29/07/2022
+#
+# DESCRIPTION: Ajouter un utilisateur avec choix du groupe et création du dossier "home"
+#########################################################################################
 
-[ "$(id -u)" != 0 ] && exec sudo "$0"
+# Forcing de l'exécution du script en tant que "Root" ou "Sudo"
+[ "$(id -u)" != 0 ] && echo "vous n'êtes pas root !"
+echo "Tentative en sudo:" 
+exec sudo bash "$0"
 
 # Saisie des informations
 
@@ -12,7 +24,7 @@ read -p "Saisir le groupe de l'utilisateur (ex: 'users'): " otaku_script_group_i
 
 # Création du compte
 
-useradd --create-home --gid "$otaku_script_group_id" --comment "$otaku_script_fullname" "$otaku_script_login"
+sudo useradd --create-home --gid "$otaku_script_group_id" --comment "$otaku_script_fullname" "$otaku_script_login"
 
 # Création du mot de passe
 
