@@ -21,7 +21,7 @@ Objectif: Installer de A à Z un serveur dédié Kimsufi avec Docker via des scr
 ## Installation
 
 ```
-sudo apt-get update && sudo apt-get install -y sudo wget perl wget && sudo wget -c https://codeload.github.com/Otaku-Prod/Kimsufi/tar.gz/master -O - | tar -x && sudo cd /Kimsufi-master/Scripts/test
+apt-get update && apt-get install -y sudo wget perl wget && sudo wget -c https://codeload.github.com/Otaku-Prod/Kimsufi/tar.gz/master -O - | tar -x && sudo cd /Kimsufi-master/Scripts/test
 ```
 
 ## Informations <a id="Informations"></a>
