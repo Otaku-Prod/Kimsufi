@@ -14,6 +14,8 @@ Objectif: Installer de A à Z un serveur dédié Kimsufi avec Docker via des scr
 
 [Informations](#Informations)
 
+[Support](#Support)
+
 [...](#...)
 
 ## Installation
@@ -36,6 +38,14 @@ Si ce projet vous intéresse (ou pas...) et que vous souhaitez contribuer / sign
 > [Accueil](https://otaku-prod.fr/)
 
 Pour avoir plus d'information sur les différents projets  
+
+## Support <a id="Support"></a>
+
+En cas de message :
+
+VOTRE_UTILISATEUR is not in the sudoers file.  This incident will be reported.
+
+Retourner à l'étape [Installation](#Installation), copier/coller et relancer.
 
 ## ... <a id="..."></a>
 
