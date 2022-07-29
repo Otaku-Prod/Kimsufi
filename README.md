@@ -43,9 +43,9 @@ Pour avoir plus d'information sur les différents projets
 
 En cas de message d'erreur lors de l'exécution du script :
 
-```
-VOTRE_UTILISATEUR is not in the sudoers file.  This incident will be reported.
-```
+
+> VOTRE_UTILISATEUR is not in the sudoers file.  This incident will be reported.
+
 
 Retourner à l'étape [Installation](#Installation), copier/coller et relancer.
 
