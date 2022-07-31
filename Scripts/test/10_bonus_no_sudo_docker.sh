@@ -12,9 +12,15 @@
 ############################################################
 
 # Forcing de l'exécution du script en tant que "Root" ou "Sudo"
-[ "$(id -u)" != 0 ] && echo "vous n'êtes pas root !"
-echo "Tentative en sudo:" 
-exec sudo bash "$0"
+if [[ "$(id -u)" != 0 ]]
+then
+  echo "Vous n'êtes pas root !"
+  echo "Tentative en sudo:"
+  exec sudo bash $0
+else
+  echo "Vous êtes root !"
+  echo "Le script peut continuer..."
+fi
 
 # Saisie des informations
 

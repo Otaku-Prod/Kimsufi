@@ -14,11 +14,12 @@
 # Forcing de l'exécution du script en tant que "Root" ou "Sudo"
 if [[ "$(id -u)" != 0 ]]
 then
-  echo "vous n'êtes pas root !"
+  echo "Vous n'êtes pas root !"
   echo "Tentative en sudo:"
-  exec sudo bash "$0"
+  exec sudo bash $0
 else
-  echo "vous êtes root !"
+  echo "Vous êtes root !"
+  echo "Le script peut continuer..."
 fi
 
 sudo apt-get -y update
