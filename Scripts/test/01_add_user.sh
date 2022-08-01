@@ -30,11 +30,11 @@ fi
 ask_user_name()
 {
   echo "Bonjour,"
-  read -p "Veuillez entrer votre nom d'utilisateur ici : ? " otaku_script_login
+  read -p "Veuillez entrer votre nom d'utilisateur ici : " otaku_script_login
   if [ "$otaku_script_login" = "" ]
     then
       echo "Votre nom d'utilisateur est vide !"
-      read -p "Voulez-vous réessayer : O/n (défaut Oui) ? " re_try
+      read -p "Voulez-vous réessayer : O/n (défaut Oui) " re_try
       if [ "$re_try" = "" ] || [ "$re_try" = "O" ]
         then
           echo "OK, on recommence."
@@ -94,14 +94,14 @@ show_user_name
 
 # Check group
 
-#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------AFFICHER LA LISTE DES GROUPES AVANT et GERER SI EXISTANT OU NON ETC...
 ask_group_name()
 {
-  read -p "Veuillez entrer votre nom de groupe ici : ? " otaku_script_group_id
+  read -p "Veuillez entrer votre nom de groupe ici : " otaku_script_group_id
   if [ "$otaku_script_group_id" = "" ]
     then
       echo "Votre nom de groupe est vide !"
-      read -p "Voulez-vous réessayer : O/n (défaut Oui) ? " re_try
+      read -p "Voulez-vous réessayer : O/n (défaut Oui) " re_try
       if [ "$re_try" = "" ] || [ "$re_try" = "O" ]
         then
           echo "OK, on recommence."
@@ -160,14 +160,14 @@ show_group_name
 
 # Ajout du Nom Complet ou d'un commentaire
 
-read -p "Veuillez entrer votre nom complet ici : ? " otaku_script_fullname
+read -p "Veuillez entrer votre nom complet ici : " otaku_script_fullname
 
 # Création du compte
 
 sudo useradd --create-home --gid "$otaku_script_group_id" --comment "$otaku_script_fullname" "$otaku_script_login"
 echo "Le compte est maintenant créé, le dossier de l'utilisateur se trouve dans /home/$otaku_script_login"
 
-# Création du mot de passe
+# Création du mot de passe ############################################################################################### GERER LE MOT DE PASSE ECHOUE
 
 echo "Veuillez saisir un mot de passe pour l'utilisateur $otaku_script_login"
 passwd $otaku_script_login
