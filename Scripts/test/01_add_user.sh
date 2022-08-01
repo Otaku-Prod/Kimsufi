@@ -118,23 +118,36 @@ check_group_exist()
 {
   case $otaku_script_group_id in
     '_apt'|'abrt'|'adm'|'apache'|'avahi'|'avahi-autoipd'|'backup'|'bin'|'chrony'|'colord'|'dbus'|'deamon'|'dnsmasq'|'docker'|'ftp'|'games'|'gdm'|'geoclue'|'gnat'|'gnome-initial-setup'|'halt'|'hplip'|'http'|'irc'|'kernoops'|'lightdm'|'list'|'lp'|'mail'|'man'|'messagebus'|'nbd'|'news'|'nfsnobody'|'nm-openconnect'|'nobody'|'ntp'|'openvpn'|'operator'|'polkitd'|'proxy'|'pulse'|'qmenu'|'radvd'|'rm-openvpn'|'root'|'rpc'|'rpcgroup'|'rtkit'|'saned'|'saslauth'|'setroubleshoot'|'shutdown'|'speech-dispatcher'|'sshd'|'sudo'|'sync'|'sys'|'syslog'|'systemd-bus-proxy'|'systemd-coredump'|'systemd-journal-gateway'|'systemd-journal-remote'|'systemd-journal-upload'|'systemd-network'|'systemd-resolve'|'systemd-timesync'|'tcpdump'|'tss'|'unbound'|'usbmux'|'usbmuxd'|'uupc'|'uuidd'|'whoopsie'|'www-data')
-      ACCEPTED_GROUP=1
-      echo "Le groupe souhaité existe ! Voulez-vous continuer ?";;
+      ACCEPTED_GROUP=1;;
     *)
-      ACCEPTED_GROUP=0
-      echo "Le groupe souhaité n'existe pas ! Voulez-vous continuer quand même ?";;
+      ACCEPTED_GROUP=0;;
     esac
 }
 #-------------------------------------------------------------------------------
-check_group_name()
+valid_group_name()
 {
   if [ "$ACCEPTED_GROUP" != 1 ]
     then
-      if id -g "$otaku_script_group_id"> /dev/null 2>&1 
+      echo "Le groupe souhaité n'existe pas !"
+      read -p "Voulez-vous continuer quand même ? : O/n (défaut Oui) " next_step
+      if [ "$next_step" = "" ] || [ "$next_step" = "O" ]
         then
-          VALID_GROUP=0
+          echo "OK, on continue."
         else
-          VALID_GROUP=1
+          echo "Vous avez décidé de quitter le script."
+          echo "Au revoir."
+          exit 0
+      fi
+    else
+      echo "Le groupe souhaité existe !"
+      read -p "Voulez-vous continuer ? : O/n (défaut Oui) " next_step
+      if [ "$next_step" = "" ] || [ "$next_step" = "O" ]
+        then
+          echo "OK, on continue."
+        else
+          echo "Vous avez décidé de quitter le script."
+          echo "Au revoir."
+          exit 0
       fi
   fi
 }
@@ -155,7 +168,7 @@ show_group_name()
 #-------------------------------------------------------------------------------
 ask_group_name
 check_group_exist
-check_group_name
+valid_group_name
 show_group_name
 #-------------------------------------------------------------------------------
 
@@ -191,7 +204,7 @@ unset check_user_name
 unset show_user_name
 unset ask_group_name
 unset check_group_exist
-unset check_group_name
+unset valid_group_name
 unset show_group_name
 unset re_try
 unset REFUSED_NAME
