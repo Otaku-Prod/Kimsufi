@@ -103,14 +103,15 @@ ask_group_name()
   read -p "Veuillez entrer votre nom de groupe ici : ? " otaku_script_group_id
   if [ "$otaku_script_group_id" = "" ]
     then
-      echo "\nVotre nom de groupe est vide !\n"
+      echo "Votre nom de groupe est vide !"
       read -p "Voulez-vous réessayer : O/n (défaut Oui) ? " re_try
       if [ "$re_try" = "" ] || [ "$re_try" = "O" ]
         then
-          echo "\nOK, on recommence."
+          echo "OK, on recommence."
           ask_group_name
         else
-          echo "\nTant pis, je ne peux pas tester votre nom de groupe.\nAu revoir.\n"
+          echo "Vous avez décidé de quitter le script."
+          echo "Au revoir."
           exit 0
       fi
   fi
@@ -132,9 +133,9 @@ check_group_name()
     then
       if id -g "$otaku_script_group_id"> /dev/null 2>&1 
         then
-          VALID_GROUP=1
-        else
           VALID_GROUP=0
+        else
+          VALID_GROUP=1
       fi
   fi
 }
@@ -143,9 +144,13 @@ show_group_name()
 {
   case $VALID_GROUP in
     1)
-      echo "\nLe nom de groupe $otaku_script_group_id est valide.\nLe script peut continuer.\n";;
+      echo "Le nom de groupe $otaku_script_group_id est valide."
+      echo "Le script peut continuer.";;
     *)
-      echo "\nDésolé, ce script n'accepte pas le nom de groupe $otaku_script_group_id !\nVeuillez recommencer avec un nom de groupe valide.\nAu revoir.\n";;
+      echo "Désolé, ce script n'accepte pas le nom de groupe $otaku_script_group_id !"
+      echo "Veuillez recommencer avec un nom de groupe valide."
+      echo "Au revoir."
+      exit 0;;
   esac
 }
 #-------------------------------------------------------------------------------
