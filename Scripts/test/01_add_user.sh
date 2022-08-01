@@ -172,8 +172,8 @@ read -p "Veuillez entrer votre nom complet ici : " otaku_script_fullname
 # Confirmation avant création du compte
 
 clear
-echo -e "\e[1;31m ATTENTION : DERNIERE ETAPE AVANT LA CREATION DU COMPTE !"
-echo "Les informations suivantes sont elles exactes :"
+echo -e "\e[1;31mATTENTION : DERNIERE ETAPE AVANT LA CREATION DU COMPTE !"
+echo -e "\e[1;37mLes informations suivantes sont elles exactes :"
 echo "Identifiant : $otaku_script_login"
 echo "Groupe : $otaku_script_group_id"
 echo "Nom Complet : $otaku_script_fullname"
