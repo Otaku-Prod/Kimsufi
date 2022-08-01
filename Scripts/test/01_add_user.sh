@@ -78,6 +78,7 @@ show_user_name()
       echo "Le script peut continuer.";;
     *)
       echo "Désolé, ce script n'accepte pas le nom d'utilisateur $otaku_script_login !"
+      echo "Soit vous utilisez un nom d'utilisateur interdit, soit celui-ci existe déjà."
       echo "Veuillez recommencer avec un nom d'utilisateur valide."
       echo "Au revoir."
       exit 0;;
@@ -90,10 +91,6 @@ check_refused_names
 check_user_name
 show_user_name
 #-------------------------------------------------------------------------------
-
-# Ajout du nom complet
-
-read -p "Saisir votre nom complet (ex: 'Kevin DUPONT'): " otaku_script_fullname
 
 # Check group
 
@@ -148,6 +145,7 @@ show_group_name()
       echo "Le script peut continuer.";;
     *)
       echo "Désolé, ce script n'accepte pas le nom de groupe $otaku_script_group_id !"
+      echo "Le groupe ne semble pas exister."
       echo "Veuillez recommencer avec un nom de groupe valide."
       echo "Au revoir."
       exit 0;;
@@ -160,13 +158,26 @@ check_group_name
 show_group_name
 #-------------------------------------------------------------------------------
 
+# Ajout du Nom Complet ou d'un commentaire
+
+read -p "Veuillez entrer votre nom complet ici : ? " otaku_script_fullname
+
 # Création du compte
 
 sudo useradd --create-home --gid "$otaku_script_group_id" --comment "$otaku_script_fullname" "$otaku_script_login"
+echo "Le compte est maintenant créé, le dossier de l'utilisateur se trouve dans /home/$otaku_script_login"
 
 # Création du mot de passe
 
+echo "Veuillez saisir un mot de passe pour l'utilisateur $otaku_script_login"
 passwd $otaku_script_login
+
+# Crédit
+
+echo "Merci d'avoir utilisé le script de création de compte."
+echo "C'est terminé... Au plaisir de vous revoir !"
+echo "Cordialement,"
+echo "Otaku-Prod"
 
 # Suppression des variables
 
@@ -186,6 +197,5 @@ unset REFUSED_NAME
 unset ACCEPTED_NAME
 unset ACCEPTED_GROUP
 unset VALID_USER
-
 
 # Fin du script
