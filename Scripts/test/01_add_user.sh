@@ -171,11 +171,13 @@ read -p "Veuillez entrer votre nom complet ici : " otaku_script_fullname
 
 # Confirmation avant création du compte
 
+clear
+echo "ATTENTION : DERNIERE ETAPE AVANT LA CREATION DU COMPTE !"
 echo "Les informations suivantes sont elles exactes :"
 echo "Identifiant : $otaku_script_login"
 echo "Groupe : $otaku_script_group_id"
 echo "Nom Complet : $otaku_script_fullname"
-read -p "Voulez-vous continuer ? : O/n (défaut Oui) " next_step
+read -p "Tout est correct ? : O/n (défaut Oui) " next_step
 if [ "$next_step" = "" ] || [ "$next_step" = "O" ]
   then
     echo "OK, on continue."
