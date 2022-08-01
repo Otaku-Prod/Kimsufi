@@ -154,11 +154,11 @@ valid_group_name()
 #-------------------------------------------------------------------------------
 show_group_name()
 {
-  case $VALID_GROUP in
+  case $ACCEPTED_GROUP in
     1)
       echo "Le nom de groupe $otaku_script_group_id a été créé";;
     *)
-      echo "Vous avez été ajouté au groupe éxistant : $otaku_script_group_id";;
+      echo "Vous allez ajouter l'utilisateur au groupe éxistant : $otaku_script_group_id";;
   esac
 }
 #-------------------------------------------------------------------------------
