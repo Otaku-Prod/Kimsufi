@@ -129,7 +129,8 @@ valid_group_name()
       read -p "Voulez-vous continuer quand même ? : O/n (défaut Oui) " next_step
       if [ "$next_step" = "" ] || [ "$next_step" = "O" ]
         then
-          echo "OK, on continue."
+          echo "OK, on recommence."
+          valid_group_name
         else
           echo "Vous avez décidé de quitter le script."
           echo "Au revoir."
@@ -140,7 +141,8 @@ valid_group_name()
       read -p "Voulez-vous continuer ? : O/n (défaut Oui) " next_step
       if [ "$next_step" = "" ] || [ "$next_step" = "O" ]
         then
-          echo "OK, on continue."
+          echo "OK, on recommence."
+          valid_group_name
         else
           echo "Vous avez décidé de quitter le script."
           echo "Au revoir."
