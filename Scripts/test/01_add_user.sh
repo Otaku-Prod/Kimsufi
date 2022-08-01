@@ -49,24 +49,21 @@ ask_user_name()
 #-------------------------------------------------------------------------------
 check_refused_names()
 {
-  case $otaku_script_login in
-    '_apt'|'abrt'|'adm'|'apache'|'avahi'|'avahi-autoipd'|'backup'|'bin'|'chrony'|'colord'|'dbus'|'deamon'|'dnsmasq'|'docker'|'ftp'|'games'|'gdm'|'geoclue'|'gnat'|'gnome-initial-setup'|'halt'|'hplip'|'http'|'irc'|'kernoops'|'lightdm'|'list'|'lp'|'mail'|'man'|'messagebus'|'nbd'|'news'|'nfsnobody'|'nm-openconnect'|'nobody'|'ntp'|'openvpn'|'operator'|'polkitd'|'proxy'|'pulse'|'qmenu'|'radvd'|'rm-openvpn'|'root'|'rpc'|'rpcuser'|'rtkit'|'saned'|'saslauth'|'setroubleshoot'|'shutdown'|'speech-dispatcher'|'sshd'|'sudo'|'sync'|'sys'|'syslog'|'systemd-bus-proxy'|'systemd-coredump'|'systemd-journal-gateway'|'systemd-journal-remote'|'systemd-journal-upload'|'systemd-network'|'systemd-resolve'|'systemd-timesync'|'tcpdump'|'tss'|'unbound'|'usbmux'|'usbmuxd'|'uupc'|'uuidd'|'whoopsie'|'www-data')
-      REFUSED_NAME=0;;
-    *)
-      REFUSED_NAME=1;;
-    esac
+  if [ $(getent passwd $otaku_script_login) ]; 
+  then
+    REFUSED_NAME=1
+  else
+    REFUSED_NAME=0
+  fi
 }
 #-------------------------------------------------------------------------------
-check_user_name()
+valid_user_name()
 {
-  if [ "$REFUSED_NAME" != 0 ]
+  if [ "$REFUSED_NAME" != 1 ]
     then
-      if id -u "$otaku_script_login"> /dev/null 2>&1 
-        then
-          VALID_USER=1
-        else
-          VALID_USER=0
-      fi
+      VALID_USER=1
+    else
+      VALID_USER=0
   fi
 }
 #-------------------------------------------------------------------------------
@@ -88,7 +85,7 @@ show_user_name()
 clear
 ask_user_name
 check_refused_names
-check_user_name
+valid_user_name
 show_user_name
 #-------------------------------------------------------------------------------
 
@@ -114,29 +111,19 @@ ask_group_name()
   fi
 }
 #-------------------------------------------------------------------------------
-#check_group_exist()
-# {
-#  case $otaku_script_group_id in
-#    '_apt'|'abrt'|'adm'|'apache'|'avahi'|'avahi-autoipd'|'backup'|'bin'|'chrony'|'colord'|'dbus'|'deamon'|'dnsmasq'|'docker'|'ftp'|'games'|'gdm'|'geoclue'|'gnat'|'gnome-initial-setup'|'halt'|'hplip'|'http'|'irc'|'kernoops'|'lightdm'|'list'|'lp'|'mail'|'man'|'messagebus'|'nbd'|'news'|'nfsnobody'|'nm-openconnect'|'nobody'|'ntp'|'openvpn'|'operator'|'polkitd'|'proxy'|'pulse'|'qmenu'|'radvd'|'rm-openvpn'|'root'|'rpc'|'rpcgroup'|'rtkit'|'saned'|'saslauth'|'setroubleshoot'|'shutdown'|'speech-dispatcher'|'sshd'|'sudo'|'sync'|'sys'|'syslog'|'systemd-bus-proxy'|'systemd-coredump'|'systemd-journal-gateway'|'systemd-journal-remote'|'systemd-journal-upload'|'systemd-network'|'systemd-resolve'|'systemd-timesync'|'tcpdump'|'tss'|'unbound'|'usbmux'|'usbmuxd'|'uupc'|'uuidd'|'whoopsie'|'www-data')
-#      ACCEPTED_GROUP=1;;
-#    *)
-#      ACCEPTED_GROUP=0;;
-#    esac
-#}
-############################-------------------------------------------------------------------------------
 check_group_exist()
 {
   if [ $(getent group $otaku_script_group_id) ]; 
   then
-    ACCEPTED_GROUP=1
+    EXISTED_GROUP=1
   else
-    ACCEPTED_GROUP=0
+    EXISTED_GROUP=0
   fi
 }
 #-------------------------------------------------------------------------------
 valid_group_name()
 {
-  if [ "$ACCEPTED_GROUP" != 1 ]
+  if [ "$EXISTED_GROUP" != 1 ]
     then
       echo "Le groupe souhaité n'existe pas !"
       read -p "Voulez-vous continuer quand même ? : O/n (défaut Oui) " next_step
@@ -164,11 +151,11 @@ valid_group_name()
 #-------------------------------------------------------------------------------
 show_group_name()
 {
-  case $ACCEPTED_GROUP in
+  case $EXISTED_GROUP in
     1)
-      echo "Vous allez ajouter l'utilisateur au groupe éxistant : "$otaku_script_group_id"";;
+      echo "L'utilisateur sera ajouté au groupe éxistant "$otaku_script_group_id" après validation.";;
     *)
-      echo "Le nom de groupe "$otaku_script_group_id" a été créé";;
+      echo "Le nom de groupe "$otaku_script_group_id" sera créé après validation.";;
   esac
 }
 #-------------------------------------------------------------------------------
@@ -222,7 +209,7 @@ unset otaku_script_fullname
 unset otaku_script_group_id
 unset ask_user_name
 unset check_refused_names
-unset check_user_name
+unset valid_user_name
 unset show_user_name
 unset ask_group_name
 unset check_group_exist
@@ -231,7 +218,7 @@ unset show_group_name
 unset re_try
 unset REFUSED_NAME
 unset ACCEPTED_NAME
-unset ACCEPTED_GROUP
+unset EXISTED_GROUP
 unset VALID_USER
 
 # Fin du script
