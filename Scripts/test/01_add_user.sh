@@ -42,7 +42,7 @@ ask_user_name()
         else
           echo "Tant pis, je ne peux pas tester votre nom d'utilisateur."
           echo "Au revoir."
-          exit 1
+          exit
       fi
   fi
 }
@@ -51,9 +51,9 @@ check_refused_names()
 {
   case $otaku_script_login in
     '_apt'|'abrt'|'adm'|'apache'|'avahi'|'avahi-autoipd'|'backup'|'bin'|'chrony'|'colord'|'dbus'|'deamon'|'dnsmasq'|'docker'|'ftp'|'games'|'gdm'|'geoclue'|'gnat'|'gnome-initial-setup'|'halt'|'hplip'|'http'|'irc'|'kernoops'|'lightdm'|'list'|'lp'|'mail'|'man'|'messagebus'|'nbd'|'news'|'nfsnobody'|'nm-openconnect'|'nobody'|'ntp'|'openvpn'|'operator'|'polkitd'|'proxy'|'pulse'|'qmenu'|'radvd'|'rm-openvpn'|'root'|'rpc'|'rpcuser'|'rtkit'|'saned'|'saslauth'|'setroubleshoot'|'shutdown'|'speech-dispatcher'|'sshd'|'sudo'|'sync'|'sys'|'syslog'|'systemd-bus-proxy'|'systemd-coredump'|'systemd-journal-gateway'|'systemd-journal-remote'|'systemd-journal-upload'|'systemd-network'|'systemd-resolve'|'systemd-timesync'|'tcpdump'|'tss'|'unbound'|'usbmux'|'usbmuxd'|'uupc'|'uuidd'|'whoopsie'|'www-data')
-      REFUSED_NAME=1;;
-    *)
       REFUSED_NAME=0;;
+    *)
+      REFUSED_NAME=1;;
     esac
 }
 #-------------------------------------------------------------------------------
@@ -179,5 +179,6 @@ unset re_try
 unset REFUSED_NAME
 unset ACCEPTED_NAME
 unset VALID_USER
+
 
 # Fin du script
