@@ -114,14 +114,24 @@ ask_group_name()
   fi
 }
 #-------------------------------------------------------------------------------
+#check_group_exist()
+# {
+#  case $otaku_script_group_id in
+#    '_apt'|'abrt'|'adm'|'apache'|'avahi'|'avahi-autoipd'|'backup'|'bin'|'chrony'|'colord'|'dbus'|'deamon'|'dnsmasq'|'docker'|'ftp'|'games'|'gdm'|'geoclue'|'gnat'|'gnome-initial-setup'|'halt'|'hplip'|'http'|'irc'|'kernoops'|'lightdm'|'list'|'lp'|'mail'|'man'|'messagebus'|'nbd'|'news'|'nfsnobody'|'nm-openconnect'|'nobody'|'ntp'|'openvpn'|'operator'|'polkitd'|'proxy'|'pulse'|'qmenu'|'radvd'|'rm-openvpn'|'root'|'rpc'|'rpcgroup'|'rtkit'|'saned'|'saslauth'|'setroubleshoot'|'shutdown'|'speech-dispatcher'|'sshd'|'sudo'|'sync'|'sys'|'syslog'|'systemd-bus-proxy'|'systemd-coredump'|'systemd-journal-gateway'|'systemd-journal-remote'|'systemd-journal-upload'|'systemd-network'|'systemd-resolve'|'systemd-timesync'|'tcpdump'|'tss'|'unbound'|'usbmux'|'usbmuxd'|'uupc'|'uuidd'|'whoopsie'|'www-data')
+#      ACCEPTED_GROUP=1;;
+#    *)
+#      ACCEPTED_GROUP=0;;
+#    esac
+#}
+############################-------------------------------------------------------------------------------
 check_group_exist()
 {
-  case $otaku_script_group_id in
-    '_apt'|'abrt'|'adm'|'apache'|'avahi'|'avahi-autoipd'|'backup'|'bin'|'chrony'|'colord'|'dbus'|'deamon'|'dnsmasq'|'docker'|'ftp'|'games'|'gdm'|'geoclue'|'gnat'|'gnome-initial-setup'|'halt'|'hplip'|'http'|'irc'|'kernoops'|'lightdm'|'list'|'lp'|'mail'|'man'|'messagebus'|'nbd'|'news'|'nfsnobody'|'nm-openconnect'|'nobody'|'ntp'|'openvpn'|'operator'|'polkitd'|'proxy'|'pulse'|'qmenu'|'radvd'|'rm-openvpn'|'root'|'rpc'|'rpcgroup'|'rtkit'|'saned'|'saslauth'|'setroubleshoot'|'shutdown'|'speech-dispatcher'|'sshd'|'sudo'|'sync'|'sys'|'syslog'|'systemd-bus-proxy'|'systemd-coredump'|'systemd-journal-gateway'|'systemd-journal-remote'|'systemd-journal-upload'|'systemd-network'|'systemd-resolve'|'systemd-timesync'|'tcpdump'|'tss'|'unbound'|'usbmux'|'usbmuxd'|'uupc'|'uuidd'|'whoopsie'|'www-data')
-      ACCEPTED_GROUP=1;;
-    *)
-      ACCEPTED_GROUP=0;;
-    esac
+  if [ $(getent group $otaku_script_group_id) ]; 
+  then
+    ACCEPTED_GROUP=1
+  else
+    ACCEPTED_GROUP=0
+  fi
 }
 #-------------------------------------------------------------------------------
 valid_group_name()
@@ -156,9 +166,9 @@ show_group_name()
 {
   case $ACCEPTED_GROUP in
     1)
-      echo "Vous allez ajouter l'utilisateur au groupe éxistant : $otaku_script_group_id";;
+      echo "Vous allez ajouter l'utilisateur au groupe éxistant : "$otaku_script_group_id"";;
     *)
-      echo "Le nom de groupe $otaku_script_group_id a été créé";;
+      echo "Le nom de groupe "$otaku_script_group_id" a été créé";;
   esac
 }
 #-------------------------------------------------------------------------------
