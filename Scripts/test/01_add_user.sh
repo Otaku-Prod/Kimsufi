@@ -74,9 +74,12 @@ show_user_name()
 {
   case $VALID_USER in
     0)
-      echo "\nLe nom d'utilisateur $otaku_script_login est valide.\nLe script peut continuer.\n";;
+      echo "Le nom d'utilisateur $otaku_script_login est valide."
+      echo "Le script peut continuer.";;
     *)
-      echo "\nDésolé, ce script n'accepte pas le nom d'utilisateur $otaku_script_login !\nVeuillez recommencer avec un nom d'utilisateur valide.\nAu revoir.\n";;
+      echo "Désolé, ce script n'accepte pas le nom d'utilisateur $otaku_script_login !"
+      echo "Veuillez recommencer avec un nom d'utilisateur valide."
+      echo "Au revoir.";;
   esac
 }
 #-------------------------------------------------------------------------------
@@ -176,6 +179,5 @@ unset re_try
 unset REFUSED_NAME
 unset ACCEPTED_NAME
 unset VALID_USER
-
 
 # Fin du script
