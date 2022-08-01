@@ -42,7 +42,7 @@ ask_user_name()
         else
           echo "Tant pis, je ne peux pas tester votre nom d'utilisateur."
           echo "Au revoir."
-          exit
+          exit 0
       fi
   fi
 }
@@ -79,7 +79,8 @@ show_user_name()
     *)
       echo "Désolé, ce script n'accepte pas le nom d'utilisateur $otaku_script_login !"
       echo "Veuillez recommencer avec un nom d'utilisateur valide."
-      echo "Au revoir.";;
+      echo "Au revoir."
+      exit 0;;
   esac
 }
 #-------------------------------------------------------------------------------
