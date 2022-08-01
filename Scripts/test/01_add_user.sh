@@ -70,7 +70,7 @@ valid_user_name()
 show_user_name()
 {
   case $VALID_USER in
-    0)
+    1)
       echo "Le nom d'utilisateur $otaku_script_login est valide."
       echo "Le script peut continuer.";;
     *)
