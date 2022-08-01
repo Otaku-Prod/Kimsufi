@@ -1,17 +1,18 @@
 #!/bin/sh
 
-#####################################################################
-# TITRE: 00_maj.sh
+##############################################################
+# TITRE: 0.2_upgrade.sh
 #
 # AUTEUR: Otaku-Prod
-# VERSION: 1.0
+# VERSION: 1.1
 # CREATION: 29/07/2022
-# MODIFIE: 29/07/2022
+# MODIFIE: 31/07/2022
 #
-# DESCRIPTION: Mettre à jour la distribution Ubuntu
-#####################################################################
+# DESCRIPTION: Installation "intéligente" des derniers paquets
+###############################################################
 
 # Forcing de l'exécution du script en tant que "Root" ou "Sudo"
+
 if [[ "$(id -u)" != 0 ]]
 then
   echo "Vous n'êtes pas root !"
@@ -22,5 +23,10 @@ else
   echo "Le script peut continuer..."
 fi
 
-sudo apt-get -y update
+# Début du script
+
+# Dist-Upgrade
+
 sudo apt-get -y dist-upgrade
+
+# Fin du script
