@@ -187,6 +187,13 @@ fi
 
 # Création du compte
 
+if [ "$EXISTED_GROUP" != 1 ]
+  then
+    groupadd $otaku_script_group_id
+    echo "Le groupe "$otaku_script_group_id" a été créé."
+  else
+    echo "L'utilisateur à rejoint le groupe existant "$otaku_script_group_id"."
+fi
 sudo useradd --create-home --gid "$otaku_script_group_id" --comment "$otaku_script_fullname" "$otaku_script_login"
 echo "Le compte est maintenant créé, le dossier de l'utilisateur se trouve dans /home/$otaku_script_login"
 
