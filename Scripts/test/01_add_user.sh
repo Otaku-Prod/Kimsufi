@@ -29,19 +29,20 @@ fi
 #-------------------------------------------------------------------------------
 ask_user_name()
 {
-  echo "\nBonjour,\n"
+  echo "Bonjour,"
   read -p "Veuillez entrer votre nom d'utilisateur ici : ? " otaku_script_login
   if [ "$otaku_script_login" = "" ]
     then
-      echo "\nVotre nom d'utilisateur est vide !\n"
+      echo "Votre nom d'utilisateur est vide !"
       read -p "Voulez-vous réessayer : O/n (défaut Oui) ? " re_try
       if [ "$re_try" = "" ] || [ "$re_try" = "O" ]
         then
-          echo "\nOK, on recommence."
+          echo "OK, on recommence."
           ask_user_name
         else
-          echo "\nTant pis, je ne peux pas tester votre nom d'utilisateur.\nAu revoir.\n"
-          exit 0
+          echo "Tant pis, je ne peux pas tester votre nom d'utilisateur."
+          echo "Au revoir."
+          exit 1
       fi
   fi
 }
@@ -50,9 +51,9 @@ check_refused_names()
 {
   case $otaku_script_login in
     '_apt'|'abrt'|'adm'|'apache'|'avahi'|'avahi-autoipd'|'backup'|'bin'|'chrony'|'colord'|'dbus'|'deamon'|'dnsmasq'|'docker'|'ftp'|'games'|'gdm'|'geoclue'|'gnat'|'gnome-initial-setup'|'halt'|'hplip'|'http'|'irc'|'kernoops'|'lightdm'|'list'|'lp'|'mail'|'man'|'messagebus'|'nbd'|'news'|'nfsnobody'|'nm-openconnect'|'nobody'|'ntp'|'openvpn'|'operator'|'polkitd'|'proxy'|'pulse'|'qmenu'|'radvd'|'rm-openvpn'|'root'|'rpc'|'rpcuser'|'rtkit'|'saned'|'saslauth'|'setroubleshoot'|'shutdown'|'speech-dispatcher'|'sshd'|'sudo'|'sync'|'sys'|'syslog'|'systemd-bus-proxy'|'systemd-coredump'|'systemd-journal-gateway'|'systemd-journal-remote'|'systemd-journal-upload'|'systemd-network'|'systemd-resolve'|'systemd-timesync'|'tcpdump'|'tss'|'unbound'|'usbmux'|'usbmuxd'|'uupc'|'uuidd'|'whoopsie'|'www-data')
-      REFUSED_NAME=0;;
-    *)
       REFUSED_NAME=1;;
+    *)
+      REFUSED_NAME=0;;
     esac
 }
 #-------------------------------------------------------------------------------
