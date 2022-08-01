@@ -40,7 +40,7 @@ ask_user_name()
           echo "OK, on recommence."
           ask_user_name
         else
-          echo "Tant pis, je ne peux pas tester votre nom d'utilisateur."
+          echo "Vous avez décidé de quitter le script."
           echo "Au revoir."
           exit 0
       fi
@@ -63,9 +63,9 @@ check_user_name()
     then
       if id -u "$otaku_script_login"> /dev/null 2>&1 
         then
-          VALID_USER=0
-        else
           VALID_USER=1
+        else
+          VALID_USER=0
       fi
   fi
 }
@@ -120,15 +120,15 @@ check_accepted_names()
 {
   case $otaku_script_group_id in
     '_apt'|'abrt'|'adm'|'apache'|'avahi'|'avahi-autoipd'|'backup'|'bin'|'chrony'|'colord'|'dbus'|'deamon'|'dnsmasq'|'docker'|'ftp'|'games'|'gdm'|'geoclue'|'gnat'|'gnome-initial-setup'|'halt'|'hplip'|'http'|'irc'|'kernoops'|'lightdm'|'list'|'lp'|'mail'|'man'|'messagebus'|'nbd'|'news'|'nfsnobody'|'nm-openconnect'|'nobody'|'ntp'|'openvpn'|'operator'|'polkitd'|'proxy'|'pulse'|'qmenu'|'radvd'|'rm-openvpn'|'root'|'rpc'|'rpcgroup'|'rtkit'|'saned'|'saslauth'|'setroubleshoot'|'shutdown'|'speech-dispatcher'|'sshd'|'sudo'|'sync'|'sys'|'syslog'|'systemd-bus-proxy'|'systemd-coredump'|'systemd-journal-gateway'|'systemd-journal-remote'|'systemd-journal-upload'|'systemd-network'|'systemd-resolve'|'systemd-timesync'|'tcpdump'|'tss'|'unbound'|'usbmux'|'usbmuxd'|'uupc'|'uuidd'|'whoopsie'|'www-data')
-      ACCEPTED_NAME=1;;
+      ACCEPTED_GROUP=1;;
     *)
-      ACCEPTED_NAME=0;;
+      ACCEPTED_GROUP=0;;
     esac
 }
 #-------------------------------------------------------------------------------
 check_group_name()
 {
-  if [ "$ACCEPTED_NAME" != 1 ]
+  if [ "$ACCEPTED_GROUP" != 1 ]
     then
       if id -g "$otaku_script_group_id"> /dev/null 2>&1 
         then
@@ -179,6 +179,7 @@ unset show_group_name
 unset re_try
 unset REFUSED_NAME
 unset ACCEPTED_NAME
+unset ACCEPTED_GROUP
 unset VALID_USER
 
 
