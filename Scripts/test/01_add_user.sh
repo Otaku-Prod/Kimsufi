@@ -114,13 +114,15 @@ ask_group_name()
   fi
 }
 #-------------------------------------------------------------------------------
-check_accepted_names()
+check_group_exist()
 {
   case $otaku_script_group_id in
     '_apt'|'abrt'|'adm'|'apache'|'avahi'|'avahi-autoipd'|'backup'|'bin'|'chrony'|'colord'|'dbus'|'deamon'|'dnsmasq'|'docker'|'ftp'|'games'|'gdm'|'geoclue'|'gnat'|'gnome-initial-setup'|'halt'|'hplip'|'http'|'irc'|'kernoops'|'lightdm'|'list'|'lp'|'mail'|'man'|'messagebus'|'nbd'|'news'|'nfsnobody'|'nm-openconnect'|'nobody'|'ntp'|'openvpn'|'operator'|'polkitd'|'proxy'|'pulse'|'qmenu'|'radvd'|'rm-openvpn'|'root'|'rpc'|'rpcgroup'|'rtkit'|'saned'|'saslauth'|'setroubleshoot'|'shutdown'|'speech-dispatcher'|'sshd'|'sudo'|'sync'|'sys'|'syslog'|'systemd-bus-proxy'|'systemd-coredump'|'systemd-journal-gateway'|'systemd-journal-remote'|'systemd-journal-upload'|'systemd-network'|'systemd-resolve'|'systemd-timesync'|'tcpdump'|'tss'|'unbound'|'usbmux'|'usbmuxd'|'uupc'|'uuidd'|'whoopsie'|'www-data')
-      ACCEPTED_GROUP=1;;
+      ACCEPTED_GROUP=1
+      echo "Le groupe souhaité existe ! Voulez-vous continuer ?";;
     *)
-      ACCEPTED_GROUP=0;;
+      ACCEPTED_GROUP=0
+      echo "Le groupe souhaité n'existe pas ! Voulez-vous continuer quand même ?";;
     esac
 }
 #-------------------------------------------------------------------------------
@@ -145,7 +147,6 @@ show_group_name()
       echo "Le script peut continuer.";;
     *)
       echo "Désolé, ce script n'accepte pas le nom de groupe $otaku_script_group_id !"
-      echo "Le groupe ne semble pas exister."
       echo "Veuillez recommencer avec un nom de groupe valide."
       echo "Au revoir."
       exit 0;;
@@ -153,7 +154,7 @@ show_group_name()
 }
 #-------------------------------------------------------------------------------
 ask_group_name
-check_accepted_names
+check_group_exist
 check_group_name
 show_group_name
 #-------------------------------------------------------------------------------
@@ -189,7 +190,7 @@ unset check_refused_names
 unset check_user_name
 unset show_user_name
 unset ask_group_name
-unset check_accepted_names
+unset check_group_exist
 unset check_group_name
 unset show_group_name
 unset re_try
