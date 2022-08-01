@@ -156,13 +156,9 @@ show_group_name()
 {
   case $VALID_GROUP in
     1)
-      echo "Le nom de groupe $otaku_script_group_id est valide."
-      echo "Le script peut continuer.";;
+      echo "Le nom de groupe $otaku_script_group_id a été créé";;
     *)
-      echo "Désolé, ce script n'accepte pas le nom de groupe $otaku_script_group_id !"
-      echo "Veuillez recommencer avec un nom de groupe valide."
-      echo "Au revoir."
-      exit 0;;
+      echo "Vous avez été ajouté au groupe éxistant : $otaku_script_group_id";;
   esac
 }
 #-------------------------------------------------------------------------------
@@ -175,6 +171,22 @@ show_group_name
 # Ajout du Nom Complet ou d'un commentaire
 
 read -p "Veuillez entrer votre nom complet ici : " otaku_script_fullname
+
+# Confirmation avant création du compte
+
+echo "Les informations suivantes sont elles exactes :"
+echo "Identifiant : $otaku_script_login"
+echo "Groupe : $otaku_script_group_id"
+echo "Nom Complet : $otaku_script_fullname"
+read -p "Voulez-vous continuer ? : O/n (défaut Oui) " next_step
+if [ "$next_step" = "" ] || [ "$next_step" = "O" ]
+  then
+    echo "OK, on continue."
+  else
+    echo "Vous avez décidé de quitter le script."
+    echo "Au revoir."
+    exit 0
+fi
 
 # Création du compte
 
