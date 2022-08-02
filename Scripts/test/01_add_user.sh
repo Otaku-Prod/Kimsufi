@@ -230,6 +230,8 @@ create_password_user()
 passwd $otaku_script_login
 }
 
+create_password_user
+
 # Crédit
 
 echo "Merci d'avoir utilisé le script de création de compte."
