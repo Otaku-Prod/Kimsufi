@@ -204,9 +204,9 @@ echo "Le compte est maintenant créé, le dossier de l'utilisateur se trouve dan
 ask_password_user()
 {
   echo "Création du mot de passe pour l'utilisateur $otaku_script_login"
-
-  read -s -p "Saisir le mot de passe : \n> " password_user
-  read -s -p "Confirmation : \n> " confirm_password_user
+  # Rappel -s = cacher le texte saisie, -p = afficher le message "Saisir le mot de passe", -r = pour rendre les "\" visible, -e = pour que "\" soit une commande
+  read -s -p -r -e "Saisir le mot de passe : \n> " password_user
+  read -s -p -r -e "Confirmation : \n> " confirm_password_user
   
   if [ "$password_user" = "$confirm_password_user" ]
     then
