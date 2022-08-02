@@ -208,7 +208,7 @@ create_password_user()
   read -s -p "Saisir le mot de passe : " $password_user
   read -s -p "Confirmation : \n" $confirm_password_user
 
-  if [ "$password_user" = "$confirm_password_user" ]
+  if [ "$password_user" == "$confirm_password_user" ]
     then
       echo "Le mot de passe est bien confirmé."
     else
