@@ -206,7 +206,7 @@ create_password_user()
   echo "Création du mot de passe pour l'utilisateur $otaku_script_login"
 
   read -s -p "Saisir le mot de passe : " $password_user
-  read -s -p -n "Confirmation : " $confirm_password_user
+  read -s -p "Confirmation : \n" $confirm_password_user
 
   if [ "$password_user" = "$confirm_password_user" ]
     then
