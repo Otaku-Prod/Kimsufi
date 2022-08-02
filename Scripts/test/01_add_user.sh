@@ -201,23 +201,29 @@ echo "Le compte est maintenant créé, le dossier de l'utilisateur se trouve dan
 
 # Création du mot de passe ############################################################################################### GERER LE MOT DE PASSE ECHOUE
 
-create_password_user()
+ask_password_user()
 {
   echo "Création du mot de passe pour l'utilisateur $otaku_script_login"
 
   read -s -p "Saisir le mot de passe : " $password_user
-  read -s -p "Confirmation : \n" $confirm_password_user
+  read -s -p "Confirmation : " $confirm_password_user
+}
 
-  if [ "$password_user" == "$confirm_password_user" ]
+check_password_user()
+{
+  if [ "$password_user" = "$confirm_password_user" ]
     then
       echo "Le mot de passe est bien confirmé."
     else
       echo "Il y a une erreur dans la saisie du mot de passe, on réessaye."
       unset password_user
       unset confirm_password_user
-      create_password_user
+      ask_password_user
   fi
+}
 
+create_password_user()
+{
   echo "Dernière étape avant validation du mot de passe"
   read -p "Continuer ? : O/n (défaut Oui) " last_step
   if [ "$last_step" = "" ] || [ "$last_step" = "O" ]
@@ -234,6 +240,8 @@ create_password_user()
   echo "$confirm_password_user"
 }
 
+ask_password_user
+check_password_user
 create_password_user
 
 # Crédit
