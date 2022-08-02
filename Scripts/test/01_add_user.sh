@@ -207,17 +207,12 @@ ask_password_user()
 
   read -s -p "Saisir le mot de passe : " password_user
   read -s -p "Confirmation : " confirm_password_user
-}
-
-check_password_user()
-{
+  
   if [ "$password_user" = "$confirm_password_user" ]
     then
       echo "Le mot de passe est bien confirmé."
     else
       echo "Il y a une erreur dans la saisie du mot de passe, on réessaye."
-      unset password_user
-      unset confirm_password_user
       ask_password_user
   fi
 }
@@ -240,7 +235,6 @@ create_password_user()
 }
 
 ask_password_user
-check_password_user
 create_password_user
 
 # Crédit
