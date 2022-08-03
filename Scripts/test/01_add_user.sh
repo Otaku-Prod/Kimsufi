@@ -40,7 +40,7 @@ ask_user_name()
     then
       echo "Votre nom d'utilisateur est vide !"
       read -p "Voulez-vous réessayer : O/n (défaut Oui) " re_try
-      if [ "$re_try" = "" ] || [ "$re_try" = "O" ]
+      if [ "$re_try" = "" ] || [ "$re_try" = "O" ] || [ "$re_try" = "o" ]
         then
           echo "OK, on recommence."
           ask_user_name
@@ -104,7 +104,7 @@ ask_group_name()
     then
       echo "Votre nom de groupe est vide !"
       read -p "Voulez-vous réessayer : O/n (défaut Oui) " re_try
-      if [ "$re_try" = "" ] || [ "$re_try" = "O" ]
+      if [ "$re_try" = "" ] || [ "$re_try" = "O" ] || [ "$re_try" = "o" ]
         then
           echo "OK, on recommence."
           ask_group_name
@@ -132,7 +132,7 @@ valid_group_name()
     then
       echo "Le groupe souhaité n'existe pas !"
       read -p "Voulez-vous continuer quand même ? : O/n (défaut Oui) " next_step
-      if [ "$next_step" = "" ] || [ "$next_step" = "O" ]
+      if [ "$next_step" = "" ] || [ "$next_step" = "O" ] || [ "$next_step" = "o" ]
         then
           echo "OK, on continue."
         else
@@ -143,7 +143,7 @@ valid_group_name()
     else
       echo "Le groupe souhaité existe !"
       read -p "Voulez-vous continuer ? : O/n (défaut Oui) " next_step
-      if [ "$next_step" = "" ] || [ "$next_step" = "O" ]
+      if [ "$next_step" = "" ] || [ "$next_step" = "O" ] || [ "$next_step" = "o" ]
         then
           echo "OK, on continue."
         else
@@ -172,45 +172,14 @@ show_group_name
 
 # Ajout du Nom Complet ou d'un commentaire
 
-read -p "Veuillez entrer votre nom complet ici : " otaku_script_fullname
-
-# Confirmation avant création du compte
-
-clear
-red_alert_text() 
+add_full_name()
 {
-  printf '\E[31m'; echo "$@"; printf '\E[0m'
+  read -p "Veuillez entrer votre nom complet ici : " otaku_script_fullname
 }
-red_alert_text "DERNIERE ETAPE AVANT LA CREATION DU COMPTE !"
-red_alert_text "Les informations suivantes sont elles exactes :"
-#echo -e "\e[1;31mATTENTION : DERNIERE ETAPE AVANT LA CREATION DU COMPTE !"
-#echo -e "\e[1;37mLes informations suivantes sont elles exactes :"
-echo "Identifiant : $otaku_script_login"
-echo "Groupe : $otaku_script_group_id"
-echo "Nom Complet : $otaku_script_fullname"
-read -p "Tout est correct ? : O/n (défaut Oui) " next_step
-if [ "$next_step" = "" ] || [ "$next_step" = "O" ]
-  then
-    echo "OK, on continue."
-  else
-    echo "Vous avez décidé de quitter le script."
-    echo "Au revoir."
-    exit 0
-fi
 
-# Création du compte
+add_full_name
 
-if [ "$EXISTED_GROUP" != 1 ]
-  then
-    groupadd $otaku_script_group_id
-    echo "Le groupe "$otaku_script_group_id" a été créé."
-  else
-    echo "L'utilisateur à rejoint le groupe existant "$otaku_script_group_id"."
-fi
-sudo useradd --create-home --gid "$otaku_script_group_id" --comment "$otaku_script_fullname" "$otaku_script_login"
-echo "Le compte est maintenant créé, le dossier de l'utilisateur se trouve dans /home/$otaku_script_login"
-
-# Création du mot de passe ############################################################################################### GERER LE MOT DE PASSE ECHOUE
+# Test du mot de passe
 
 ask_password_user()
 {
@@ -228,9 +197,57 @@ ask_password_user()
   fi
 }
 
-create_password_user()
+ask_password_user
+
+# Confirmation avant création du compte
+
+red_alert_text() 
 {
-  echo "Dernière étape avant validation du mot de passe"
+  printf '\E[31m'; echo "$@"; printf '\E[0m'
+}
+
+verification()
+{
+  clear
+  red_alert_text "UNE PETITE VERIFICATION !"
+  #echo -e "\e[1;31mATTENTION : DERNIERE ETAPE AVANT LA CREATION DU COMPTE !"
+  #echo -e "\e[1;37mLes informations suivantes sont elles exactes :"
+  echo "Identifiant : $otaku_script_login"
+  echo "Groupe : $otaku_script_group_id"
+  echo "Nom Complet : $otaku_script_fullname"
+  read -p "Tout est correct ? : O/n (défaut Oui) " next_step
+  if [ "$next_step" = "" ] || [ "$next_step" = "O" ] || [ "$next_step" = "o" ]
+    then
+      echo "OK, on continue."
+    else
+      echo "Vous avez décidé de quitter le script."
+      echo "Au revoir."
+      exit 0
+  fi
+  echo "Voulez-vous voir et confirmer le mot de passe ? : O/n (défaut Non)" valid_pass
+  if [ "$valid_pass" = "O" ] || [ "$valid_pass" = "o" ]
+    then
+      Mot de passe : $password_user
+      echo "Le mot de passe vous convient toujours ? : O/n (défaut Oui)" confirm_pass
+      if [ "$confirm_pass" = "" ] || [ "$confirm_pass" = "O" ] || [ "$confirm_pass" = "o" ]
+        then
+          echo "OK, on continue."
+        else
+          ask_password_user
+      fi
+    else
+      echo "OK, on continue."
+  fi
+}
+
+verification
+
+last_step()
+{
+  clear
+  red_alert_text "DERNIERE ETAPE AVANT LA CREATION DU COMPTE !"
+  red_alert_text "CTRL + C pour fermer et annuler le script sans impact"
+    echo "Dernière étape avant validation du mot de passe"
   read -p "Continuer ? : O/n (défaut Oui) " last_step
   if [ "$last_step" = "" ] || [ "$last_step" = "O" ]
     then
@@ -240,12 +257,34 @@ create_password_user()
       echo "Au revoir."
       exit 0
   fi
-
-  echo -e "$password_user\n$confirm_password_user" | passwd $otaku_script_login > /dev/null 2>&1
-
 }
 
-ask_password_user
+last_step
+
+# Création du compte
+
+create_user()
+{
+sudo useradd --create-home --gid "$otaku_script_group_id" --comment "$otaku_script_fullname" "$otaku_script_login"
+echo "Le compte est maintenant créé, le dossier de l'utilisateur se trouve dans /home/$otaku_script_login"
+if [ "$EXISTED_GROUP" != 1 ]
+  then
+    groupadd $otaku_script_group_id
+    echo "Le groupe "$otaku_script_group_id" a été créé."
+  else
+    echo "L'utilisateur à rejoint le groupe existant "$otaku_script_group_id"."
+fi
+}
+
+create_user
+
+# Création du mot de passe
+
+create_password_user()
+{
+  echo -e "$password_user\n$confirm_password_user" | passwd $otaku_script_login > /dev/null 2>&1
+}
+
 create_password_user
 
 # Crédit
