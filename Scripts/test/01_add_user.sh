@@ -11,9 +11,9 @@
 # DESCRIPTION: Ajouter un utilisateur avec choix du groupe et création du dossier "home"
 #########################################################################################
 
-#-------------------------------------------------------------------------------
-# Début du script
-#-------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------#
+# Création des fonctions
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------#
 
 #-------------------------------------------------------------------------------
 # Forcing de l'exécution du script en tant que "Root" ou "Sudo"
@@ -29,6 +29,20 @@ check_root_sudo()
       echo "Vous êtes root !"
   fi
 }
+
+#-------------------------------------------------------------------------------
+# Gestion des couleurs
+
+red_text() 
+{
+  printf '\E[31m'; echo "$@"; printf '\E[0m'
+}
+
+green_text() 
+{
+  printf '\E[32m'; echo "$@"; printf '\E[0m'
+}
+
 #-------------------------------------------------------------------------------
 # Demande du nom d'utilisateur
 
@@ -51,8 +65,10 @@ ask_user_name()
       fi
   fi
 }
+
 #-------------------------------------------------------------------------------
 # Variable pour définir si l'utilisateur est interdit ou pas
+
 check_refused_names()
 {
   if [ $(getent passwd $otaku_script_login) ]; 
@@ -62,8 +78,11 @@ check_refused_names()
     REFUSED_NAME=0
   fi
 }
+
 #-------------------------------------------------------------------------------
-show_user_name()
+# Vérification de l'état de la variable
+
+valid_user_name()
 {
   case $REFUSED_NAME in
     0)
@@ -77,18 +96,12 @@ show_user_name()
       exit 0;;
   esac
 }
-#-------------------------------------------------------------------------------
-check_root_sudo
-clear
-ask_user_name
-check_refused_names
-valid_user_name
-show_user_name
+
 #-------------------------------------------------------------------------------
 
-# Check group
+#------------------------------AFFICHER LA LISTE DES GROUPES AVANT "voulez vous voir les groupes existants?"---------------------------------------------------#
+# Demande un nom de groupe
 
-#-------------------------------------------------------------------------------AFFICHER LA LISTE DES GROUPES AVANT et GERER SI EXISTANT OU NON ETC...
 ask_group_name()
 {
   read -p "Veuillez entrer votre nom de groupe ici : " otaku_script_group_id
@@ -107,7 +120,10 @@ ask_group_name()
       fi
   fi
 }
+
 #-------------------------------------------------------------------------------
+# Variable pour définir si le groupe existe ou non
+
 check_group_exist()
 {
   if [ $(getent group $otaku_script_group_id) ]; 
@@ -117,7 +133,10 @@ check_group_exist()
     EXISTED_GROUP=0
   fi
 }
+
 #-------------------------------------------------------------------------------
+# Vérification de l'état de la variable
+
 valid_group_name()
 {
   if [ "$EXISTED_GROUP" != 1 ]
@@ -127,6 +146,7 @@ valid_group_name()
       if [ "$next_step" = "" ] || [ "$next_step" = "O" ] || [ "$next_step" = "o" ] || [ "$next_step" = "oui" ] || [ "$next_step" = "yes" ] || [ "$next_step" = "y" ] || [ "$next_step" = "Y" ]
         then
           echo "OK, on continue."
+          echo "Le nom de groupe "$otaku_script_group_id" sera créé après validation."
         else
           echo "Vous avez décidé de quitter le script."
           echo "Au revoir."
@@ -134,10 +154,11 @@ valid_group_name()
       fi
     else
       echo "Le groupe souhaité existe !"
-      read -p "Voulez-vous continuer ? : O/n (défaut Oui) " next_step
+      read -p "Voulez-vous continuer quand même ? : O/n (défaut Oui) " next_step
       if [ "$next_step" = "" ] || [ "$next_step" = "O" ] || [ "$next_step" = "o" ] || [ "$next_step" = "oui" ] || [ "$next_step" = "yes" ] || [ "$next_step" = "y" ] || [ "$next_step" = "Y" ]
         then
           echo "OK, on continue."
+          echo "L'utilisateur sera ajouté au groupe éxistant "$otaku_script_group_id" après validation."
         else
           echo "Vous avez décidé de quitter le script."
           echo "Au revoir."
@@ -145,23 +166,8 @@ valid_group_name()
       fi
   fi
 }
-#-------------------------------------------------------------------------------
-show_group_name()
-{
-  case $EXISTED_GROUP in
-    1)
-      echo "L'utilisateur sera ajouté au groupe éxistant "$otaku_script_group_id" après validation.";;
-    *)
-      echo "Le nom de groupe "$otaku_script_group_id" sera créé après validation.";;
-  esac
-}
-#-------------------------------------------------------------------------------
-ask_group_name
-check_group_exist
-valid_group_name
-show_group_name
-#-------------------------------------------------------------------------------
 
+#-------------------------------------------------------------------------------
 # Ajout du Nom Complet ou d'un commentaire
 
 add_full_name()
@@ -169,9 +175,8 @@ add_full_name()
   read -p "Veuillez entrer votre nom complet ici : " otaku_script_fullname
 }
 
-add_full_name
-
-# Test du mot de passe
+#-------------------------------------------------------------------------------
+# Demande et test du mot de passe
 
 ask_password_user()
 {
@@ -189,19 +194,13 @@ ask_password_user()
   fi
 }
 
-ask_password_user
-
-# Confirmation avant création du compte
-
-red_alert_text() 
-{
-  printf '\E[31m'; echo "$@"; printf '\E[0m'
-}
+#-------------------------------------------------------------------------------
+# Vérification des informations non sensibles avant création du compte
 
 check_info()
 {
   clear
-  red_alert_text "UNE PETITE VERIFICATION !"
+  red_text "UNE PETITE VERIFICATION !"
   #echo -e "\e[1;31mATTENTION : DERNIERE ETAPE AVANT LA CREATION DU COMPTE !"
   #echo -e "\e[1;37mLes informations suivantes sont elles exactes :"
   echo "Identifiant : $otaku_script_login"
@@ -217,6 +216,9 @@ check_info()
       exit 0
   fi
 }
+
+#-------------------------------------------------------------------------------
+# Vérification des informations sensibles avant création du compte
 
 check_pass()
 {
@@ -236,14 +238,14 @@ check_pass()
   fi
 }
 
-check_info
-check_pass
+#-------------------------------------------------------------------------------
+# Dernière chance de quitter le script sans problème
 
 last_step()
 {
   clear
-  red_alert_text "DERNIERE ETAPE AVANT LA CREATION DU COMPTE !"
-  red_alert_text "CTRL + C pour fermer et annuler le script sans impact"
+  red_text "DERNIERE ETAPE AVANT LA CREATION DU COMPTE !"
+  red_text "CTRL + C pour fermer et annuler le script sans impact"
   echo "Le compte va être créé, pas de retour arrière possible !"
   read -p "Continuer ? : O/n (défaut Oui) " last_step
   if [ "$last_step" = "" ] || [ "$last_step" = "O" ] || [ "$last_step" = "o" ] || [ "$last_step" = "oui" ] || [ "$last_step" = "yes" ] || [ "$last_step" = "y" ] || [ "$last_step" = "Y" ]
@@ -256,8 +258,7 @@ last_step()
   fi
 }
 
-last_step
-
+#-------------------------------------------------------------------------------
 # Création du compte
 
 create_user()
@@ -273,8 +274,7 @@ if [ "$EXISTED_GROUP" != 1 ]
 fi
 }
 
-create_user
-
+#-------------------------------------------------------------------------------
 # Création du mot de passe
 
 create_password_user()
@@ -282,18 +282,42 @@ create_password_user()
   echo -e "$password_user\n$confirm_password_user" | passwd $otaku_script_login > /dev/null 2>&1
 }
 
-create_password_user
-
+#-------------------------------------------------------------------------------
 # Crédit
 
 credit()
 {
-echo "Merci d'avoir utilisé le script de création de compte."
-echo "C'est terminé... Au plaisir de vous revoir !"
-echo "Cordialement,"
-echo "Otaku-Prod"
+green_text "Merci d'avoir utilisé le script de création de compte."
+green_text "C'est terminé... Au plaisir de vous revoir !"
+green_text "Cordialement,"
+green_text "Otaku-Prod"
 }
 
-credit
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------#
+# Exécution des fonctions
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------#
 
-# Fin du script
+check_root_sudo
+
+clear
+
+ask_user_name
+check_refused_names
+valid_user_name
+
+ask_group_name
+check_group_exist
+valid_group_name
+
+add_full_name
+
+ask_password_user
+
+check_info
+check_pass
+last_step
+
+create_user
+create_password_user
+
+credit
