@@ -252,7 +252,7 @@ last_step()
   clear
   red_alert_text "DERNIERE ETAPE AVANT LA CREATION DU COMPTE !"
   red_alert_text "CTRL + C pour fermer et annuler le script sans impact"
-    echo "Dernière étape avant validation du mot de passe"
+  echo "Le compte va être créé, pas de retour arrière possible !"
   read -p "Continuer ? : O/n (défaut Oui) " last_step
   if [ "$last_step" = "" ] || [ "$last_step" = "O" ]
     then
