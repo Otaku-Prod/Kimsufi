@@ -231,7 +231,7 @@ check_pass()
   read -p "Voulez-vous voir et confirmer le mot de passe ? : O/n (défaut Non)" valid_pass
   if [ "$valid_pass" = "O" ] || [ "$valid_pass" = "o" ]
     then
-      Mot de passe : $password_user
+      echo "Mot de passe : $password_user"
       read -p "Le mot de passe vous convient toujours ? : O/n (défaut Oui)" confirm_pass
       if [ "$confirm_pass" = "" ] || [ "$confirm_pass" = "O" ] || [ "$confirm_pass" = "o" ]
         then
