@@ -11,6 +11,11 @@
 # DESCRIPTION: Ajouter un utilisateur avec choix du groupe et création du dossier "home"
 #########################################################################################
 
+#-------------------------------------------------------------------------------
+# Début du script
+#-------------------------------------------------------------------------------
+
+#-------------------------------------------------------------------------------
 # Forcing de l'exécution du script en tant que "Root" ou "Sudo"
 
 check_root_sudo()
@@ -24,14 +29,9 @@ check_root_sudo()
       echo "Vous êtes root !"
   fi
 }
-
-check_root_sudo
-
-# Début du script
-
-# Check user
-
 #-------------------------------------------------------------------------------
+# Demande du nom d'utilisateur
+
 ask_user_name()
 {
   echo "Bonjour,"
@@ -40,7 +40,7 @@ ask_user_name()
     then
       echo "Votre nom d'utilisateur est vide !"
       read -p "Voulez-vous réessayer : O/n (défaut Oui) " re_try
-      if [ "$re_try" = "" ] || [ "$re_try" = "O" ] || [ "$re_try" = "o" ]
+      if [ "$re_try" = "" ] || [ "$re_try" = "O" ] || [ "$re_try" = "o" ] || [ "$re_try" = "oui" ] || [ "$re_try" = "yes" ] || [ "$re_try" = "y" ] || [ "$re_try" = "Y" ]
         then
           echo "OK, on recommence."
           ask_user_name
@@ -52,6 +52,7 @@ ask_user_name()
   fi
 }
 #-------------------------------------------------------------------------------
+# Variable pour définir si l'utilisateur est interdit ou pas
 check_refused_names()
 {
   if [ $(getent passwd $otaku_script_login) ]; 
@@ -62,20 +63,10 @@ check_refused_names()
   fi
 }
 #-------------------------------------------------------------------------------
-valid_user_name()
-{
-  if [ "$REFUSED_NAME" != 1 ]
-    then
-      VALID_USER=1
-    else
-      VALID_USER=0
-  fi
-}
-#-------------------------------------------------------------------------------
 show_user_name()
 {
-  case $VALID_USER in
-    1)
+  case $REFUSED_NAME in
+    0)
       echo "Le nom d'utilisateur $otaku_script_login est valide."
       echo "Le script peut continuer.";;
     *)
@@ -87,6 +78,7 @@ show_user_name()
   esac
 }
 #-------------------------------------------------------------------------------
+check_root_sudo
 clear
 ask_user_name
 check_refused_names
@@ -104,7 +96,7 @@ ask_group_name()
     then
       echo "Votre nom de groupe est vide !"
       read -p "Voulez-vous réessayer : O/n (défaut Oui) " re_try
-      if [ "$re_try" = "" ] || [ "$re_try" = "O" ] || [ "$re_try" = "o" ]
+      if [ "$re_try" = "" ] || [ "$re_try" = "O" ] || [ "$re_try" = "o" ] || [ "$re_try" = "oui" ] || [ "$re_try" = "yes" ] || [ "$re_try" = "y" ] || [ "$re_try" = "Y" ]
         then
           echo "OK, on recommence."
           ask_group_name
@@ -132,7 +124,7 @@ valid_group_name()
     then
       echo "Le groupe souhaité n'existe pas !"
       read -p "Voulez-vous continuer quand même ? : O/n (défaut Oui) " next_step
-      if [ "$next_step" = "" ] || [ "$next_step" = "O" ] || [ "$next_step" = "o" ]
+      if [ "$next_step" = "" ] || [ "$next_step" = "O" ] || [ "$next_step" = "o" ] || [ "$next_step" = "oui" ] || [ "$next_step" = "yes" ] || [ "$next_step" = "y" ] || [ "$next_step" = "Y" ]
         then
           echo "OK, on continue."
         else
@@ -143,7 +135,7 @@ valid_group_name()
     else
       echo "Le groupe souhaité existe !"
       read -p "Voulez-vous continuer ? : O/n (défaut Oui) " next_step
-      if [ "$next_step" = "" ] || [ "$next_step" = "O" ] || [ "$next_step" = "o" ]
+      if [ "$next_step" = "" ] || [ "$next_step" = "O" ] || [ "$next_step" = "o" ] || [ "$next_step" = "oui" ] || [ "$next_step" = "yes" ] || [ "$next_step" = "y" ] || [ "$next_step" = "Y" ]
         then
           echo "OK, on continue."
         else
@@ -216,7 +208,7 @@ check_info()
   echo "Groupe : $otaku_script_group_id"
   echo "Nom Complet : $otaku_script_fullname"
   read -p "Tout est correct ? : O/n (défaut Oui) " next_step
-  if [ "$next_step" = "" ] || [ "$next_step" = "O" ] || [ "$next_step" = "o" ]
+  if [ "$next_step" = "" ] || [ "$next_step" = "O" ] || [ "$next_step" = "o" ] || [ "$next_step" = "oui" ] || [ "$next_step" = "yes" ] || [ "$next_step" = "y" ] || [ "$next_step" = "Y" ]
     then
       echo "OK, on continue."
     else
@@ -229,11 +221,11 @@ check_info()
 check_pass()
 {
   read -p "Voulez-vous voir et confirmer le mot de passe ? : O/n (défaut Non)" valid_pass
-  if [ "$valid_pass" = "O" ] || [ "$valid_pass" = "o" ]
+  if [ "$valid_pass" = "O" ] || [ "$valid_pass" = "o" ] || [ "$valid_pass" = "oui" ] || [ "$valid_pass" = "yes" ] || [ "$valid_pass" = "y" ] || [ "$valid_pass" = "Y" ]
     then
       echo "Mot de passe : $password_user"
       read -p "Le mot de passe vous convient toujours ? : O/n (défaut Oui)" confirm_pass
-      if [ "$confirm_pass" = "" ] || [ "$confirm_pass" = "O" ] || [ "$confirm_pass" = "o" ]
+      if [ "$confirm_pass" = "" ] || [ "$confirm_pass" = "O" ] || [ "$confirm_pass" = "o" ] || [ "$confirm_pass" = "oui" ] || [ "$confirm_pass" = "yes" ] || [ "$confirm_pass" = "y" ] || [ "$confirm_pass" = "Y" ]
         then
           echo "OK, on continue."
         else
@@ -254,7 +246,7 @@ last_step()
   red_alert_text "CTRL + C pour fermer et annuler le script sans impact"
   echo "Le compte va être créé, pas de retour arrière possible !"
   read -p "Continuer ? : O/n (défaut Oui) " last_step
-  if [ "$last_step" = "" ] || [ "$last_step" = "O" ]
+  if [ "$last_step" = "" ] || [ "$last_step" = "O" ] || [ "$last_step" = "o" ] || [ "$last_step" = "oui" ] || [ "$last_step" = "yes" ] || [ "$last_step" = "y" ] || [ "$last_step" = "Y" ]
     then
       echo "OK, on continue."
     else
@@ -294,28 +286,14 @@ create_password_user
 
 # Crédit
 
+credit()
+{
 echo "Merci d'avoir utilisé le script de création de compte."
 echo "C'est terminé... Au plaisir de vous revoir !"
 echo "Cordialement,"
 echo "Otaku-Prod"
+}
 
-# Suppression des variables
-
-unset otaku_script_login
-unset otaku_script_fullname
-unset otaku_script_group_id
-unset ask_user_name
-unset check_refused_names
-unset valid_user_name
-unset show_user_name
-unset ask_group_name
-unset check_group_exist
-unset valid_group_name
-unset show_group_name
-unset re_try
-unset REFUSED_NAME
-unset ACCEPTED_NAME
-unset EXISTED_GROUP
-unset VALID_USER
+credit
 
 # Fin du script
