@@ -86,10 +86,10 @@ valid_user_name()
 {
   case $REFUSED_NAME in
     0)
-      echo "Le nom d'utilisateur $otaku_script_login est valide."
+      echo "Le nom d'utilisateur "$otaku_script_login" est valide."
       echo "Le script peut continuer.";;
     *)
-      echo "Désolé, ce script n'accepte pas le nom d'utilisateur $otaku_script_login !"
+      echo "Désolé, ce script n'accepte pas le nom d'utilisateur "$otaku_script_login" !"
       echo "Soit vous utilisez un nom d'utilisateur interdit, soit celui-ci existe déjà."
       echo "Veuillez recommencer avec un nom d'utilisateur valide."
       echo "Au revoir."
@@ -180,7 +180,7 @@ add_full_name()
 
 ask_password_user()
 {
-  echo "Création du mot de passe pour l'utilisateur $otaku_script_login"
+  echo "Création du mot de passe pour l'utilisateur "$otaku_script_login""
   # Rappel -s = cacher le texte saisie, -p = afficher le message "Saisir le mot de passe", -r = pour rendre les "\" visible, -e = pour que "\" soit une commande
   read -s -p "Saisir le mot de passe : `echo $'\n> '`" password_user
   read -s -p "`echo $'\nConfirmation : '` `echo $'\n> '`" confirm_password_user
@@ -268,9 +268,9 @@ echo "Le compte est maintenant créé, le dossier de l'utilisateur se trouve dan
 if [ "$EXISTED_GROUP" != 1 ]
   then
     groupadd $otaku_script_group_id
-    echo "Le groupe "$otaku_script_group_id" a été créé."
+    echo "Le groupe '$otaku_script_group_id' a été créé."
   else
-    echo "L'utilisateur à rejoint le groupe existant "$otaku_script_group_id"."
+    echo "L'utilisateur à rejoint le groupe existant '$otaku_script_group_id'."
 fi
 }
 
