@@ -15,11 +15,9 @@
 if [[ "$(id -u)" != 0 ]]
 then
   echo "Vous n'êtes pas root !"
-  echo "Tentative en sudo:"
-  exec sudo bash $0
+  echo "Tentative en sudo:" | exec sudo bash $0 > /dev/null 2>&1
 else
   echo "Vous êtes root !"
-  echo "Le script peut continuer..."
 fi
 
 # Début du script
@@ -30,7 +28,7 @@ fi
 ask_user_name()
 {
   echo "Bonjour,"
-  read -p "Veuillez entrer votre nom d'utilisateur ici : " otaku_script_login
+  read -p "Veuillez saisir le nom d'utilisateur à créer ici : " otaku_script_login
   if [ "$otaku_script_login" = "" ]
     then
       echo "Votre nom d'utilisateur est vide !"
