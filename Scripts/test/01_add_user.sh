@@ -86,10 +86,10 @@ valid_user_name()
 {
   case $REFUSED_NAME in
     0)
-      echo "Le nom d'utilisateur "$otaku_script_login" est valide."
+      echo "Le nom d'utilisateur '$otaku_script_login' est valide."
       echo "Le script peut continuer.";;
     *)
-      echo "Désolé, ce script n'accepte pas le nom d'utilisateur "$otaku_script_login" !"
+      echo "Désolé, ce script n'accepte pas le nom d'utilisateur '$otaku_script_login' !"
       echo "Soit vous utilisez un nom d'utilisateur interdit, soit celui-ci existe déjà."
       echo "Veuillez recommencer avec un nom d'utilisateur valide."
       echo "Au revoir."
@@ -98,9 +98,7 @@ valid_user_name()
 }
 
 #-------------------------------------------------------------------------------
-
-#------------------------------AFFICHER LA LISTE DES GROUPES AVANT "voulez vous voir les groupes existants?"---------------------------------------------------#
-# Demande a voir la liste des groupes
+# Affiche la liste des groupes
 
 prompt_group_name()
 {
@@ -160,7 +158,7 @@ valid_group_name()
       if [ "$next_step" = "" ] || [ "$next_step" = "O" ] || [ "$next_step" = "o" ] || [ "$next_step" = "oui" ] || [ "$next_step" = "yes" ] || [ "$next_step" = "y" ] || [ "$next_step" = "Y" ]
         then
           echo "OK, on continue."
-          echo "Le nom de groupe "$otaku_script_group_id" sera créé après validation."
+          echo "Le nom de groupe '$otaku_script_group_id' sera créé après validation."
         else
           echo "Vous avez décidé de quitter le script."
           echo "Au revoir."
@@ -172,7 +170,7 @@ valid_group_name()
       if [ "$next_step" = "" ] || [ "$next_step" = "O" ] || [ "$next_step" = "o" ] || [ "$next_step" = "oui" ] || [ "$next_step" = "yes" ] || [ "$next_step" = "y" ] || [ "$next_step" = "Y" ]
         then
           echo "OK, on continue."
-          echo "L'utilisateur sera ajouté au groupe éxistant "$otaku_script_group_id" après validation."
+          echo "L'utilisateur sera ajouté au groupe éxistant '$otaku_script_group_id' après validation."
         else
           echo "Vous avez décidé de quitter le script."
           echo "Au revoir."
@@ -194,7 +192,7 @@ add_full_name()
 
 ask_password_user()
 {
-  echo "Création du mot de passe pour l'utilisateur "$otaku_script_login""
+  echo "Création du mot de passe pour l'utilisateur '$otaku_script_login'"
   # Rappel -s = cacher le texte saisie, -p = afficher le message "Saisir le mot de passe", -r = pour rendre les "\" visible, -e = pour que "\" soit une commande
   read -s -p "Saisir le mot de passe : `echo $'\n> '`" password_user
   read -s -p "`echo $'\nConfirmation : '` `echo $'\n> '`" confirm_password_user
