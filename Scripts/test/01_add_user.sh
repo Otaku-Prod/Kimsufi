@@ -206,7 +206,7 @@ red_alert_text()
   printf '\E[31m'; echo "$@"; printf '\E[0m'
 }
 
-verification()
+check_info()
 {
   clear
   red_alert_text "UNE PETITE VERIFICATION !"
@@ -224,6 +224,10 @@ verification()
       echo "Au revoir."
       exit 0
   fi
+}
+
+check_pass()
+{
   echo "Voulez-vous voir et confirmer le mot de passe ? : O/n (défaut Non)" valid_pass
   if [ "$valid_pass" = "O" ] || [ "$valid_pass" = "o" ]
     then
@@ -240,7 +244,8 @@ verification()
   fi
 }
 
-verification
+check_info
+check_pass
 
 last_step()
 {
