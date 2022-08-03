@@ -100,6 +100,20 @@ valid_user_name()
 #-------------------------------------------------------------------------------
 
 #------------------------------AFFICHER LA LISTE DES GROUPES AVANT "voulez vous voir les groupes existants?"---------------------------------------------------#
+# Demande a voir la liste des groupes
+
+prompt_group_name()
+{
+  read -p "Voulez-vous voir les groupes existants ? : O/n (défaut Oui) " next_step
+  if [ "$next_step" = "" ] || [ "$next_step" = "O" ] || [ "$next_step" = "o" ] || [ "$next_step" = "oui" ] || [ "$next_step" = "yes" ] || [ "$next_step" = "y" ] || [ "$next_step" = "Y" ]
+    then
+      echo "cat /etc/group | awk -F: '{print $ 1}'"
+    else
+      echo "Ok, on passe."
+  fi
+}
+
+#-------------------------------------------------------------------------------
 # Demande un nom de groupe
 
 ask_group_name()
@@ -263,15 +277,15 @@ last_step()
 
 create_user()
 {
-sudo useradd --create-home --gid "$otaku_script_group_id" --comment "$otaku_script_fullname" "$otaku_script_login"
-echo "Le compte est maintenant créé, le dossier de l'utilisateur se trouve dans /home/$otaku_script_login"
-if [ "$EXISTED_GROUP" != 1 ]
-  then
-    groupadd $otaku_script_group_id
-    echo "Le groupe '$otaku_script_group_id' a été créé."
-  else
-    echo "L'utilisateur à rejoint le groupe existant '$otaku_script_group_id'."
-fi
+  if [ "$EXISTED_GROUP" != 1 ]
+    then
+      groupadd $otaku_script_group_id
+      echo "Le groupe '$otaku_script_group_id' a été créé."
+    else
+      echo "L'utilisateur à rejoint le groupe existant '$otaku_script_group_id'."
+  fi
+  sudo useradd --create-home --gid "$otaku_script_group_id" --comment "$otaku_script_fullname" "$otaku_script_login"
+  echo "Le compte est maintenant créé, le dossier de l'utilisateur se trouve dans /home/$otaku_script_login"
 }
 
 #-------------------------------------------------------------------------------
@@ -287,10 +301,10 @@ create_password_user()
 
 credit()
 {
-green_text "Merci d'avoir utilisé le script de création de compte."
-green_text "C'est terminé... Au plaisir de vous revoir !"
-green_text "Cordialement,"
-green_text "Otaku-Prod"
+  green_text "Merci d'avoir utilisé le script de création de compte."
+  green_text "C'est terminé... Au plaisir de vous revoir !"
+  green_text "Cordialement,"
+  green_text "Otaku-Prod"
 }
 
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------#
@@ -305,6 +319,7 @@ ask_user_name
 check_refused_names
 valid_user_name
 
+prompt_group_name
 ask_group_name
 check_group_exist
 valid_group_name
