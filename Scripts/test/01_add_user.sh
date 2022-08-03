@@ -12,13 +12,20 @@
 #########################################################################################
 
 # Forcing de l'exécution du script en tant que "Root" ou "Sudo"
-if [[ "$(id -u)" != 0 ]]
-then
-  echo "Vous n'êtes pas root !"
-  echo "Tentative en sudo:" | exec sudo bash $0 > /dev/null 2>&1
-else
-  echo "Vous êtes root !"
-fi
+
+check_root_sudo()
+{
+  if [[ "$(id -u)" != 0 ]]
+    then
+      echo "Vous n'êtes pas root !"
+      echo "Tentative en sudo:"
+      exec sudo bash $0
+    else
+      echo "Vous êtes root !"
+  fi
+}
+
+check_root_sudo
 
 # Début du script
 
@@ -170,8 +177,14 @@ read -p "Veuillez entrer votre nom complet ici : " otaku_script_fullname
 # Confirmation avant création du compte
 
 clear
-echo -e "\e[1;31mATTENTION : DERNIERE ETAPE AVANT LA CREATION DU COMPTE !"
-echo -e "\e[1;37mLes informations suivantes sont elles exactes :"
+red_alert_text() 
+{
+  printf '\E[31m'; echo "$@"; printf '\E[0m'
+}
+red_alert_text "DERNIERE ETAPE AVANT LA CREATION DU COMPTE !"
+red_alert_text "Les informations suivantes sont elles exactes :"
+#echo -e "\e[1;31mATTENTION : DERNIERE ETAPE AVANT LA CREATION DU COMPTE !"
+#echo -e "\e[1;37mLes informations suivantes sont elles exactes :"
 echo "Identifiant : $otaku_script_login"
 echo "Groupe : $otaku_script_group_id"
 echo "Nom Complet : $otaku_script_fullname"
