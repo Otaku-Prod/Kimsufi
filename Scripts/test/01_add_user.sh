@@ -38,25 +38,25 @@ red_zone()
   printf '\E[31m'
 }
 
-red_zone
-
-red_text() 
+green_zone() 
 {
-  printf '\E[31m'; echo "$@"; printf '\E[0m'
+  printf '\E[32m'
 }
 
-green_text() 
+white_zone() 
 {
-  printf '\E[32m'; echo "$@"; printf '\E[0m'
+  printf '\E[0m'
 }
+
+#-------------------------------------------------------------------------------
 
 the_question()
 {
   echo "Que désirez vous faire ?"
-  read -p "Ajouter un utilisateur ? 1 `echo $'\n'`Modifier un utilisateur ? 2 `echo $'\n'`Supprimer un utilisateur ? 3 `echo $'\n> '`" choix
+  read -p "Ajouter un utilisateur ? 1 `echo $'\nModifier un utilisateur ? 2 '` `echo $'\nSupprimer un utilisateur ? 3 '` `echo $'\n> '`" choix
 }
 
-valid_first_choix()
+the_choix()
 {
   case $choix in
     1)
@@ -263,9 +263,9 @@ ask_password_user()
 check_info()
 {
   clear
-  red_text "UNE PETITE VERIFICATION !"
-  #echo -e "\e[1;31mATTENTION : DERNIERE ETAPE AVANT LA CREATION DU COMPTE !"
-  #echo -e "\e[1;37mLes informations suivantes sont elles exactes :"
+  red_zone
+  echo "UNE PETITE VERIFICATION !"
+  white_zone
   echo "Identifiant : $otaku_script_login"
   echo "Groupe : $otaku_script_group_id"
   echo "Nom Complet : $otaku_script_fullname"
@@ -307,8 +307,10 @@ check_pass()
 last_step()
 {
   clear
-  red_text "DERNIERE ETAPE AVANT LA CREATION DU COMPTE !"
-  red_text "CTRL + C pour fermer et annuler le script sans impact"
+  red_zone
+  echo "DERNIERE ETAPE AVANT LA CREATION DU COMPTE !"
+  echo "CTRL + C pour fermer et annuler le script sans impact"
+  white_zone
   echo "Le compte va être créé, pas de retour arrière possible !"
   read -p "Continuer ? : O/n (défaut Oui) " last_step
   if [ "$last_step" = "" ] || [ "$last_step" = "O" ] || [ "$last_step" = "o" ] || [ "$last_step" = "oui" ] || [ "$last_step" = "yes" ] || [ "$last_step" = "y" ] || [ "$last_step" = "Y" ]
@@ -432,10 +434,12 @@ edit_user_script()
 
 credit()
 {
-  green_text "Merci d'avoir utilisé le script de création de compte."
-  green_text "C'est terminé... Au plaisir de vous revoir !"
-  green_text "Cordialement,"
-  green_text "Otaku-Prod"
+  green_zone
+  echo "Merci d'avoir utilisé le script de création de compte."
+  echo "C'est terminé... Au plaisir de vous revoir !"
+  echo "Cordialement,"
+  echo "Otaku-Prod"
+  white_zone
 }
 
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------#
@@ -447,7 +451,7 @@ check_root_sudo
 clear
 
 the_question
-valid_first_choix
+the_choix
 
 # faire un if ici sinon ca senchaine
 add_user_script
