@@ -43,6 +43,34 @@ green_text()
   printf '\E[32m'; echo "$@"; printf '\E[0m'
 }
 
+the_question()
+{
+  echo "Que désirez vous faire ?"
+  read -p "Ajouter un utilisateur ? 1" choix
+  read -p "Modifier un utilisateur ? 2" choix
+  read -p "Supprimer un utilisateur ? 3" choix
+}
+
+valid_first_choix()
+{
+  case $choix in
+    1)
+      echo "Nous allons changer ajouter un utilisateur."
+      add_user_script;;
+    2
+      echo "Nous allons modifier un utilisateur."
+      edit_user_script;;
+    3)
+      echo "Nous allons supprimer un utilisateur.";;
+    *)
+      echo "Désolé, ce script n'accepte pas le votre choix !"
+      echo "Au revoir."
+      exit 0;;
+  esac
+}
+
+
+
 #-------------------------------------------------------------------------------
 # Demande du nom d'utilisateur
 
@@ -69,28 +97,46 @@ ask_user_name()
 #-------------------------------------------------------------------------------
 # Variable pour définir si l'utilisateur est interdit ou pas
 
-check_refused_names()
+check_exist_name()
 {
   if [ $(getent passwd $otaku_script_login) ]; 
   then
-    REFUSED_NAME=1
+    EXIST_NAME=1
   else
-    REFUSED_NAME=0
+    EXIST_NAME=0
   fi
 }
 
 #-------------------------------------------------------------------------------
-# Vérification de l'état de la variable
+# Vérification de l'état de la variable pour l'ajout d'utilisateur
 
-valid_user_name()
+valid_add_user_name()
 {
-  case $REFUSED_NAME in
+  case $EXIST_NAME in
     0)
       echo "Le nom d'utilisateur '$otaku_script_login' est valide."
       echo "Le script peut continuer.";;
     *)
       echo "Désolé, ce script n'accepte pas le nom d'utilisateur '$otaku_script_login' !"
       echo "Soit vous utilisez un nom d'utilisateur interdit, soit celui-ci existe déjà."
+      echo "Veuillez recommencer avec un nom d'utilisateur valide."
+      echo "Au revoir."
+      exit 0;;
+  esac
+}
+
+#-------------------------------------------------------------------------------
+# Vérification de l'état de la variable pour la modification d'utilisateur
+
+valid_edit_user_name()
+{
+  case $EXIST_NAME in
+    1)
+      echo "Le nom d'utilisateur '$otaku_script_login' est valide."
+      echo "Le script peut continuer.";;
+    *)
+      echo "Désolé, ce script n'accepte pas le nom d'utilisateur '$otaku_script_login' !"
+      echo "Le nom d'utilisateur n'existe pas."
       echo "Veuillez recommencer avec un nom d'utilisateur valide."
       echo "Au revoir."
       exit 0;;
@@ -295,6 +341,88 @@ create_password_user()
 }
 
 #-------------------------------------------------------------------------------
+# Choix de l'édition de l'utilisateur
+
+choix_edit_user()
+{
+  echo "Que voulez vous faire avec $otaku_script_login !"
+  read -p "Changer le mot de passe ? 1" choix
+  read -p "Changer le groupe actuel ? 2" choix
+  read -p "Ajouter un ou plusieurs groupes ? 3" choix
+}
+
+valid_edit_choix()
+{
+  case $choix in
+    1)
+      echo "Nous allons changer le mot de passe.";;
+    2
+      echo "Nous allons changer le groupe actuel (efface celui existant et ajoute un ou plusieurs groupes).";;
+    3)
+      echo "Nous allons ajouter un ou plusieurs groupes (cela n'efface pas les groupes déjà présents).";;
+    *)
+      echo "Désolé, ce script n'accepte pas le votre choix !"
+      echo "Au revoir."
+      exit 0;;
+  esac
+}
+
+#-------------------------------------------------------------------------------
+# Script complet pour ajouter un utilisateur (création d'un utilisateur avec nom complet, dossier 'home', choix des groupes et du mot de passe)
+
+add_user_script()
+{
+  ask_user_name
+  check_exist_name
+  valid_add_user_name
+
+  prompt_group_name
+  ask_group_name
+  check_group_exist
+  valid_group_name
+
+  add_full_name
+
+  ask_password_user
+
+  check_info
+  check_pass
+  last_step
+
+  create_user
+  create_password_user
+}
+
+#-------------------------------------------------------------------------------
+# Script complet pour la modification d'un utilisateur (changement de mot de passe et du groupe)
+
+edit_user_script()
+{
+  ask_user_name
+  check_exist_name
+  valid_edit_user_name
+
+  choix_edit_user
+  valid_edit_choix
+  
+  prompt_group_name
+  ask_group_name
+  check_group_exist
+  valid_group_name
+
+  add_full_name
+
+  ask_password_user
+
+  check_info
+  check_pass
+  last_step
+
+  create_user
+  create_password_user
+}
+
+#-------------------------------------------------------------------------------
 # Crédit
 
 credit()
@@ -313,24 +441,10 @@ check_root_sudo
 
 clear
 
-ask_user_name
-check_refused_names
-valid_user_name
+the_question
+valid_first_choix
 
-prompt_group_name
-ask_group_name
-check_group_exist
-valid_group_name
-
-add_full_name
-
-ask_password_user
-
-check_info
-check_pass
-last_step
-
-create_user
-create_password_user
+add_user_script
+edit_user_script
 
 credit
