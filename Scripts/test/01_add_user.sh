@@ -18,7 +18,7 @@
 #-------------------------------------------------------------------------------
 # Forcing de l'exécution du script en tant que "Root" ou "Sudo"
 
-############################### --------------------------------------------------Ajouter les options, voir les utilisateurs, voir les groupes + ajouter au lancement de la question ask_user_name voulez vous voir les utilisateurs existant + redemande 1 seule fois le mot de passe
+############################### --------------------------------------------------Ajouter les options, voir les utilisateurs, voir les groupes + ajouter au lancement de la question ask_user_name voulez vous voir les utilisateurs existant + redemande 1 seule fois le mot de passe + ajouter à "Continuer ?" et "Tout est correct ?"" l'option recommencer si on répond non...
 
 check_root_sudo()
 {
@@ -303,7 +303,6 @@ add_full_name()
 
 ask_password_user()
 {
-  quit_rappel
   echo "Création du mot de passe pour l'utilisateur '$otaku_script_login'"
   # Rappel -s = cacher le texte saisie, -p = afficher le message "Saisir le mot de passe", -r = pour rendre les "\" visible, -e = pour que "\" soit une commande
   read -s -p "Saisir le mot de passe : `echo $'\n> '`" password_user
@@ -356,7 +355,6 @@ check_info()
 
 check_pass()
 {
-  red_zone
   read -p "Voulez-vous vérifer le mot de passe ? : O/n (défaut Non)" valid_pass
   white_zone
   if [ "$valid_pass" = "O" ] || [ "$valid_pass" = "o" ] || [ "$valid_pass" = "oui" ] || [ "$valid_pass" = "yes" ] || [ "$valid_pass" = "y" ] || [ "$valid_pass" = "Y" ]
@@ -383,6 +381,7 @@ check_pass()
 
 last_step()
 {
+  clear
   quit_rappel
   red_zone
   echo "DERNIERE ETAPE AVANT LA CREATION DU COMPTE !"
@@ -393,7 +392,6 @@ last_step()
     then
       clear
       quit_rappel
-      echo "OK, on continue."
     else
       clear
       echo "Vous avez décidé de quitter le script."
