@@ -356,7 +356,7 @@ valid_edit_choix()
   case $choix in
     1)
       echo "Nous allons changer le mot de passe.";;
-    2
+    2)
       echo "Nous allons changer le groupe actuel (efface celui existant et ajoute un ou plusieurs groupes).";;
     3)
       echo "Nous allons ajouter un ou plusieurs groupes (cela n'efface pas les groupes déjà présents).";;
