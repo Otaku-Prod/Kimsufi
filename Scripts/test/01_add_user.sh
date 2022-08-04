@@ -30,6 +30,13 @@ check_root_sudo()
   fi
 }
 
+quit_rappel()
+{
+  red_zone
+  echo "CTRL + C pour annuler et fermer à tout moment."
+  white_zone
+}
+
 #-------------------------------------------------------------------------------
 # Gestion des couleurs
 
@@ -52,6 +59,8 @@ white_zone()
 
 the_question()
 {
+  quit_rappel
+  echo "Bonjour,"
   echo "Que désirez vous faire ?"
   read -p "Ajouter un utilisateur ? 1 `echo $'\nModifier un utilisateur ? 2 '` `echo $'\nSupprimer un utilisateur ? 3 '` `echo $'\n> '`" choix
 }
@@ -81,7 +90,6 @@ the_choix()
 
 ask_user_name()
 {
-  echo "Bonjour,"
   read -p "Veuillez saisir le nom d'utilisateur à créer ici : " otaku_script_login
   if [ "$otaku_script_login" = "" ]
     then
@@ -153,6 +161,7 @@ valid_edit_user_name()
 
 prompt_group_name()
 {
+  quit_rappel
   read -p "Voulez-vous voir les groupes existants ? : O/n (défaut Oui) " next_step
   if [ "$next_step" = "" ] || [ "$next_step" = "O" ] || [ "$next_step" = "o" ] || [ "$next_step" = "oui" ] || [ "$next_step" = "yes" ] || [ "$next_step" = "y" ] || [ "$next_step" = "Y" ]
     then
@@ -167,6 +176,7 @@ prompt_group_name()
 
 ask_group_name()
 {
+  quit_rappel
   read -p "Veuillez entrer votre nom de groupe ici : " otaku_script_group_id
   if [ "$otaku_script_group_id" = "" ]
     then
@@ -235,6 +245,7 @@ valid_group_name()
 
 add_full_name()
 {
+  quit_rappel
   read -p "Veuillez entrer votre nom complet ici : " otaku_script_fullname
 }
 
@@ -243,6 +254,7 @@ add_full_name()
 
 ask_password_user()
 {
+  quit_rappel
   echo "Création du mot de passe pour l'utilisateur '$otaku_script_login'"
   # Rappel -s = cacher le texte saisie, -p = afficher le message "Saisir le mot de passe", -r = pour rendre les "\" visible, -e = pour que "\" soit une commande
   read -s -p "Saisir le mot de passe : `echo $'\n> '`" password_user
@@ -263,6 +275,7 @@ ask_password_user()
 check_info()
 {
   clear
+  quit_rappel
   red_zone
   echo "UNE PETITE VERIFICATION !"
   white_zone
@@ -307,9 +320,9 @@ check_pass()
 last_step()
 {
   clear
+  quit_rappel
   red_zone
   echo "DERNIERE ETAPE AVANT LA CREATION DU COMPTE !"
-  echo "CTRL + C pour fermer et annuler le script sans impact"
   white_zone
   echo "Le compte va être créé, pas de retour arrière possible !"
   read -p "Continuer ? : O/n (défaut Oui) " last_step
@@ -352,6 +365,7 @@ create_password_user()
 
 choix_edit_user()
 {
+  quit_rappel
   echo "Que voulez vous faire avec $otaku_script_login !"
   read -p "Changer le mot de passe ? 1" choix
   read -p "Changer le groupe actuel ? 2" choix
