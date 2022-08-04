@@ -73,7 +73,7 @@ the_choix()
       clear
       quit_rappel
       green_zone
-      echo "Nous allons changer ajouter un utilisateur."
+      echo "Nous allons ajouter un utilisateur."
       white_zone
       add_user_script;;
     2)
@@ -261,7 +261,9 @@ valid_group_name()
           clear
           quit_rappel
           echo "OK, on continue."
+          green_zone
           echo "Le nom de groupe '$otaku_script_group_id' sera créé après validation."
+          white_zone
         else
           clear
           echo "Vous avez décidé de quitter le script."
@@ -278,7 +280,9 @@ valid_group_name()
           clear
           quit_rappel
           echo "OK, on continue."
+          green_zone
           echo "L'utilisateur sera ajouté au groupe éxistant '$otaku_script_group_id' après validation."
+          white_zone
         else
           clear
           echo "Vous avez décidé de quitter le script."
