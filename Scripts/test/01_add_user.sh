@@ -71,18 +71,21 @@ the_choix()
   case $choix in
     1)
       clear
+      quit_rappel
       green_zone
       echo "Nous allons changer ajouter un utilisateur."
       white_zone
       add_user_script;;
     2)
       clear
+      quit_rappel
       green_zone
       echo "Nous allons modifier un utilisateur."
       white_zone
       edit_user_script;;
     3)
       clear
+      quit_rappel
       green_zone
       echo "Nous allons supprimer un utilisateur."
       green_zone
@@ -118,6 +121,7 @@ ask_user_name()
           white_zone
           ask_user_name
         else
+          clear
           echo "Vous avez décidé de quitter le script."
           echo "Au revoir."
           exit 0
@@ -170,12 +174,14 @@ valid_edit_user_name()
   case $EXIST_NAME in
     1)
       clear
+      quit_rappel
       green_zone
       echo "Le nom d'utilisateur '$otaku_script_login' est valide."
       white_zone
       echo "Le script peut continuer.";;
     *)
       clear
+      quit_rappel
       red_zone
       echo "Désolé, ce script n'accepte pas le nom d'utilisateur '$otaku_script_login' !"
       echo "Le nom d'utilisateur n'existe pas."
@@ -191,7 +197,6 @@ valid_edit_user_name()
 
 prompt_group_name()
 {
-  quit_rappel
   read -p "Voulez-vous voir les groupes existants ? : O/n (défaut Oui) " next_step
   if [ "$next_step" = "" ] || [ "$next_step" = "O" ] || [ "$next_step" = "o" ] || [ "$next_step" = "oui" ] || [ "$next_step" = "yes" ] || [ "$next_step" = "y" ] || [ "$next_step" = "Y" ]
     then
@@ -219,6 +224,7 @@ ask_group_name()
           echo "OK, on recommence."
           ask_group_name
         else
+          clear
           echo "Vous avez décidé de quitter le script."
           echo "Au revoir."
           exit 0
@@ -252,9 +258,12 @@ valid_group_name()
       read -p "Voulez-vous continuer quand même ? : O/n (défaut Oui) " next_step
       if [ "$next_step" = "" ] || [ "$next_step" = "O" ] || [ "$next_step" = "o" ] || [ "$next_step" = "oui" ] || [ "$next_step" = "yes" ] || [ "$next_step" = "y" ] || [ "$next_step" = "Y" ]
         then
+          clear
+          quit_rappel
           echo "OK, on continue."
           echo "Le nom de groupe '$otaku_script_group_id' sera créé après validation."
         else
+          clear
           echo "Vous avez décidé de quitter le script."
           echo "Au revoir."
           exit 0
@@ -266,9 +275,12 @@ valid_group_name()
       read -p "Voulez-vous continuer quand même ? : O/n (défaut Oui) " next_step
       if [ "$next_step" = "" ] || [ "$next_step" = "O" ] || [ "$next_step" = "o" ] || [ "$next_step" = "oui" ] || [ "$next_step" = "yes" ] || [ "$next_step" = "y" ] || [ "$next_step" = "Y" ]
         then
+          clear
+          quit_rappel
           echo "OK, on continue."
           echo "L'utilisateur sera ajouté au groupe éxistant '$otaku_script_group_id' après validation."
         else
+          clear
           echo "Vous avez décidé de quitter le script."
           echo "Au revoir."
           exit 0
@@ -281,7 +293,6 @@ valid_group_name()
 
 add_full_name()
 {
-  quit_rappel
   read -p "Veuillez entrer votre nom complet ici : " otaku_script_fullname
 }
 
@@ -324,8 +335,11 @@ check_info()
   read -p "Tout est correct ? : O/n (défaut Oui) " next_step
   if [ "$next_step" = "" ] || [ "$next_step" = "O" ] || [ "$next_step" = "o" ] || [ "$next_step" = "oui" ] || [ "$next_step" = "yes" ] || [ "$next_step" = "y" ] || [ "$next_step" = "Y" ]
     then
+      clear
+      quit_rappel
       echo "OK, on continue."
     else
+      clear
       echo "Vous avez décidé de quitter le script."
       echo "Au revoir."
       exit 0
@@ -346,11 +360,15 @@ check_pass()
       read -p "Le mot de passe vous convient toujours ? : O/n (défaut Oui)" confirm_pass
       if [ "$confirm_pass" = "" ] || [ "$confirm_pass" = "O" ] || [ "$confirm_pass" = "o" ] || [ "$confirm_pass" = "oui" ] || [ "$confirm_pass" = "yes" ] || [ "$confirm_pass" = "y" ] || [ "$confirm_pass" = "Y" ]
         then
+          clear
+          quit_rappel
           echo "OK, on continue."
         else
           ask_password_user
       fi
     else
+      clear
+      quit_rappel
       echo "OK, on continue."
   fi
 }
@@ -368,8 +386,11 @@ last_step()
   read -p "Continuer ? : O/n (défaut Oui) " last_step
   if [ "$last_step" = "" ] || [ "$last_step" = "O" ] || [ "$last_step" = "o" ] || [ "$last_step" = "oui" ] || [ "$last_step" = "yes" ] || [ "$last_step" = "y" ] || [ "$last_step" = "Y" ]
     then
+      clear
+      quit_rappel
       echo "OK, on continue."
     else
+      clear
       echo "Vous avez décidé de quitter le script."
       echo "Au revoir."
       exit 0
