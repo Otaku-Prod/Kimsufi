@@ -57,7 +57,7 @@ valid_first_choix()
     1)
       echo "Nous allons changer ajouter un utilisateur."
       add_user_script;;
-    2
+    2)
       echo "Nous allons modifier un utilisateur."
       edit_user_script;;
     3)
