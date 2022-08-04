@@ -18,6 +18,8 @@
 #-------------------------------------------------------------------------------
 # Forcing de l'exécution du script en tant que "Root" ou "Sudo"
 
+############################### --------------------------------------------------Ajouter les options, voir les utilisateurs, voir les groupes + ajouter au lancement de la question ask_user_name voulez vous voir les utilisateurs existant + redemande 1 seule fois le mot de passe
+
 check_root_sudo()
 {
   if [[ "$(id -u)" != 0 ]]
@@ -301,6 +303,7 @@ add_full_name()
 
 ask_password_user()
 {
+  clear
   quit_rappel
   echo "Création du mot de passe pour l'utilisateur '$otaku_script_login'"
   # Rappel -s = cacher le texte saisie, -p = afficher le message "Saisir le mot de passe", -r = pour rendre les "\" visible, -e = pour que "\" soit une commande
@@ -309,10 +312,14 @@ ask_password_user()
   
   if [ "$password_user" = "$confirm_password_user" ]
     then
+      clear
+      quit_rappel
       green_zone
       echo "Le mot de passe est bien confirmé."
       white_zone
     else
+      clear
+      quit_rappel
       red_zone
       echo "Il y a une erreur dans la saisie du mot de passe, on réessaye."
       white_zone
@@ -325,8 +332,7 @@ ask_password_user()
 
 check_info()
 {
-  quit_rappel
-  red_zone
+  green_zone
   echo "UNE PETITE VERIFICATION !"
   white_zone
   echo "Identifiant : $otaku_script_login"
@@ -352,7 +358,7 @@ check_info()
 check_pass()
 {
   red_zone
-  read -p "Voulez-vous voir et confirmer le mot de passe ? : O/n (défaut Non)" valid_pass
+  read -p "Voulez-vous vérifer le mot de passe ? : O/n (défaut Non)" valid_pass
   white_zone
   if [ "$valid_pass" = "O" ] || [ "$valid_pass" = "o" ] || [ "$valid_pass" = "oui" ] || [ "$valid_pass" = "yes" ] || [ "$valid_pass" = "y" ] || [ "$valid_pass" = "Y" ]
     then
