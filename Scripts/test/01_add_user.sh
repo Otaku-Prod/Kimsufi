@@ -419,6 +419,8 @@ choix_edit_user()
   read -p "Ajouter un ou plusieurs groupes ? 3" choix
 }
 
+#-------------------------------------------------------------------------------
+
 valid_edit_choix()
 {
   case $choix in
