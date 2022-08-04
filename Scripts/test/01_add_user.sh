@@ -150,6 +150,7 @@ valid_add_user_name()
   case $EXIST_NAME in
     0)
       clear
+      quit_rappel
       green_zone
       echo "Le nom d'utilisateur '$otaku_script_login' est valide."
       white_zone
