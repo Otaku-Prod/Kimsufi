@@ -46,9 +46,8 @@ green_text()
 the_question()
 {
   echo "Que désirez vous faire ?"
-  read -p "Ajouter un utilisateur ? 1" choix
-  read -p "Modifier un utilisateur ? 2" choix
-  read -p "Supprimer un utilisateur ? 3" choix
+  read -p "Ajouter un utilisateur ? 1 `echo $'\n'`Modifier un utilisateur ? 2 `echo $'\n'`Supprimer un utilisateur ? 3 `echo $'\n> '`" choix
+  
 }
 
 valid_first_choix()
