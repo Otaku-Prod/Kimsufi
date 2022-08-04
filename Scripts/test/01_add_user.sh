@@ -210,7 +210,6 @@ prompt_group_name()
 
 ask_group_name()
 {
-  quit_rappel
   read -p "Veuillez entrer votre nom de groupe ici : " otaku_script_group_id
   if [ "$otaku_script_group_id" = "" ]
     then
