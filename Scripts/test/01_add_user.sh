@@ -303,7 +303,6 @@ add_full_name()
 
 ask_password_user()
 {
-  clear
   quit_rappel
   echo "Création du mot de passe pour l'utilisateur '$otaku_script_login'"
   # Rappel -s = cacher le texte saisie, -p = afficher le message "Saisir le mot de passe", -r = pour rendre les "\" visible, -e = pour que "\" soit une commande
