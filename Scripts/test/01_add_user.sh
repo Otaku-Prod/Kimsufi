@@ -258,7 +258,6 @@ valid_group_name()
         then
           clear
           quit_rappel
-          echo "OK, on continue."
           green_zone
           echo "Le nom de groupe '$otaku_script_group_id' sera créé après validation."
           white_zone
@@ -277,7 +276,6 @@ valid_group_name()
         then
           clear
           quit_rappel
-          echo "OK, on continue."
           green_zone
           echo "L'utilisateur sera ajouté au groupe éxistant '$otaku_script_group_id' après validation."
           white_zone
@@ -339,7 +337,7 @@ check_info()
     then
       clear
       quit_rappel
-      echo "OK, on continue."
+      echo "Les informations sont validées."
     else
       clear
       echo "Vous avez décidé de quitter le script."
