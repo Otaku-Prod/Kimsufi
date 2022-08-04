@@ -33,6 +33,13 @@ check_root_sudo()
 #-------------------------------------------------------------------------------
 # Gestion des couleurs
 
+red_zone() 
+{
+  printf '\E[31m'
+}
+
+red_zone
+
 red_text() 
 {
   printf '\E[31m'; echo "$@"; printf '\E[0m'
@@ -47,7 +54,6 @@ the_question()
 {
   echo "Que désirez vous faire ?"
   read -p "Ajouter un utilisateur ? 1 `echo $'\n'`Modifier un utilisateur ? 2 `echo $'\n'`Supprimer un utilisateur ? 3 `echo $'\n> '`" choix
-  
 }
 
 valid_first_choix()
@@ -443,6 +449,7 @@ clear
 the_question
 valid_first_choix
 
+# faire un if ici sinon ca senchaine
 add_user_script
 edit_user_script
 
