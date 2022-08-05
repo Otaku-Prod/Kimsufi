@@ -482,9 +482,8 @@ choix_edit_user()
   clear
   quit_rappel
   echo "Que voulez vous faire avec $otaku_script_login !"
-  read -p "Changer le mot de passe ? 1" choix
-  read -p "Changer le groupe actuel ? 2" choix
-  read -p "Ajouter un ou plusieurs groupes ? 3" choix
+  read -p "Changer le mot de passe ? 1 `echo $'\nChanger le groupe actuel ? 2 '` `echo $'\nAjouter un ou plusieurs groupes ? 3 '` `echo $'\n> '`" choix
+  valid_edit_choix
 }
 
 #-------------------------------------------------------------------------------
