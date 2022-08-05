@@ -124,9 +124,8 @@ ask_user_name()
           ask_user_name
         else
           clear
-          echo "Vous avez décidé de quitter le script."
-          echo "Au revoir."
-          exit 0
+          echo "Vous avez choisi de ne pas réessayer."
+          the_question
       fi
   fi
 }
@@ -234,9 +233,8 @@ ask_group_name()
           ask_group_name
         else
           clear
-          echo "Vous avez décidé de quitter le script."
-          echo "Au revoir."
-          exit 0
+          echo "Vous avez choisi de ne pas réessayer."
+          the_question
       fi
   fi
 }
@@ -274,9 +272,8 @@ valid_group_name()
           white_zone
         else
           clear
-          echo "Vous avez décidé de quitter le script."
-          echo "Au revoir."
-          exit 0
+          echo "Vous avez choisi de ne pas continuer."
+          the_question
       fi
     else
       green_zone
@@ -292,9 +289,8 @@ valid_group_name()
           white_zone
         else
           clear
-          echo "Vous avez décidé de quitter le script."
-          echo "Au revoir."
-          exit 0
+          echo "Vous avez choisi de ne pas continuer."
+          the_question
       fi
   fi
 }
@@ -405,9 +401,8 @@ last_step()
       quit_rappel
     else
       clear
-      echo "Vous avez décidé de quitter le script."
-      echo "Au revoir."
-      exit 0
+      echo "Vous avez choisi de ne pas continuer."
+      the_question
   fi
 }
 
