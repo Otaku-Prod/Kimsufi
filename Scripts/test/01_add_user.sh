@@ -18,7 +18,7 @@
 #-------------------------------------------------------------------------------
 # Forcing de l'exécution du script en tant que "Root" ou "Sudo"
 
-############################### --------------------------------------------------Ajouter les options, voir les utilisateurs, voir les groupes + ajouter au lancement de la question ask_user_name voulez vous voir les utilisateurs existant + redemande 1 seule fois le mot de passe + ajouter à "Continuer ?" et "Tout est correct ?"" l'option recommencer si on répond non...
+############################### --------------------------------------------------Ajouter les options, voir les utilisateurs, voir les groupes
 
 check_root_sudo()
 {
@@ -64,7 +64,7 @@ the_question()
   quit_rappel
   echo "Bonjour,"
   echo "Que désirez vous faire ?"
-  read -p "Ajouter un utilisateur ? 1 `echo $'\nModifier un utilisateur ? 2 '` `echo $'\nSupprimer un utilisateur ? 3 '` `echo $'\n> '`" choix
+  read -p "Ajouter un utilisateur ? 1 `echo $'\nModifier un utilisateur ? 2 '` `echo $'\nSupprimer un utilisateur ? 3 '` `echo $'\nVoir la liste des utilisateurs existant ? 4 '` `echo $'\nVoir la liste des groupes existant ? 5 '` `echo $'\n> '`" choix
   the_choix
 }
 
@@ -92,6 +92,12 @@ the_choix()
       echo "Nous allons supprimer un utilisateur."
       green_zone
       ;;
+    4)
+      clear
+      show_user_list;;
+    5)
+      clear
+      show_group_list;;
     *)
       clear
       red_zone
@@ -101,8 +107,6 @@ the_choix()
       exit 0;;
   esac
 }
-
-
 
 #-------------------------------------------------------------------------------
 # Demande du nom d'utilisateur
@@ -163,7 +167,7 @@ valid_add_user_name()
       echo "L'utilisateur est déjà pris !"
       echo "Veuillez recommencer avec un nom d'utilisateur valide."
       white_zone
-      ask_user_name;;
+      the_question;;
   esac
 }
 
@@ -187,9 +191,16 @@ valid_edit_user_name()
       echo "Désolé, ce script n'accepte pas le nom d'utilisateur '$otaku_script_login' !"
       echo "L'utilisateur n'existe pas."
       white_zone
-      ask_user_name;;
+      the_question;;
   esac
 }
+
+show_user_list()
+{
+  cat /etc/passwd | awk -F: '{print $ 1}'
+  the_question
+}
+
 
 #-------------------------------------------------------------------------------
 # Affiche la liste des groupes
@@ -201,6 +212,12 @@ prompt_user_name()
     then
       cat /etc/passwd | awk -F: '{print $ 1}'
   fi
+}
+
+show_group_list()
+{
+  cat /etc/group | awk -F: '{print $ 1}'
+  the_question
 }
 
 #-------------------------------------------------------------------------------
