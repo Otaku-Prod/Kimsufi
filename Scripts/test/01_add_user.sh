@@ -205,8 +205,8 @@ show_user_list()
   echo "`echo $'\n'`"
   echo "Il y a actuellement :"
   #cat /etc/passwd | wc -l
-  read "cat /etc/passwd" | wc -l > /dev/null 2>&1 number_user
-  echo -e "$number_user"
+  read "cat /etc/passwd" | wc -l > /dev/null 2>&1
+  echo -e "$1"
   echo "utilisateurs existants"
   white_zone
   the_question
