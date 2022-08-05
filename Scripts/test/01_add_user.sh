@@ -154,14 +154,14 @@ valid_add_user_name()
       clear
       quit_rappel
       green_zone
-      echo "Le nom d'utilisateur '$otaku_script_login' n'existe pas."
+      echo "L'utilisateur '$otaku_script_login' n'existe pas."
       echo "Le script peut continuer."
       white_zone;;
     *)
       clear
       red_zone
       echo "Désolé, ce script n'accepte pas le nom d'utilisateur '$otaku_script_login'."
-      echo "Le nom est déjà pris !"
+      echo "L'utilisateur est déjà pris !"
       echo "Veuillez recommencer avec un nom d'utilisateur valide."
       white_zone
       ask_user_name;;
@@ -178,19 +178,17 @@ valid_edit_user_name()
       clear
       quit_rappel
       green_zone
-      echo "Le nom d'utilisateur '$otaku_script_login' est valide."
-      white_zone
-      echo "Le script peut continuer.";;
+      echo "L'utilisateur '$otaku_script_login' existe."
+      echo "Le script peut continuer."
+      white_zone;;
     *)
       clear
       quit_rappel
       red_zone
       echo "Désolé, ce script n'accepte pas le nom d'utilisateur '$otaku_script_login' !"
-      echo "Le nom d'utilisateur n'existe pas."
+      echo "L'utilisateur n'existe pas."
       white_zone
-      echo "Veuillez recommencer avec un nom d'utilisateur valide."
-      echo "Au revoir."
-      exit 0;;
+      ask_user_name;;
   esac
 }
 
