@@ -221,7 +221,7 @@ prompt_user_name()
       green_zone
       echo "Voici la liste des utilisateurs :"
       white_zone
-      awk -F: 'BEGIN { ORS = " " } { print $ 1 }' /etc/passwd
+      awk -F: 'BEGIN { ORS = " | " } { print $ 1 }' /etc/passwd
       echo "`echo $'\n'`"
   fi
 }
@@ -231,7 +231,7 @@ show_group_list()
   green_zone
   echo "Voici la liste des groupes :"
   white_zone
-  awk -F: 'BEGIN { ORS = " " } { print $ 1 }' /etc/group
+  awk -F: 'BEGIN { ORS = " | " } { print $ 1 }' /etc/group
   echo "`echo $'\n'`"
   green_zone
   echo "Nombre de groupes existants :"
@@ -248,7 +248,7 @@ prompt_group_name()
   read -p "Voulez-vous voir les groupes existants ? : O/n (défaut Oui) " next_step
   if [ "$next_step" = "" ] || [ "$next_step" = "O" ] || [ "$next_step" = "o" ] || [ "$next_step" = "oui" ] || [ "$next_step" = "yes" ] || [ "$next_step" = "y" ] || [ "$next_step" = "Y" ]
     then
-      awk -F: 'BEGIN { ORS = " " } { print $ 1 }' /etc/group
+      awk -F: 'BEGIN { ORS = " | " } { print $ 1 }' /etc/group
       echo "`echo $'\n'`"
   fi
 }
