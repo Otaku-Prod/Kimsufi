@@ -195,7 +195,7 @@ valid_edit_user_name()
 
 show_user_list()
 {
-  cat /etc/passwd | awk -F: '{print $ 1}'
+  cat /etc/passwd | awk 'BEGIN { ORS = " " } { print $ 1 }' infile
   green_zone
   echo "Il y a actuellement : `echo "cat /etc/passwd | wc -l"` utilisateurs existant"
   white_zone
