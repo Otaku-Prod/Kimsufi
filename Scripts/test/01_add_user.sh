@@ -18,8 +18,6 @@
 #-------------------------------------------------------------------------------
 # Forcing de l'exécution du script en tant que "Root" ou "Sudo"
 
-############################### --------------------------------------------------Ajouter les options, voir les utilisateurs, voir les groupes
-
 check_root_sudo()
 {
   if [[ "$(id -u)" != 0 ]]
