@@ -568,6 +568,9 @@ the_choix
 
 # faire un if ici sinon ca senchaine
 add_user_script
+the_question
+
 edit_user_script
+the_question
 
 credit
