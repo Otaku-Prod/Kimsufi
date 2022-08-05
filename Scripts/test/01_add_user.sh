@@ -164,8 +164,7 @@ valid_add_user_name()
       echo "Soit vous utilisez un nom d'utilisateur interdit, soit celui-ci existe déjà."
       white_zone
       echo "Veuillez recommencer avec un nom d'utilisateur valide."
-      echo "Au revoir."
-      exit 0;;
+      ask_user_name
   esac
 }
 
