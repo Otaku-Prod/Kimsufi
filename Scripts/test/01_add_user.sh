@@ -333,6 +333,34 @@ valid_group_name()
   fi
 }
 
+valid_group_edit()
+{
+  if [ "$EXISTED_GROUP" != 1 ]
+    then
+      red_zone
+      echo "Le groupe souhaité n'existe pas !"
+      white_zone
+      the_question      
+    else
+      green_zone
+      echo "Le groupe souhaité existe !"
+      white_zone
+      read -p "Voulez-vous continuer quand même ? : O/n (défaut Oui) " next_step
+      if [ "$next_step" = "" ] || [ "$next_step" = "O" ] || [ "$next_step" = "o" ] || [ "$next_step" = "oui" ] || [ "$next_step" = "yes" ] || [ "$next_step" = "y" ] || [ "$next_step" = "Y" ]
+        then
+          clear
+          quit_rappel
+          green_zone
+          echo "L'utilisateur sera ajouté au groupe éxistant '$otaku_script_group_id' après validation."
+          white_zone
+        else
+          clear
+          echo "Vous avez choisi de ne pas continuer."
+          the_question
+      fi
+  fi
+}
+
 #-------------------------------------------------------------------------------
 # Ajout du Nom Complet ou d'un commentaire
 
@@ -474,6 +502,18 @@ create_password_user()
   echo -e "$password_user\n$confirm_password_user" | passwd $otaku_script_login > /dev/null 2>&1
 }
 
+add_group()
+{
+  usermod -a -G $otaku_script_group_id $otaku_script_login
+  echo "ok"
+}
+
+change_group()
+{
+  usermod -g $otaku_script_group_id $otaku_script_login
+  echo "ok"
+}
+
 #-------------------------------------------------------------------------------
 # Choix de l'édition de l'utilisateur
 
@@ -496,19 +536,32 @@ valid_edit_choix()
       quit_rappel
       green_zone
       echo "Nous allons changer le mot de passe."
-      white_zone;;
+      white_zone
+      ask_password_user
+      check_pass
+      the_question;;
     2)
       clear
       quit_rappel
       green_zone
-      echo "Nous allons changer le groupe actuel (efface celui existant et ajoute un ou plusieurs groupes)."
-      white_zone;;
+      echo "Nous allons changer le groupe principal (efface celui existant)."
+      white_zone
+      prompt_group_name
+      ask_group_name
+      check_group_exist
+      change_group
+      the_question;;
     3)
       clear
       quit_rappel
       green_zone
       echo "Nous allons ajouter un ou plusieurs groupes (cela n'efface pas les groupes déjà présents)."
-      white_zone;;
+      white_zone
+      prompt_group_name
+      ask_group_name
+      check_group_exist
+      add_group
+      the_question;;
     *)
       clear
       red_zone
