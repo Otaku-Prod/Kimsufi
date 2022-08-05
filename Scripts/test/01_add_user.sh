@@ -197,7 +197,7 @@ show_user_list()
 {
   cat /etc/passwd | awk -F: '{print $ 1}'
   green_zone
-  echo "Il y a actuellement : `echo cat /etc/passwd | wc -l` utilisateurs existant"
+  echo "Il y a actuellement : `echo 'cat /etc/passwd | wc -l'` utilisateurs existant"
   white_zone
   the_question
 }
