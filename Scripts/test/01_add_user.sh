@@ -202,7 +202,9 @@ show_user_list()
   white_zone
   awk -F: 'BEGIN { ORS = " " } { print $ 1 }' /etc/passwd
   green_zone
-  read "`echo $'\nIl y a actuellement : '` `echo $'\ncat /etc/passwd | wc -l'` `echo $'\nutilisateurs existants'`"
+  `echo $'\nIl y a actuellement : '`
+  cat /etc/passwd | wc -l
+  `echo $'\nutilisateurs existants'`
   white_zone
   the_question
 }
