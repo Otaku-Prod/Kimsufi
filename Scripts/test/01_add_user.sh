@@ -195,10 +195,10 @@ valid_edit_user_name()
 
 show_user_list()
 {
-  green_zone
-  echo "Il y a actuellement : 'echo "cat /etc/passwd | wc -l"' utilisateurs existant"
-  white_zone
   cat /etc/passwd | awk -F: '{print $ 1}'
+  green_zone
+  echo "Il y a actuellement : `echo \'cat /etc/passwd | wc -l' utilisateurs existant"
+  white_zone
   the_question
 }
 
