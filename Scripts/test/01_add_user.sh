@@ -203,8 +203,8 @@ show_user_list()
   awk -F: 'BEGIN { ORS = " | " } { print $ 1 }' /etc/passwd
   green_zone
   echo "`echo $'\n'`"
+  echo "Nombre d'utilisateurs existants :"
   cat /etc/passwd | wc -l
-  echo "utilisateurs existants"
   white_zone
   the_question
 }
@@ -231,6 +231,11 @@ show_group_list()
   echo "Voici la liste des groupes :"
   white_zone
   awk -F: 'BEGIN { ORS = " " } { print $ 1 }' /etc/group
+  green_zone
+  echo "`echo $'\n'`"
+  echo "Nombre de groupes existants :"
+  cat /etc/group | wc -l
+  white_zone
   the_question
 }
 
