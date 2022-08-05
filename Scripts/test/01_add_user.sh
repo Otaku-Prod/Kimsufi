@@ -66,6 +66,7 @@ the_question()
   echo "Bonjour,"
   echo "Que désirez vous faire ?"
   read -p "Ajouter un utilisateur ? 1 `echo $'\nModifier un utilisateur ? 2 '` `echo $'\nSupprimer un utilisateur ? 3 '` `echo $'\n> '`" choix
+  the_choix
 }
 
 the_choix()
@@ -512,6 +513,8 @@ add_user_script()
 
   create_user
   create_password_user
+  sleep 5
+  the_question
 }
 
 #-------------------------------------------------------------------------------
@@ -564,7 +567,6 @@ credit()
 check_root_sudo
 
 the_question
-the_choix
 
 # faire un if ici sinon ca senchaine
 add_user_script
