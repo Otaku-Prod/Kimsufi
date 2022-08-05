@@ -195,7 +195,8 @@ valid_edit_user_name()
 
 show_user_list()
 {
-  cat /etc/passwd | awk -F: '{print $ 1}'
+  #cat /etc/passwd | awk -F: '{print $ 1}'
+  awk  -F':' '$3>999 {print $1 " uid: " $3}' /etc/passwd | column -t | grep -v nobody
   the_question
 }
 
