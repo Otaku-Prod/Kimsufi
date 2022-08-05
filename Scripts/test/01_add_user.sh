@@ -201,8 +201,8 @@ show_user_list()
   echo "Voici la liste des utilisateurs :"
   white_zone
   awk -F: 'BEGIN { ORS = " | " } { print $ 1 }' /etc/passwd
-  green_zone
   echo "`echo $'\n'`"
+  green_zone
   echo "Nombre d'utilisateurs existants :"
   cat /etc/passwd | wc -l
   white_zone
@@ -222,6 +222,7 @@ prompt_user_name()
       echo "Voici la liste des utilisateurs :"
       white_zone
       awk -F: 'BEGIN { ORS = " " } { print $ 1 }' /etc/passwd
+      echo "`echo $'\n'`"
   fi
 }
 
@@ -231,8 +232,8 @@ show_group_list()
   echo "Voici la liste des groupes :"
   white_zone
   awk -F: 'BEGIN { ORS = " " } { print $ 1 }' /etc/group
-  green_zone
   echo "`echo $'\n'`"
+  green_zone
   echo "Nombre de groupes existants :"
   cat /etc/group | wc -l
   white_zone
@@ -248,6 +249,7 @@ prompt_group_name()
   if [ "$next_step" = "" ] || [ "$next_step" = "O" ] || [ "$next_step" = "o" ] || [ "$next_step" = "oui" ] || [ "$next_step" = "yes" ] || [ "$next_step" = "y" ] || [ "$next_step" = "Y" ]
     then
       awk -F: 'BEGIN { ORS = " " } { print $ 1 }' /etc/group
+      echo "`echo $'\n'`"
   fi
 }
 
