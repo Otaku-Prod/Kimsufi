@@ -350,12 +350,14 @@ check_info()
     then
       clear
       quit_rappel
+      green_zone
       echo "Les informations sont validées."
+      white_zone
     else
       clear
-      echo "Vous avez décidé de quitter le script."
-      echo "Au revoir."
-      exit 0
+      echo "Vous avez déclaré que les informations n'étaient pas correct."
+      echo "Le script redémarre."
+      the_question
   fi
 }
 
