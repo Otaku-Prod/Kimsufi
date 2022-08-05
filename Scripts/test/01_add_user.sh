@@ -65,6 +65,7 @@ the_question()
   echo "Bonjour,"
   echo "Que désirez vous faire ?"
   read -p "Ajouter un utilisateur ? 1 `echo $'\nModifier un utilisateur ? 2 '` `echo $'\nSupprimer un utilisateur ? 3 '` `echo $'\n> '`" choix
+  the_choix
 }
 
 the_choix()
