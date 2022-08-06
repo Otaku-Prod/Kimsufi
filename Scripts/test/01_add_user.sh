@@ -366,7 +366,7 @@ valid_group_name()
           clear
           quit_rappel
           green_text
-          echo "Le nom de groupe '$otaku_script_group_id' sera créé après validation."
+          echo "Le nom de groupe '$otaku_script_group_id' sera créé à la fin du script."
           reset_color
         else
           clear
@@ -388,7 +388,7 @@ valid_group_name()
           clear
           quit_rappel
           green_text
-          echo "L'utilisateur sera ajouté au groupe éxistant '$otaku_script_group_id' après validation."
+          echo "L'utilisateur sera ajouté au groupe éxistant '$otaku_script_group_id' à la fin du script."
           reset_color
         else
           clear
@@ -422,7 +422,7 @@ valid_group_edit()
           clear
           quit_rappel
           green_text
-          echo "L'utilisateur sera ajouté au groupe éxistant '$otaku_script_group_id' après validation."
+          echo "L'utilisateur sera ajouté au groupe éxistant '$otaku_script_group_id' à la fin du script."
           reset_color
         else
           clear
@@ -439,7 +439,10 @@ valid_group_edit()
 
 add_full_name()
 {
-  read -p "Veuillez entrer votre nom complet ici : " otaku_script_fullname
+  green_text
+  echo "Veuillez entrer votre nom complet ici : "
+  reset_color
+  read -p "`echo $'\n> '`" otaku_script_fullname
 }
 
 #-------------------------------------------------------------------------------
@@ -447,10 +450,16 @@ add_full_name()
 
 ask_password_user()
 {
+  green_text
   echo "Création du mot de passe pour l'utilisateur '$otaku_script_login'"
-  # Rappel -s = cacher le texte saisie, -p = afficher le message "Saisir le mot de passe", -r = pour rendre les "\" visible, -e = pour que "\" soit une commande
-  read -s -p "Saisir le mot de passe : `echo $'\n> '`" password_user
-  read -s -p "`echo $'\nConfirmation : '` `echo $'\n> '`" confirm_password_user
+  echo -n "Saisir le mot de passe : "
+  reset_color
+  read -s -p "`echo $'\n> '`" password_user
+  green_text
+  echo -n "Confirmation : "
+  reset_color
+  read -s -p "`echo $'\n> '`" confirm_password_user
+  #read -s -p "`echo $'\nConfirmation : '` `echo $'\n> '`" confirm_password_user
   
   if [ "$password_user" = "$confirm_password_user" ]
     then
