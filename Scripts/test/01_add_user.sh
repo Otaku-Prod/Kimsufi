@@ -260,6 +260,7 @@ restart_script()
   read -p "> " restart_script
   if [ "$restart_script" = "" ] || [ "$restart_script" = "O" ] || [ "$restart_script" = "o" ] || [ "$restart_script" = "oui" ] || [ "$restart_script" = "yes" ] || [ "$restart_script" = "y" ] || [ "$restart_script" = "Y" ]
     then
+      clear
       the_question
     else
       credit
