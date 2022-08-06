@@ -74,7 +74,12 @@ the_question()
   blue_text
   echo "Bonjour,"
   echo "Que désirez vous faire ?"
-  read -p "Ajouter un utilisateur ? $reset_color 1 $blue_text `echo $'\nModifier un utilisateur ? 2 '` `echo $'\nSupprimer un utilisateur ? 3 '` `echo $'\nVoir les utilisateurs existant ? 4 '` `echo $'\nVoir les groupes existant ? $reset_color 5 '` `echo $'\n> '`" choix
+  read "Ajouter un utilisateur ? 1"
+  read "Modifier un utilisateur ? 2"
+  read "Supprimer un utilisateur ? 3"
+  read "Voir les utilisateurs existant ? 4"
+  read "Voir les groupes existant ? 5"
+  read -p "`echo $'\n> '`" choix
   the_choix
 }
 
