@@ -475,7 +475,7 @@ ask_password_user()
   reset_color
   read -s -p "`echo $'\n> '`" password_user
   blue_text
-  echo -n "Confirmation : "
+  echo "Confirmation : "
   reset_color
   read -s -p "`echo $'\n> '`" confirm_password_user
   
