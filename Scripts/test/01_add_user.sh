@@ -439,10 +439,10 @@ valid_group_edit()
 
 add_full_name()
 {
-  green_text
+  blue_text
   echo "Veuillez entrer votre nom complet ici : "
   reset_color
-  read -p "`echo $'\n> '`" otaku_script_fullname
+  read -p "> " otaku_script_fullname
 }
 
 #-------------------------------------------------------------------------------
@@ -452,10 +452,11 @@ ask_password_user()
 {
   green_text
   echo "Création du mot de passe pour l'utilisateur '$otaku_script_login'"
+  blue_text
   echo -n "Saisir le mot de passe : "
   reset_color
   read -s -p "`echo $'\n> '`" password_user
-  green_text
+  blue_text
   echo -n "Confirmation : "
   reset_color
   read -s -p "`echo $'\n> '`" confirm_password_user
