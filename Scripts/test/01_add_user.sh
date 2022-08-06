@@ -277,8 +277,8 @@ show_user_list()
   echo "`echo $'\n'`"
   green_text
   echo "Nombre d'utilisateurs existants :"
-  cat /etc/passwd | wc -l
   reset_color
+  cat /etc/passwd | wc -l
   restart_script
 }
 
@@ -296,8 +296,8 @@ show_group_list()
   echo "`echo $'\n'`"
   green_text
   echo "Nombre de groupes existants :"
-  cat /etc/group | wc -l
   reset_color
+  cat /etc/group | wc -l
   restart_script
 }
 
