@@ -460,7 +460,6 @@ ask_password_user()
   echo -n "Confirmation : "
   reset_color
   read -s -p "`echo $'\n> '`" confirm_password_user
-  #read -s -p "`echo $'\nConfirmation : '` `echo $'\n> '`" confirm_password_user
   
   if [ "$password_user" = "$confirm_password_user" ]
     then
@@ -488,7 +487,12 @@ check_info()
   echo "Identifiant : $otaku_script_login"
   echo "Groupe : $otaku_script_group_id"
   echo "Nom Complet : $otaku_script_fullname"
-  read -p "Tout est correct ? : O/n (défaut Oui) " next_step
+  blue_text
+  echo "Tout est correct ? "
+  reset_color
+  echo "O/n (défaut Oui)"
+  read -p "`echo $'\n> '`" next_step
+  #read -p "Tout est correct ? : O/n (défaut Oui) " next_step
   if [ "$next_step" = "" ] || [ "$next_step" = "O" ] || [ "$next_step" = "o" ] || [ "$next_step" = "oui" ] || [ "$next_step" = "yes" ] || [ "$next_step" = "y" ] || [ "$next_step" = "Y" ]
     then
       clear
