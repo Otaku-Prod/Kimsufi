@@ -353,7 +353,7 @@ valid_group_name()
 {
   if [ "$EXISTED_GROUP" != 1 ]
     then
-      red_text
+      green_text
       echo "Le groupe souhaité n'existe pas !"
       reset_color
       read -p "Voulez-vous continuer quand même ? : O/n (défaut Oui) " next_step
@@ -366,7 +366,9 @@ valid_group_name()
           reset_color
         else
           clear
+          green_text
           echo "Vous avez choisi de ne pas continuer."
+          reset_color
           the_question
       fi
     else
@@ -383,7 +385,9 @@ valid_group_name()
           reset_color
         else
           clear
+          green_text
           echo "Vous avez choisi de ne pas continuer."
+          reset_color
           the_question
       fi
   fi
@@ -393,7 +397,7 @@ valid_group_edit()
 {
   if [ "$EXISTED_GROUP" != 1 ]
     then
-      red_text
+      green_text
       echo "Le groupe souhaité n'existe pas !"
       reset_color
       the_question      
@@ -411,7 +415,9 @@ valid_group_edit()
           reset_color
         else
           clear
+          green_text
           echo "Vous avez choisi de ne pas continuer."
+          reset_color
           the_question
       fi
   fi
@@ -523,7 +529,9 @@ last_step()
       quit_rappel
     else
       clear
+      green_text
       echo "Vous avez choisi de ne pas continuer."
+      reset_color
       the_question
   fi
 }
