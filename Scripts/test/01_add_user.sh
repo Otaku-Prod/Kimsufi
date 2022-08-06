@@ -32,7 +32,6 @@ check_root_sudo()
 
 quit_rappel()
 {
-  red_text
   red_background
   echo "CTRL + C pour annuler et fermer à tout moment."
   reset_color
