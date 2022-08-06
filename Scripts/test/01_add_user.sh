@@ -163,7 +163,7 @@ ask_user_name()
   blue_text
   echo -n "Veuillez saisir le nom d'utilisateur à créer ici : "
   reset_color
-  read -p "> " otaku_script_login
+  read -p "`echo $'\n> '`" otaku_script_login
   if [ "$otaku_script_login" = "" ]
     then
       red_text
