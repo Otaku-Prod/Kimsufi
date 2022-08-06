@@ -536,7 +536,7 @@ check_pass()
   blue_text
   echo -n "Voulez-vous vérifer le mot de passe ? "
   reset_color
-  echo "O/n (défaut Oui)"
+  echo "o/N (défaut Non)"
   read -p "> " valid_pass
   reset_color
   if [ "$valid_pass" = "O" ] || [ "$valid_pass" = "o" ] || [ "$valid_pass" = "oui" ] || [ "$valid_pass" = "yes" ] || [ "$valid_pass" = "y" ] || [ "$valid_pass" = "Y" ]
