@@ -489,7 +489,8 @@ ask_password_user()
       reset_color
     else
       red_text
-      echo -n "Il y a une erreur dans la saisie du mot de passe, on réessaye."
+      echo "`echo $'\n'`"
+      echo "Il y a une erreur dans la saisie du mot de passe, on réessaye."
       reset_color
       ask_password_user
   fi
