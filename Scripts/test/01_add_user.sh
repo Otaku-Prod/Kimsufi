@@ -450,6 +450,8 @@ add_full_name()
 
 ask_password_user()
 {
+  clear
+  quit_rappel
   green_text
   echo "Création du mot de passe pour l'utilisateur '$otaku_script_login'"
   blue_text
@@ -500,8 +502,10 @@ check_info()
       reset_color
     else
       clear
+      green_text
       echo "Vous avez déclaré que les informations n'étaient pas correct."
       echo "Le script redémarre."
+      reset_color
       the_question
   fi
 }
