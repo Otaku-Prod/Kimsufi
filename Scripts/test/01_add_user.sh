@@ -753,6 +753,7 @@ clear
 the_question
 
 # faire un if ici sinon ca senchaine
+#> Creer une fonction avec un if et faire appel a cette fonction en dessous en remplacement
 add_user_script
 edit_user_script
 
