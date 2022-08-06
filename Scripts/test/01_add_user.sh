@@ -168,8 +168,11 @@ ask_user_name()
     then
       red_text
       echo "Votre nom d'utilisateur est vide !"
+      blue_text
+      echo -n "Voulez-vous réessayer ? "
       reset_color
-      read -p "Voulez-vous réessayer : O/n (défaut Oui) " re_try
+      echo "O/n (défaut Oui)"
+      read -p "`echo $'\n> '`" re_try
       if [ "$re_try" = "" ] || [ "$re_try" = "O" ] || [ "$re_try" = "o" ] || [ "$re_try" = "oui" ] || [ "$re_try" = "yes" ] || [ "$re_try" = "y" ] || [ "$re_try" = "Y" ]
         then
           green_text
@@ -284,7 +287,11 @@ show_group_list()
 
 prompt_group_list()
 {
-  read -p "Voulez-vous voir les groupes existants ? : O/n (défaut Oui) " next_step
+  blue_text
+  echo -n "Voulez-vous voir les groupes existants ? "
+  reset_color
+  echo "O/n (défaut Oui)"
+  read -p "> " next_step
   if [ "$next_step" = "" ] || [ "$next_step" = "O" ] || [ "$next_step" = "o" ] || [ "$next_step" = "oui" ] || [ "$next_step" = "yes" ] || [ "$next_step" = "y" ] || [ "$next_step" = "Y" ]
     then
       awk -F: 'BEGIN { ORS = " | " } { print $ 1 }' /etc/group
@@ -297,20 +304,30 @@ prompt_group_list()
 
 ask_group_name()
 {
-  read -p "Veuillez entrer votre nom de groupe ici : " otaku_script_group_id
+  blue_text
+  echo -n "Veuillez saisir le nom du groupe ici : "
+  reset_color
+  read -p "`echo $'\n> '`" otaku_script_group_id
   if [ "$otaku_script_group_id" = "" ]
     then
       red_text
       echo "Votre nom de groupe est vide !"
+      blue_text
+      echo -n "Voulez-vous réessayer ? "
       reset_color
-      read -p "Voulez-vous réessayer : O/n (défaut Oui) " re_try
+      echo "O/n (défaut Oui)"
+      read -p "`echo $'\n> '`" re_try
       if [ "$re_try" = "" ] || [ "$re_try" = "O" ] || [ "$re_try" = "o" ] || [ "$re_try" = "oui" ] || [ "$re_try" = "yes" ] || [ "$re_try" = "y" ] || [ "$re_try" = "Y" ]
         then
+          green_text
           echo "OK, on recommence."
+          reset_color
           ask_group_name
         else
           clear
+          green_text
           echo "Vous avez choisi de ne pas réessayer."
+          clear
           the_question
       fi
   fi
