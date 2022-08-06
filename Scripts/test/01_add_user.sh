@@ -584,7 +584,6 @@ last_step()
   if [ "$last_step" = "" ] || [ "$last_step" = "O" ] || [ "$last_step" = "o" ] || [ "$last_step" = "oui" ] || [ "$last_step" = "yes" ] || [ "$last_step" = "y" ] || [ "$last_step" = "Y" ]
     then
       clear
-      quit_rappel
     else
       clear
       green_text
