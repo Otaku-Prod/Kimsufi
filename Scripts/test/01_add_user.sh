@@ -119,8 +119,7 @@ the_choix()
       quit_rappel
       green_text
       echo "Nous allons supprimer un utilisateur."
-      green_text
-      ;;
+      reset_color;;
     4)
       clear
       show_user_list;;
@@ -172,7 +171,7 @@ ask_user_name()
       echo -n "Voulez-vous réessayer ? "
       reset_color
       echo "O/n (défaut Oui)"
-      read -p "`echo $'\n> '`" re_try
+      read -p "> " re_try
       if [ "$re_try" = "" ] || [ "$re_try" = "O" ] || [ "$re_try" = "o" ] || [ "$re_try" = "oui" ] || [ "$re_try" = "yes" ] || [ "$re_try" = "y" ] || [ "$re_try" = "Y" ]
         then
           green_text
@@ -181,7 +180,9 @@ ask_user_name()
           ask_user_name
         else
           clear
+          green_text
           echo "Vous avez choisi de ne pas réessayer."
+          reset_color
           the_question
       fi
   fi
@@ -316,7 +317,7 @@ ask_group_name()
       echo -n "Voulez-vous réessayer ? "
       reset_color
       echo "O/n (défaut Oui)"
-      read -p "`echo $'\n> '`" re_try
+      read -p "> " re_try
       if [ "$re_try" = "" ] || [ "$re_try" = "O" ] || [ "$re_try" = "o" ] || [ "$re_try" = "oui" ] || [ "$re_try" = "yes" ] || [ "$re_try" = "y" ] || [ "$re_try" = "Y" ]
         then
           green_text
@@ -327,7 +328,7 @@ ask_group_name()
           clear
           green_text
           echo "Vous avez choisi de ne pas réessayer."
-          clear
+          reset_color
           the_question
       fi
   fi
@@ -355,8 +356,11 @@ valid_group_name()
     then
       green_text
       echo "Le groupe souhaité n'existe pas !"
+      blue_text
+      echo -n "Voulez-vous continuer quand même ? "
       reset_color
-      read -p "Voulez-vous continuer quand même ? : O/n (défaut Oui) " next_step
+      echo "O/n (défaut Oui)"
+      read -p "> " next_step
       if [ "$next_step" = "" ] || [ "$next_step" = "O" ] || [ "$next_step" = "o" ] || [ "$next_step" = "oui" ] || [ "$next_step" = "yes" ] || [ "$next_step" = "y" ] || [ "$next_step" = "Y" ]
         then
           clear
@@ -374,8 +378,11 @@ valid_group_name()
     else
       green_text
       echo "Le groupe souhaité existe !"
+      blue_text
+      echo -n "Voulez-vous continuer quand même ? "
       reset_color
-      read -p "Voulez-vous continuer quand même ? : O/n (défaut Oui) " next_step
+      echo "O/n (défaut Oui)"
+      read -p "> " next_step
       if [ "$next_step" = "" ] || [ "$next_step" = "O" ] || [ "$next_step" = "o" ] || [ "$next_step" = "oui" ] || [ "$next_step" = "yes" ] || [ "$next_step" = "y" ] || [ "$next_step" = "Y" ]
         then
           clear
@@ -405,7 +412,11 @@ valid_group_edit()
       green_text
       echo "Le groupe souhaité existe !"
       reset_color
-      read -p "Voulez-vous continuer quand même ? : O/n (défaut Oui) " next_step
+      blue_text
+      echo -n "Voulez-vous continuer quand même ? "
+      reset_color
+      echo "O/n (défaut Oui)"
+      read -p "> " next_step
       if [ "$next_step" = "" ] || [ "$next_step" = "O" ] || [ "$next_step" = "o" ] || [ "$next_step" = "oui" ] || [ "$next_step" = "yes" ] || [ "$next_step" = "y" ] || [ "$next_step" = "Y" ]
         then
           clear
