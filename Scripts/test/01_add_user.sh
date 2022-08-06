@@ -73,7 +73,7 @@ the_question()
   quit_rappel
   blue_text
   echo "Bonjour,"
-  echo "Que désirez vous faire ?"
+  echo "Que désirez vous faire :"
   echo -n "Ajouter un utilisateur ? "
   reset_color
   echo "1"
@@ -140,6 +140,7 @@ the_choix()
 
 prompt_user_list()
 {
+  blue_text
   echo -n "Voulez-vous voir les utilisateurs existants ? "
   reset_color
   echo "O/n (défaut Oui)"
@@ -159,7 +160,10 @@ prompt_user_list()
 
 ask_user_name()
 {
-  read -p "Veuillez saisir le nom d'utilisateur à créer ici : `echo $'\n> '`" otaku_script_login
+  blue_text
+  echo -n "Veuillez saisir le nom d'utilisateur à créer ici : "
+  reset_color
+  read -p "> " otaku_script_login
   if [ "$otaku_script_login" = "" ]
     then
       red_text
