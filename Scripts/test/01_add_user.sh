@@ -32,25 +32,32 @@ check_root_sudo()
 
 quit_rappel()
 {
-  red_zone
+  red_text
+  red_background
   echo "CTRL + C pour annuler et fermer à tout moment."
-  white_zone
+  reset_color
 }
 
 #-------------------------------------------------------------------------------
 # Gestion des couleurs
 
-red_zone() 
+red_text() 
 {
   printf '\E[31m'
 }
 
-green_zone() 
+
+green_text() 
 {
   printf '\E[32m'
 }
 
-white_zone() 
+red_background()
+{
+  printf '\E[41m'
+}
+
+reset_color() 
 {
   printf '\E[0m'
 }
@@ -72,23 +79,23 @@ the_choix()
     1)
       clear
       quit_rappel
-      green_zone
+      green_text
       echo "Nous allons ajouter un utilisateur."
-      white_zone
+      reset_color
       add_user_script;;
     2)
       clear
       quit_rappel
-      green_zone
+      green_text
       echo "Nous allons modifier un utilisateur."
-      white_zone
+      reset_color
       edit_user_script;;
     3)
       clear
       quit_rappel
-      green_zone
+      green_text
       echo "Nous allons supprimer un utilisateur."
-      green_zone
+      green_text
       ;;
     4)
       clear
@@ -98,9 +105,9 @@ the_choix()
       show_group_list;;
     *)
       clear
-      red_zone
+      red_text
       echo "Désolé, ce script n'accepte pas votre choix !"
-      white_zone
+      reset_color
       echo "Au revoir."
       exit 0;;
   esac
@@ -114,15 +121,15 @@ ask_user_name()
   read -p "Veuillez saisir le nom d'utilisateur à créer ici : `echo $'\n> '`" otaku_script_login
   if [ "$otaku_script_login" = "" ]
     then
-      red_zone
+      red_text
       echo "Votre nom d'utilisateur est vide !"
-      white_zone
+      reset_color
       read -p "Voulez-vous réessayer : O/n (défaut Oui) " re_try
       if [ "$re_try" = "" ] || [ "$re_try" = "O" ] || [ "$re_try" = "o" ] || [ "$re_try" = "oui" ] || [ "$re_try" = "yes" ] || [ "$re_try" = "y" ] || [ "$re_try" = "Y" ]
         then
-          green_zone
+          green_text
           echo "OK, on recommence."
-          white_zone
+          reset_color
           ask_user_name
         else
           clear
@@ -154,17 +161,17 @@ valid_add_user_name()
     0)
       clear
       quit_rappel
-      green_zone
+      green_text
       echo "L'utilisateur '$otaku_script_login' n'existe pas."
       echo "Le script peut continuer."
-      white_zone;;
+      reset_color;;
     *)
       clear
-      red_zone
+      red_text
       echo "Désolé, ce script n'accepte pas le nom d'utilisateur '$otaku_script_login'."
       echo "L'utilisateur est déjà pris !"
       echo "Veuillez recommencer avec un nom d'utilisateur valide."
-      white_zone
+      reset_color
       the_question;;
   esac
 }
@@ -178,17 +185,17 @@ valid_edit_user_name()
     1)
       clear
       quit_rappel
-      green_zone
+      green_text
       echo "L'utilisateur '$otaku_script_login' existe."
       echo "Le script peut continuer."
-      white_zone;;
+      reset_color;;
     *)
       clear
       quit_rappel
-      red_zone
+      red_text
       echo "Désolé, ce script n'accepte pas le nom d'utilisateur '$otaku_script_login' !"
       echo "L'utilisateur n'existe pas."
-      white_zone
+      reset_color
       the_question;;
   esac
 }
@@ -197,15 +204,15 @@ valid_edit_user_name()
 
 show_user_list()
 {
-  green_zone
+  green_text
   echo "Voici la liste des utilisateurs :"
-  white_zone
+  reset_color
   awk -F: 'BEGIN { ORS = " | " } { print $ 1 }' /etc/passwd
   echo "`echo $'\n'`"
-  green_zone
+  green_text
   echo "Nombre d'utilisateurs existants :"
   cat /etc/passwd | wc -l
-  white_zone
+  reset_color
   the_question
 }
 
@@ -218,9 +225,9 @@ prompt_user_name()
   read -p "Voulez-vous voir les utilisateurs existants ? : O/n (défaut Oui) " next_step
   if [ "$next_step" = "" ] || [ "$next_step" = "O" ] || [ "$next_step" = "o" ] || [ "$next_step" = "oui" ] || [ "$next_step" = "yes" ] || [ "$next_step" = "y" ] || [ "$next_step" = "Y" ]
     then
-      green_zone
+      green_text
       echo "Voici la liste des utilisateurs :"
-      white_zone
+      reset_color
       awk -F: 'BEGIN { ORS = " | " } { print $ 1 }' /etc/passwd
       echo "`echo $'\n'`"
   fi
@@ -228,15 +235,15 @@ prompt_user_name()
 
 show_group_list()
 {
-  green_zone
+  green_text
   echo "Voici la liste des groupes :"
-  white_zone
+  reset_color
   awk -F: 'BEGIN { ORS = " | " } { print $ 1 }' /etc/group
   echo "`echo $'\n'`"
-  green_zone
+  green_text
   echo "Nombre de groupes existants :"
   cat /etc/group | wc -l
-  white_zone
+  reset_color
   the_question
 }
 
@@ -261,9 +268,9 @@ ask_group_name()
   read -p "Veuillez entrer votre nom de groupe ici : " otaku_script_group_id
   if [ "$otaku_script_group_id" = "" ]
     then
-      red_zone
+      red_text
       echo "Votre nom de groupe est vide !"
-      white_zone
+      reset_color
       read -p "Voulez-vous réessayer : O/n (défaut Oui) " re_try
       if [ "$re_try" = "" ] || [ "$re_try" = "O" ] || [ "$re_try" = "o" ] || [ "$re_try" = "oui" ] || [ "$re_try" = "yes" ] || [ "$re_try" = "y" ] || [ "$re_try" = "Y" ]
         then
@@ -297,34 +304,34 @@ valid_group_name()
 {
   if [ "$EXISTED_GROUP" != 1 ]
     then
-      red_zone
+      red_text
       echo "Le groupe souhaité n'existe pas !"
-      white_zone
+      reset_color
       read -p "Voulez-vous continuer quand même ? : O/n (défaut Oui) " next_step
       if [ "$next_step" = "" ] || [ "$next_step" = "O" ] || [ "$next_step" = "o" ] || [ "$next_step" = "oui" ] || [ "$next_step" = "yes" ] || [ "$next_step" = "y" ] || [ "$next_step" = "Y" ]
         then
           clear
           quit_rappel
-          green_zone
+          green_text
           echo "Le nom de groupe '$otaku_script_group_id' sera créé après validation."
-          white_zone
+          reset_color
         else
           clear
           echo "Vous avez choisi de ne pas continuer."
           the_question
       fi
     else
-      green_zone
+      green_text
       echo "Le groupe souhaité existe !"
-      white_zone
+      reset_color
       read -p "Voulez-vous continuer quand même ? : O/n (défaut Oui) " next_step
       if [ "$next_step" = "" ] || [ "$next_step" = "O" ] || [ "$next_step" = "o" ] || [ "$next_step" = "oui" ] || [ "$next_step" = "yes" ] || [ "$next_step" = "y" ] || [ "$next_step" = "Y" ]
         then
           clear
           quit_rappel
-          green_zone
+          green_text
           echo "L'utilisateur sera ajouté au groupe éxistant '$otaku_script_group_id' après validation."
-          white_zone
+          reset_color
         else
           clear
           echo "Vous avez choisi de ne pas continuer."
@@ -337,22 +344,22 @@ valid_group_edit()
 {
   if [ "$EXISTED_GROUP" != 1 ]
     then
-      red_zone
+      red_text
       echo "Le groupe souhaité n'existe pas !"
-      white_zone
+      reset_color
       the_question      
     else
-      green_zone
+      green_text
       echo "Le groupe souhaité existe !"
-      white_zone
+      reset_color
       read -p "Voulez-vous continuer quand même ? : O/n (défaut Oui) " next_step
       if [ "$next_step" = "" ] || [ "$next_step" = "O" ] || [ "$next_step" = "o" ] || [ "$next_step" = "oui" ] || [ "$next_step" = "yes" ] || [ "$next_step" = "y" ] || [ "$next_step" = "Y" ]
         then
           clear
           quit_rappel
-          green_zone
+          green_text
           echo "L'utilisateur sera ajouté au groupe éxistant '$otaku_script_group_id' après validation."
-          white_zone
+          reset_color
         else
           clear
           echo "Vous avez choisi de ne pas continuer."
@@ -383,15 +390,15 @@ ask_password_user()
     then
       clear
       quit_rappel
-      green_zone
+      green_text
       echo "Le mot de passe est bien confirmé."
-      white_zone
+      reset_color
     else
       clear
       quit_rappel
-      red_zone
+      red_text
       echo "Il y a une erreur dans la saisie du mot de passe, on réessaye."
-      white_zone
+      reset_color
       ask_password_user
   fi
 }
@@ -401,9 +408,9 @@ ask_password_user()
 
 check_info()
 {
-  green_zone
+  green_text
   echo "UNE PETITE VERIFICATION !"
-  white_zone
+  reset_color
   echo "Identifiant : $otaku_script_login"
   echo "Groupe : $otaku_script_group_id"
   echo "Nom Complet : $otaku_script_fullname"
@@ -412,9 +419,9 @@ check_info()
     then
       clear
       quit_rappel
-      green_zone
+      green_text
       echo "Les informations sont validées."
-      white_zone
+      reset_color
     else
       clear
       echo "Vous avez déclaré que les informations n'étaient pas correct."
@@ -429,7 +436,7 @@ check_info()
 check_pass()
 {
   read -p "Voulez-vous vérifer le mot de passe ? : O/n (défaut Non)" valid_pass
-  white_zone
+  reset_color
   if [ "$valid_pass" = "O" ] || [ "$valid_pass" = "o" ] || [ "$valid_pass" = "oui" ] || [ "$valid_pass" = "yes" ] || [ "$valid_pass" = "y" ] || [ "$valid_pass" = "Y" ]
     then
       echo "Mot de passe : $password_user"
@@ -456,10 +463,10 @@ last_step()
 {
   clear
   quit_rappel
-  red_zone
+  red_text
   echo "DERNIERE ETAPE AVANT LA CREATION DU COMPTE !"
   echo "Le compte va être créé, pas de retour arrière possible !"
-  white_zone
+  reset_color
   read -p "Continuer ? : O/n (défaut Oui) " last_step
   if [ "$last_step" = "" ] || [ "$last_step" = "O" ] || [ "$last_step" = "o" ] || [ "$last_step" = "oui" ] || [ "$last_step" = "yes" ] || [ "$last_step" = "y" ] || [ "$last_step" = "Y" ]
     then
@@ -480,18 +487,18 @@ create_user()
   if [ "$EXISTED_GROUP" != 1 ]
     then
       groupadd $otaku_script_group_id
-      green_zone
+      green_text
       echo "Le groupe '$otaku_script_group_id' a été créé."
-      white_zone
+      reset_color
     else
-      green_zone
+      green_text
       echo "L'utilisateur à rejoint le groupe existant '$otaku_script_group_id'."
-      white_zone
+      reset_color
   fi
   sudo useradd --create-home --gid "$otaku_script_group_id" --comment "$otaku_script_fullname" "$otaku_script_login"
-  green_zone
+  green_text
   echo "Le compte est maintenant créé, le dossier de l'utilisateur se trouve dans /home/$otaku_script_login"
-  white_zone
+  reset_color
 }
 
 #-------------------------------------------------------------------------------
@@ -534,18 +541,18 @@ valid_edit_choix()
     1)
       clear
       quit_rappel
-      green_zone
+      green_text
       echo "Nous allons changer le mot de passe."
-      white_zone
+      reset_color
       ask_password_user
       check_pass
       the_question;;
     2)
       clear
       quit_rappel
-      green_zone
+      green_text
       echo "Nous allons changer le groupe principal (efface celui existant)."
-      white_zone
+      reset_color
       prompt_group_name
       ask_group_name
       check_group_exist
@@ -554,9 +561,9 @@ valid_edit_choix()
     3)
       clear
       quit_rappel
-      green_zone
+      green_text
       echo "Nous allons ajouter un ou plusieurs groupes (cela n'efface pas les groupes déjà présents)."
-      white_zone
+      reset_color
       prompt_group_name
       ask_group_name
       check_group_exist
@@ -564,9 +571,9 @@ valid_edit_choix()
       the_question;;
     *)
       clear
-      red_zone
+      red_text
       echo "Désolé, ce script n'accepte pas le votre choix !"
-      white_zone
+      reset_color
       echo "Au revoir."
       exit 0;;
   esac
@@ -636,12 +643,12 @@ edit_user_script()
 
 credit()
 {
-  green_zone
+  green_text
   echo "Merci d'avoir utilisé le script de création de compte."
   echo "C'est terminé... Au plaisir de vous revoir !"
   echo "Cordialement,"
   echo "Otaku-Prod"
-  white_zone
+  reset_color
 }
 
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------#
