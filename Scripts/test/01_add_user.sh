@@ -556,6 +556,7 @@ check_pass()
           reset_color
         else
           ask_password_user
+          check_pass
       fi
     else
       clear
