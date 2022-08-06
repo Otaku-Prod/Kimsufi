@@ -78,10 +78,21 @@ the_question()
   reset_color
   echo "1"
   blue_text
-  echo "Modifier un utilisateur ? 2"
-  echo "Supprimer un utilisateur ? 3"
-  echo "Voir les utilisateurs existant ? 4"
-  echo "Voir les groupes existant ? 5"
+  echo -n "Modifier un utilisateur ? "
+  reset_color
+  echo "2"
+  blue_text
+  echo -n "Supprimer un utilisateur ? "
+  reset_color
+  echo "3"
+  blue_text
+  echo -n "Voir les utilisateurs existant ? "
+  reset_color
+  echo "4"
+  blue_text
+  echo -n "Voir les groupes existant ? "
+  reset_color
+  echo "5"
   read -p `echo $'\n> '` choix
   #read -p "Ajouter un utilisateur ? 1 `echo $'\nModifier un utilisateur ? 2 '` `echo $'\nSupprimer un utilisateur ? 3 '` `echo $'\nVoir les utilisateurs existant ? 4 '` `echo $'\nVoir les groupes existant ? 5 '` `echo $'\n> '`" choix
   the_choix
