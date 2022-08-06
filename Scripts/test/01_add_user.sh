@@ -74,6 +74,7 @@ the_question()
   blue_text
   echo "Bonjour,"
   echo "Que désirez vous faire ?" | reset_color
+  echo "test"
   read -p "Ajouter un utilisateur ? 1 `echo $'\nModifier un utilisateur ? 2 '` `echo $'\nSupprimer un utilisateur ? 3 '` `echo $'\nVoir les utilisateurs existant ? 4 '` `echo $'\nVoir les groupes existant ? 5 '` `echo $'\n> '`" choix
   the_choix
 }
