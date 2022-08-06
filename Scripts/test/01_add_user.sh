@@ -488,10 +488,10 @@ check_info()
   echo "Groupe : $otaku_script_group_id"
   echo "Nom Complet : $otaku_script_fullname"
   blue_text
-  echo "Tout est correct ? "
+  echo -n "Tout est correct ? "
   reset_color
   echo "O/n (défaut Oui)"
-  read -p "`echo $'\n> '`" next_step
+  read -p "> " next_step
   #read -p "Tout est correct ? : O/n (défaut Oui) " next_step
   if [ "$next_step" = "" ] || [ "$next_step" = "O" ] || [ "$next_step" = "o" ] || [ "$next_step" = "oui" ] || [ "$next_step" = "yes" ] || [ "$next_step" = "y" ] || [ "$next_step" = "Y" ]
     then
