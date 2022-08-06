@@ -93,7 +93,7 @@ the_question()
   echo -n "Voir les groupes existant ? "
   reset_color
   echo "5"
-  read -p "`echo $'\n> '`" choix
+  read -p "> " choix
   #read -p "Ajouter un utilisateur ? 1 `echo $'\nModifier un utilisateur ? 2 '` `echo $'\nSupprimer un utilisateur ? 3 '` `echo $'\nVoir les utilisateurs existant ? 4 '` `echo $'\nVoir les groupes existant ? 5 '` `echo $'\n> '`" choix
   the_choix
 }
