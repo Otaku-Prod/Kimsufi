@@ -474,8 +474,9 @@ ask_password_user()
   echo -n "Saisir le mot de passe : "
   reset_color
   read -s -p "`echo $'\n> '`" password_user
+  echo "`echo $'\n'`"
   blue_text
-  echo "Confirmation : "
+  echo -n "Confirmation : "
   reset_color
   read -s -p "`echo $'\n> '`" confirm_password_user
   
