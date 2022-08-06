@@ -94,7 +94,6 @@ the_question()
   reset_color
   echo "5"
   read -p "> " choix
-  #read -p "Ajouter un utilisateur ? 1 `echo $'\nModifier un utilisateur ? 2 '` `echo $'\nSupprimer un utilisateur ? 3 '` `echo $'\nVoir les utilisateurs existant ? 4 '` `echo $'\nVoir les groupes existant ? 5 '` `echo $'\n> '`" choix
   the_choix
 }
 
@@ -144,7 +143,7 @@ prompt_user_list()
   echo -n "Voulez-vous voir les utilisateurs existants ? "
   reset_color
   echo "O/n (défaut Oui)"
-  read -p "`echo $'\n> '`" next_step
+  read -p "> " next_step
   if [ "$next_step" = "" ] || [ "$next_step" = "O" ] || [ "$next_step" = "o" ] || [ "$next_step" = "oui" ] || [ "$next_step" = "yes" ] || [ "$next_step" = "y" ] || [ "$next_step" = "Y" ]
     then
       green_text
