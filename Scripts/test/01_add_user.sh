@@ -68,17 +68,19 @@ reset_color()
 
 #-------------------------------------------------------------------------------
 
+saut_de_ligne=`echo $'\n> '`
+
 the_question()
 {
   quit_rappel
   blue_text
   echo "Bonjour,"
   echo "Que désirez vous faire ?"
-  read "Ajouter un utilisateur ? 1"
-  read "Modifier un utilisateur ? 2"
-  read "Supprimer un utilisateur ? 3"
-  read "Voir les utilisateurs existant ? 4"
-  read "Voir les groupes existant ? 5"
+  echo "Ajouter un utilisateur ? 1"
+  echo "Modifier un utilisateur ? 2"
+  echo "Supprimer un utilisateur ? 3"
+  echo "Voir les utilisateurs existant ? 4"
+  echo "Voir les groupes existant ? 5"
   read -p "`echo $'\n> '`" choix
   the_choix
 }
