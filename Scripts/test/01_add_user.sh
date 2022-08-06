@@ -470,8 +470,6 @@ ask_password_user()
       echo "Le mot de passe est bien confirmé."
       reset_color
     else
-      clear
-      quit_rappel
       red_text
       echo "Il y a une erreur dans la saisie du mot de passe, on réessaye."
       reset_color
