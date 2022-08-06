@@ -561,7 +561,9 @@ check_pass()
     else
       clear
       quit_rappel
+      green_text
       echo "Le mot de passe a été confirmé."
+      reset_color
   fi
 }
 
@@ -573,8 +575,12 @@ last_step()
   red_text
   echo "DERNIERE ETAPE AVANT LA CREATION DU COMPTE !"
   echo "Le compte va être créé, pas de retour arrière possible !"
+  blue_text
+  echo -n "Continuer ? "
   reset_color
-  read -p "Continuer ? : O/n (défaut Oui) " last_step
+  echo "O/n (défaut Oui)"
+  read -p "> " last_step
+  reset_color
   if [ "$last_step" = "" ] || [ "$last_step" = "O" ] || [ "$last_step" = "o" ] || [ "$last_step" = "oui" ] || [ "$last_step" = "yes" ] || [ "$last_step" = "y" ] || [ "$last_step" = "Y" ]
     then
       clear
