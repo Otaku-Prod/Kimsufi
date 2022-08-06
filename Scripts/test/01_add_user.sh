@@ -492,7 +492,6 @@ check_info()
   reset_color
   echo "O/n (défaut Oui)"
   read -p "> " next_step
-  #read -p "Tout est correct ? : O/n (défaut Oui) " next_step
   if [ "$next_step" = "" ] || [ "$next_step" = "O" ] || [ "$next_step" = "o" ] || [ "$next_step" = "oui" ] || [ "$next_step" = "yes" ] || [ "$next_step" = "y" ] || [ "$next_step" = "Y" ]
     then
       clear
@@ -515,24 +514,34 @@ check_info()
 
 check_pass()
 {
-  read -p "Voulez-vous vérifer le mot de passe ? : O/n (défaut Non)" valid_pass
+  blue_text
+  echo -n "Voulez-vous vérifer le mot de passe ? "
+  reset_color
+  echo "O/n (défaut Oui)"
+  read -p "> " valid_pass
   reset_color
   if [ "$valid_pass" = "O" ] || [ "$valid_pass" = "o" ] || [ "$valid_pass" = "oui" ] || [ "$valid_pass" = "yes" ] || [ "$valid_pass" = "y" ] || [ "$valid_pass" = "Y" ]
     then
       echo "Mot de passe : $password_user"
-      read -p "Le mot de passe vous convient toujours ? : O/n (défaut Oui)" confirm_pass
+      blue_text
+      echo -n "Le mot de passe vous convient toujours ? "
+      reset_color
+      echo "O/n (défaut Oui)"
+      read -p "> " confirm_pass
       if [ "$confirm_pass" = "" ] || [ "$confirm_pass" = "O" ] || [ "$confirm_pass" = "o" ] || [ "$confirm_pass" = "oui" ] || [ "$confirm_pass" = "yes" ] || [ "$confirm_pass" = "y" ] || [ "$confirm_pass" = "Y" ]
         then
           clear
           quit_rappel
-          echo "OK, on continue."
+          green_text
+          echo "Le mot de passe a été confirmé."
+          reset_color
         else
           ask_password_user
       fi
     else
       clear
       quit_rappel
-      echo "OK, on continue."
+      echo "Le mot de passe a été confirmé."
   fi
 }
 
@@ -541,8 +550,6 @@ check_pass()
 
 last_step()
 {
-  clear
-  quit_rappel
   red_text
   echo "DERNIERE ETAPE AVANT LA CREATION DU COMPTE !"
   echo "Le compte va être créé, pas de retour arrière possible !"
