@@ -93,7 +93,7 @@ the_question()
   echo -n "Voir les groupes existant ? "
   reset_color
   echo "5"
-  read -p `echo $'\n> '` choix
+  read -p "echo $'\n> '" choix
   #read -p "Ajouter un utilisateur ? 1 `echo $'\nModifier un utilisateur ? 2 '` `echo $'\nSupprimer un utilisateur ? 3 '` `echo $'\nVoir les utilisateurs existant ? 4 '` `echo $'\nVoir les groupes existant ? 5 '` `echo $'\n> '`" choix
   the_choix
 }
@@ -132,10 +132,27 @@ the_choix()
       clear
       red_text
       echo "Désolé, ce script n'accepte pas votre choix !"
-      reset_color
+      blue_text
       echo "Au revoir."
+      reset_color
       exit 0;;
   esac
+}
+
+prompt_user_list()
+{
+  echo -n "Voulez-vous voir les utilisateurs existants ? "
+  reset_color
+  echo "O/n (défaut Oui)"
+  read -p "echo $'\n> '" next_step
+  if [ "$next_step" = "" ] || [ "$next_step" = "O" ] || [ "$next_step" = "o" ] || [ "$next_step" = "oui" ] || [ "$next_step" = "yes" ] || [ "$next_step" = "y" ] || [ "$next_step" = "Y" ]
+    then
+      green_text
+      echo "Voici la liste des utilisateurs :"
+      reset_color
+      awk -F: 'BEGIN { ORS = " | " } { print $ 1 }' /etc/passwd
+      echo "`echo $'\n'`"
+  fi
 }
 
 #-------------------------------------------------------------------------------
@@ -245,19 +262,6 @@ show_user_list()
 #-------------------------------------------------------------------------------
 # Affiche la liste des groupes
 
-prompt_user_name()
-{
-  read -p "Voulez-vous voir les utilisateurs existants ? : O/n (défaut Oui) " next_step
-  if [ "$next_step" = "" ] || [ "$next_step" = "O" ] || [ "$next_step" = "o" ] || [ "$next_step" = "oui" ] || [ "$next_step" = "yes" ] || [ "$next_step" = "y" ] || [ "$next_step" = "Y" ]
-    then
-      green_text
-      echo "Voici la liste des utilisateurs :"
-      reset_color
-      awk -F: 'BEGIN { ORS = " | " } { print $ 1 }' /etc/passwd
-      echo "`echo $'\n'`"
-  fi
-}
-
 show_group_list()
 {
   green_text
@@ -275,7 +279,7 @@ show_group_list()
 #-------------------------------------------------------------------------------
 # Affiche la liste des groupes
 
-prompt_group_name()
+prompt_group_list()
 {
   read -p "Voulez-vous voir les groupes existants ? : O/n (défaut Oui) " next_step
   if [ "$next_step" = "" ] || [ "$next_step" = "O" ] || [ "$next_step" = "o" ] || [ "$next_step" = "oui" ] || [ "$next_step" = "yes" ] || [ "$next_step" = "y" ] || [ "$next_step" = "Y" ]
@@ -578,7 +582,7 @@ valid_edit_choix()
       green_text
       echo "Nous allons changer le groupe principal (efface celui existant)."
       reset_color
-      prompt_group_name
+      prompt_group_list
       ask_group_name
       check_group_exist
       change_group
@@ -589,7 +593,7 @@ valid_edit_choix()
       green_text
       echo "Nous allons ajouter un ou plusieurs groupes (cela n'efface pas les groupes déjà présents)."
       reset_color
-      prompt_group_name
+      prompt_group_list
       ask_group_name
       check_group_exist
       add_group
@@ -609,12 +613,12 @@ valid_edit_choix()
 
 add_user_script()
 {
-  prompt_user_name
+  prompt_user_list
   ask_user_name
   check_exist_name
   valid_add_user_name
 
-  prompt_group_name
+  prompt_group_list
   ask_group_name
   check_group_exist
   valid_group_name
@@ -638,7 +642,7 @@ add_user_script()
 
 edit_user_script()
 {
-  prompt_user_name
+  prompt_user_list
   ask_user_name
   check_exist_name
   valid_edit_user_name
@@ -646,7 +650,7 @@ edit_user_script()
   choix_edit_user
   valid_edit_choix
   
-  prompt_group_name
+  prompt_group_list
   ask_group_name
   check_group_exist
   valid_group_name
