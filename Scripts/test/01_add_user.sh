@@ -268,6 +268,7 @@ restart_script()
 
 show_user_list()
 {
+  quit_rappel
   green_text
   echo "Voici la liste des utilisateurs :"
   reset_color
@@ -286,6 +287,7 @@ show_user_list()
 
 show_group_list()
 {
+  quit_rappel
   green_text
   echo "Voici la liste des groupes :"
   reset_color
