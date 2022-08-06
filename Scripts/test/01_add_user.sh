@@ -68,7 +68,7 @@ reset_color()
 
 #-------------------------------------------------------------------------------
 
-saut_de_ligne=`echo $'\n> '`
+reset_color_echo=printf '\E[34m'
 
 the_question()
 {
@@ -76,7 +76,7 @@ the_question()
   blue_text
   echo "Bonjour,"
   echo "Que désirez vous faire ?"
-  echo "Ajouter un utilisateur ? 1"
+  echo "Ajouter un utilisateur ? $reset_color_echo 1"
   echo "Modifier un utilisateur ? 2"
   echo "Supprimer un utilisateur ? 3"
   echo "Voir les utilisateurs existant ? 4"
