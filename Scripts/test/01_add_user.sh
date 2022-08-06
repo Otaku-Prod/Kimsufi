@@ -251,6 +251,21 @@ valid_edit_user_name()
 
 #-------------------------------------------------------------------------------
 
+restart_script()
+{
+  blue_text
+  echo -n "Revenir à la page d'accueil du script ? "
+  reset_color
+  echo "O/n (défaut Oui)"
+  read -p "> " restart_script
+  if [ "$restart_script" = "" ] || [ "$restart_script" = "O" ] || [ "$restart_script" = "o" ] || [ "$restart_script" = "oui" ] || [ "$restart_script" = "yes" ] || [ "$restart_script" = "y" ] || [ "$restart_script" = "Y" ]
+    then
+      the_question
+    else
+      credit
+  fi
+}
+
 show_user_list()
 {
   green_text
@@ -262,7 +277,7 @@ show_user_list()
   echo "Nombre d'utilisateurs existants :"
   cat /etc/passwd | wc -l
   reset_color
-  the_question
+  restart_script
 }
 
 
@@ -280,7 +295,7 @@ show_group_list()
   echo "Nombre de groupes existants :"
   cat /etc/group | wc -l
   reset_color
-  the_question
+  restart_script
 }
 
 #-------------------------------------------------------------------------------
