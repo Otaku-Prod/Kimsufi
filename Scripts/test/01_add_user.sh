@@ -119,7 +119,8 @@ the_choix()
       quit_rappel
       green_text
       echo "Nous allons supprimer un utilisateur."
-      reset_color;;
+      reset_color
+      delete_user_script;;
     4)
       clear
       show_user_list;;
