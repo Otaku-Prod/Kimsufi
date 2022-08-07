@@ -496,6 +496,35 @@ ask_password_user()
   fi
 }
 
+ask_modif_password()
+{
+  green_text
+  echo "Modification du mot de passe pour l'utilisateur '$otaku_script_login'"
+  blue_text
+  echo -n "Saisir le mot de passe : "
+  reset_color
+  read -s -p "`echo $'\n> '`" password_user
+  echo "`echo $'\n'`"
+  blue_text
+  echo -n "Confirmation : "
+  reset_color
+  read -s -p "`echo $'\n> '`" confirm_password_user
+  
+  if [ "$password_user" = "$confirm_password_user" ]
+    then
+      green_text
+      echo "Le mot de passe est bien confirmé."
+      reset_color
+      restart_script
+    else
+      red_text
+      echo "`echo $'\n'`"
+      echo "Il y a une erreur dans la saisie du mot de passe, on réessaye."
+      reset_color
+      ask_password_user
+  fi
+}
+
 #-------------------------------------------------------------------------------
 # Vérification des informations non sensibles avant création du compte
 
@@ -644,12 +673,12 @@ choix_edit_user()
   clear
   quit_rappel
   blue_text
-  echo "Que voulez vous faire avec $otaku_script_login !"
-  echo -n "Changer le mot de passe ? "
+  echo "Que voulez vous faire avec '$otaku_script_login' :"
+  echo -n "Modifier le mot de passe ? "
   reset_color
   echo "1"
   blue_text
-  echo -n "Changer le groupe actuel ? "
+  echo -n "Modifier le groupe principal ? "
   reset_color
   echo "2"
   blue_text
@@ -669,7 +698,7 @@ valid_edit_choix()
       clear
       quit_rappel
       green_text
-      echo "Nous allons changer le mot de passe."
+      echo "Nous allons modifier le mot de passe."
       reset_color
       ask_password_user
       check_pass
