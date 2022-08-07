@@ -233,14 +233,12 @@ valid_edit_user_name()
   case $EXIST_NAME in
     1)
       clear
-      quit_rappel
       green_text
       echo "L'utilisateur '$otaku_script_login' existe."
       echo "Le script peut continuer."
       reset_color;;
     *)
       clear
-      quit_rappel
       red_text
       echo "Désolé, ce script n'accepte pas le nom d'utilisateur '$otaku_script_login' !"
       echo "L'utilisateur n'existe pas."
@@ -686,7 +684,6 @@ choix_edit_user()
   reset_color
   echo "3"
   read -p "> " choix
-  valid_edit_choix
 }
 
 #-------------------------------------------------------------------------------
