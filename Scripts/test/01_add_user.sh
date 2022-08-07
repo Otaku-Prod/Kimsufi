@@ -737,6 +737,12 @@ valid_edit_choix()
   esac
 }
 
+delete_user()
+{
+  userdel -r $otaku_script_login
+  echo "L'utilisateur '$otaku_script_login' à bien été supprimé."
+}
+
 #-------------------------------------------------------------------------------
 # Script complet pour ajouter un utilisateur (création d'un utilisateur avec nom complet, dossier 'home', choix des groupes et du mot de passe)
 
@@ -781,6 +787,18 @@ edit_user_script()
   choix_edit_user
   valid_edit_choix
 
+  restart_script
+}
+
+delete_user_script()
+{
+  prompt_user_list
+  ask_user_name
+  check_exist_name
+  valid_edit_user_name
+
+  delete_user
+  
   restart_script
 }
 
