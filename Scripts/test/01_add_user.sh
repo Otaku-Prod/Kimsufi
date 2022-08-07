@@ -740,7 +740,7 @@ valid_edit_choix()
 
 delete_user()
 {
-  userdel -r $otaku_script_login
+  deluser --remove-home $otaku_script_login
   green_text
   echo "L'utilisateur '$otaku_script_login' à bien été supprimé."
   reset_color
