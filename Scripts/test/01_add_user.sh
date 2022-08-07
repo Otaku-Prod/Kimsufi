@@ -93,13 +93,13 @@ the_question()
   echo -n "Voir les groupes existant ? "
   reset_color
   echo "5"
-  read -p "> " choix
+  read -p "> " the_choix
   the_choix
 }
 
 the_choix()
 {
-  case $choix in
+  case $the_choix in
     1)
       clear
       quit_rappel
@@ -160,7 +160,7 @@ prompt_user_list()
 ask_user_name()
 {
   blue_text
-  echo -n "Veuillez saisir le nom d'utilisateur à créer ici : "
+  echo -n "Veuillez saisir le nom d'utilisateur ici : "
   reset_color
   read -p "`echo $'\n> '`" otaku_script_login
   if [ "$otaku_script_login" = "" ]
