@@ -654,13 +654,19 @@ create_password_user()
 add_group()
 {
   usermod -a -G $otaku_script_group_id $otaku_script_login
-  echo "ok"
+  green_text
+  echo "Le groupe principal de l'utilisateur '$otaku_script_login' est maintenant '$otaku_script_group_id'."
+  echo "id - g $otaku_script_login"
+  reset_color
 }
 
 change_group()
 {
+  green_text
   usermod -g $otaku_script_group_id $otaku_script_login
-  echo "ok"
+  echo "Le ou les groupes '$otaku_script_group_id' ont bien été ajouté à l'utilisateur $otaku_script_login."
+  echo "id - g $otaku_script_login"
+  reset_color
 }
 
 #-------------------------------------------------------------------------------
