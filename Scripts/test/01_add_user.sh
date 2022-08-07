@@ -700,7 +700,7 @@ valid_edit_choix()
       green_text
       echo "Nous allons modifier le mot de passe."
       reset_color
-      ask_password_user
+      ask_modif_password
       check_pass;;
     2)
       clear
