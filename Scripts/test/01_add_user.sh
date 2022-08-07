@@ -701,8 +701,7 @@ valid_edit_choix()
       echo "Nous allons modifier le mot de passe."
       reset_color
       ask_password_user
-      check_pass
-      the_question;;
+      check_pass;;
     2)
       clear
       quit_rappel
@@ -712,8 +711,7 @@ valid_edit_choix()
       prompt_group_list
       ask_group_name
       check_group_exist
-      change_group
-      the_question;;
+      change_group;;
     3)
       clear
       quit_rappel
@@ -723,8 +721,7 @@ valid_edit_choix()
       prompt_group_list
       ask_group_name
       check_group_exist
-      add_group
-      the_question;;
+      add_group;;
     *)
       clear
       red_text
@@ -762,8 +759,8 @@ add_user_script()
 
   create_user
   create_password_user
-  sleep 5
-  the_question
+
+  restart_script
 }
 
 #-------------------------------------------------------------------------------
@@ -778,22 +775,8 @@ edit_user_script()
 
   choix_edit_user
   valid_edit_choix
-  
-  prompt_group_list
-  ask_group_name
-  check_group_exist
-  valid_group_name
 
-  add_full_name
-
-  ask_password_user
-
-  check_info
-  check_pass
-  last_step
-
-  create_user
-  create_password_user
+  restart_script
 }
 
 #-------------------------------------------------------------------------------
