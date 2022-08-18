@@ -86,7 +86,6 @@ next_step()
 
 last_step()
 {
-  clear
   how_to_quit
   red_colored_text
   echo "DERNIERE ETAPE !"
@@ -728,7 +727,7 @@ choice_user_settings_management()
 
 delete_user_script()
 {
-  view_all_users
+  ask_view_all_users
   ask_user_name
   check_name_exists
   valid_edit_user_name
