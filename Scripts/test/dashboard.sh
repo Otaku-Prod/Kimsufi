@@ -147,10 +147,7 @@ choice_homepage()
       clear
       red_colored_text
       echo "Désolé, ce script n'accepte pas votre choix !"
-      blue_colored_text
-      echo "Au revoir."
-      color_reset
-      exit 0;;
+      credit
   esac
 }
 
@@ -212,10 +209,7 @@ choice_kimsufi_management()
       clear
       red_colored_text
       echo "Désolé, ce script n'accepte pas votre choix !"
-      blue_colored_text
-      echo "Au revoir."
-      color_reset
-      exit 0;;
+      credit
   esac
 }
 
@@ -253,10 +247,7 @@ choice_kimsufi_settings_management()
       clear
       red_colored_text
       echo "Désolé, ce script n'accepte pas votre choix !"
-      blue_colored_text
-      echo "Au revoir."
-      color_reset
-      exit 0;;
+      credit
   esac
 }
 
@@ -310,10 +301,7 @@ choice_user_management()
       clear
       red_colored_text
       echo "Désolé, ce script n'accepte pas votre choix !"
-      blue_colored_text
-      echo "Au revoir."
-      color_reset
-      exit 0;;
+      credit
   esac
 }
 
@@ -732,10 +720,7 @@ choice_user_settings_management()
       clear
       red_colored_text
       echo "Désolé, ce script n'accepte pas votre choix !"
-      blue_colored_text
-      echo "Au revoir."
-      color_reset
-      exit 0;;
+      credit
   esac
 }
 
