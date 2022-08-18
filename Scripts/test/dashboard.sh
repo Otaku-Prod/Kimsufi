@@ -47,14 +47,14 @@ how_to_quit()
   color_reset
 }
 
-restart_script()
+restart_or_quit()
 {
   blue_colored_text
   echo -n "Revenir à la page d'accueil du script ? "
   color_reset
   echo "O/n (défaut Oui)"
-  read -p "> " restart_script
-  if [ "$restart_script" = "" ] || [ "$restart_script" = "O" ] || [ "$restart_script" = "o" ] || [ "$restart_script" = "oui" ] || [ "$restart_script" = "yes" ] || [ "$restart_script" = "y" ] || [ "$restart_script" = "Y" ]
+  read -p "> " restart_or_quit
+  if [ "$restart_or_quit" = "" ] || [ "$restart_or_quit" = "O" ] || [ "$restart_or_quit" = "o" ] || [ "$restart_or_quit" = "oui" ] || [ "$restart_or_quit" = "yes" ] || [ "$restart_or_quit" = "y" ] || [ "$restart_or_quit" = "Y" ]
     then
       clear
       how_to_quit
@@ -88,9 +88,10 @@ last_step()
 {
   clear
   how_to_quit
-  red_text
+  red_colored_text
   echo "DERNIERE ETAPE !"
   echo "Pas de retour arrière possible !"
+  color_reset
   next_step
 }
 
@@ -651,7 +652,7 @@ create_user()
       echo "L'utilisateur à rejoint le groupe existant '$otaku_script_group_id'."
       color_reset
   fi
-  sudo useradd --create-home --gid "$otaku_script_group_id" --comment "$otaku_script_fullname" "$otaku_script_login"
+  useradd --create-home --gid "$otaku_script_group_id" --comment "$otaku_script_fullname" "$otaku_script_login"
   green_colored_text
   echo "Le compte est maintenant créé, le dossier de l'utilisateur se trouve dans /home/$otaku_script_login"
   color_reset
