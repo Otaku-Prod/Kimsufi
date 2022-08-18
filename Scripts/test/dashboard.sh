@@ -225,8 +225,8 @@ kimsufi_settings_management()
   echo -n "Gérer les groupes ? "
   color_reset
   echo "2"
-  read -p "> " choice_kimsufi_settings
-  choice_kimsufi_settings
+  read -p "> " choice_kimsufi_settings_management
+  choice_kimsufi_settings_management
 }
 
 choice_kimsufi_settings_management()
