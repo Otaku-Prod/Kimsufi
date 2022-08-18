@@ -42,9 +42,9 @@ red_color_background()
 
 how_to_quit()
 {
-  red_background
+  red_color_background
   echo "Saisir "0" et valider pour annuler et fermer le script."
-  reset_color
+  color_reset
 }
 
 restart_script()
