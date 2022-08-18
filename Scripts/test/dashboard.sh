@@ -231,7 +231,7 @@ kimsufi_settings_management()
 
 choice_kimsufi_settings_management()
 {
-  case $choice_kimsufi_management in
+  case $choice_kimsufi_settings_management in
     0)
       clear
       credit;;
