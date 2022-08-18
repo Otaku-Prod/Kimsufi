@@ -738,6 +738,25 @@ delete_user_script()
   restart_or_quit
 }
 
+valid_edit_user_name()
+{
+  case $name_exists in
+    1)
+      clear
+      green_colored_text
+      echo "L'utilisateur '$otaku_script_login' existe."
+      echo "Le script peut continuer."
+      color_reset;;
+    *)
+      clear
+      red_colored_text
+      echo "Désolé, ce script n'accepte pas le nom d'utilisateur '$otaku_script_login' !"
+      echo "L'utilisateur n'existe pas."
+      color_reset
+      homepage;;
+  esac
+}
+
 delete_user()
 {
   deluser --remove-home $otaku_script_login
