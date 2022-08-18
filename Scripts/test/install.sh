@@ -98,7 +98,7 @@ docker_step()
   echo \
     "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
     $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null 2>&1
-  echo "Le dépôt a été ajouté à la liste."
+  echo "Le dépôt Docker a été ajouté à la liste des dépôt."
   chmod a+r /etc/apt/keyrings/docker.gpg
   echo "Ajout des droits de lecture sur la clé."
   apt-get update > /dev/null 2>&1
@@ -111,8 +111,10 @@ docker_step()
 compose_step()
 {
   blue_colored_text
-  echo "Installation de Docker-Compose v2.7.0 :"
-  wget https://github.com/docker/compose/releases/download/v2.7.0/docker-compose-linux-x86_64 && mv docker-compose-linux-x86_64 /usr/local/bin/docker-compose && chmod +x /usr/local/bin/docker-compose > /dev/null 2>&1
+  echo "Installation de Docker-Compose :"
+  wget https://github.com/docker/compose/releases/download/v2.7.0/docker-compose-linux-x86_64 > /dev/null 2>&1
+  mv docker-compose-linux-x86_64 /usr/local/bin/docker-compose > /dev/null 2>&1
+  chmod +x /usr/local/bin/docker-compose > /dev/null 2>&1
   docker-compose --version
   echo "Installation terminé."
 }
@@ -138,7 +140,7 @@ ask_reboot()
 
 clear
 
-check_root_sudo
+check_admin_rights
 
 ubuntu_step
 
