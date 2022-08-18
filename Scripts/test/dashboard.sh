@@ -110,13 +110,17 @@ homepage()
   blue_colored_text
   echo "Bonjour,"
   echo "Que désirez vous faire :"
-  echo -n "Gérer Docker ? "
+  echo -n "Gérer les contenaires ? "
   color_reset
   echo "1"
   blue_colored_text
-  echo -n "Gérer la Kimsufi ? "
+  echo -n "Gérer Docker ? "
   color_reset
   echo "2"
+  blue_colored_text
+  echo -n "Gérer la Kimsufi ? "
+  color_reset
+  echo "3"
   read -p "> " choice_homepage
   choice_homepage
 }
