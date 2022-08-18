@@ -1,3 +1,6 @@
+# Récupérer les logs pour crowdsec?
+# Port TCP et UDP identique dans env normal ? modifiable ?
+
 version: "3.9"
 
 services:

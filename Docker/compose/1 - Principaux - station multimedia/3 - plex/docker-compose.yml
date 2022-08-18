@@ -1,3 +1,6 @@
+# Récupérer les logs pour crowdsec?
+# UID et GID ?
+
 version: "3.9"
 
 services:
@@ -13,7 +16,7 @@ services:
       - ${PORT_WEB}:32400
     volumes:
       - ${VOLUME}/config:/config
-      - ${VOLUME}//temp:/transcode
+      - ${VOLUME}/temp:/transcode
       - ${VOLUME_DOWNLOADS}:/data
     networks:	
       frontend:

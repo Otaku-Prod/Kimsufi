@@ -86,7 +86,6 @@ next_step()
 
 last_step()
 {
-  how_to_quit
   red_colored_text
   echo "DERNIERE ETAPE !"
   echo "Pas de retour arrière possible !"
@@ -758,7 +757,7 @@ valid_edit_user_name()
 
 delete_user()
 {
-  deluser --remove-home $otaku_script_login
+  deluser --remove-home $otaku_script_login > /dev/null 2>&1
   green_colored_text
   echo "L'utilisateur '$otaku_script_login' à bien été supprimé."
   color_reset
